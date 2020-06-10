@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { FiUpload } from 'react-icons/fi';
 import { baseUrl } from '../helpers';
 
-const UsersSignup = () => {
+const FacilitatorSingup = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -43,7 +43,7 @@ const UsersSignup = () => {
       const data = new FormData(formRef.current);
       axios({
         method: 'post',
-        url: `${baseUrl}auth/users/register`,
+        url: `${baseUrl}auth/facilitators/register`,
         data,
       })
         .then((res) => {
@@ -59,7 +59,7 @@ const UsersSignup = () => {
 
   return (
     <div className="container">
-      <h2 className="title is-2 is-centered">User Sign up</h2>
+      <h2 className="title is-2 is-centered">Facilitator Sign up</h2>
       <form className="form" ref={formRef} onSubmit={handleSubmit}>
         <div className="field">
           <label className="label">Name</label>
@@ -107,8 +107,6 @@ const UsersSignup = () => {
           </label>
         </div>
 
-        <input type="hidden" name="facilitator_id" value="1" />
-
         <div className="field is-grouped">
           <div className="control is-centered">
             <button className="button is-link" disabled={isDisabled}>Sign up</button>
@@ -125,4 +123,4 @@ const UsersSignup = () => {
   )
 };
 
-export default UsersSignup;
+export default FacilitatorSingup;
