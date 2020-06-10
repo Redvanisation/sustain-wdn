@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { FiUpload } from 'react-icons/fi';
-import { baseUrl } from '../helpers/';
+import { baseUrl } from '../helpers';
 
-const Signup = () => {
+const UsersSignup = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -20,6 +20,7 @@ const Signup = () => {
   const handleImage = (e) => {
     setSelectedImage(e.target.files[0]);
     const img = e.target.files[0];
+    if (!img) return;
     if (img.type === 'image/png' || img.type === 'image/jpg' || img.type === 'image/jpeg') {
       setIsDisabled(false);
     } else {
@@ -56,7 +57,8 @@ const Signup = () => {
   }
 
   return (
-    // <div className="container">
+    <div className="container">
+      <h2 className="title is-2 is-centered">Users Users</h2>
       <form className="form" ref={formRef} onSubmit={handleSubmit}>
         <div className="field">
           <label className="label">Name</label>
@@ -86,7 +88,7 @@ const Signup = () => {
           </div>
         </div>
 
-        <div className="field file has-name">
+        <div className="field file has-name is-boxed">
           <label className="file-label">
             <input className="file-input" type="file" name="image" onChange={handleImage} />
             <span className="file-cta">
@@ -95,17 +97,16 @@ const Signup = () => {
 
               </span>
               <span className="file-label">
-                Choose a file…
+                Choose an image...
               </span>
             </span>
             <span className="file-name">
-              {selectedImage ? selectedImage.name : 'No image selected'}
+              {selectedImage ? selectedImage.name : 'No profile image selected...'}
             </span>
           </label>
         </div>
 
         <input type="hidden" name="facilitator_id" value="1" />
-
 
         <div className="field is-grouped">
           <div className="control">
@@ -113,8 +114,8 @@ const Signup = () => {
           </div>
       </div>
     </form>
-  // </div>
+  </div>
   )
 };
 
-export default Signup;
+export default UsersSignup;
