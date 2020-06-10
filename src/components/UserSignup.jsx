@@ -2,9 +2,9 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { FiUpload } from 'react-icons/fi';
-import { baseUrl } from '../helpers';
+import { baseUrl, validateEmail } from '../helpers';
 
-const UsersSignup = () => {
+const UserSignup = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -12,11 +12,6 @@ const UsersSignup = () => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const formRef = useRef(null);
-
-  const validateEmail = (email) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  }
 
   const handleImage = (e) => {
     setSelectedImage(e.target.files[0]);
@@ -118,11 +113,11 @@ const UsersSignup = () => {
     
     <div className="is-centered">
       You have an account?
-      <Link to="#"> Login!</Link>
+      <Link to="/auth"> Login!</Link>
     </div>
 
   </div>
   )
 };
 
-export default UsersSignup;
+export default UserSignup;
