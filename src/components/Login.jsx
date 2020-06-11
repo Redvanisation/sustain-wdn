@@ -1,11 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { baseUrl, validateEmail } from '../helpers';
+import { UserContext } from '../providers/UsersProvider';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const formRef = useRef(null);
+  const userCtx = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,12 +23,14 @@ const Login = () => {
         method: 'post',
         url: `${baseUrl}auth/login`,
         data,
+        withCredentials: true
       })
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             // history.push('/auth');
             console.log('success');
-            console.log(res.data)
+            // console.log(res.data)
+            userCtx.setCookie('user', res.data)
             formRef.current.reset();
           }
         })
