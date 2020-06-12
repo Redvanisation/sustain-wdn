@@ -18,7 +18,7 @@ const Navigation = () => {
     }
     
   };
-  const boo = true
+  const boo = false
   return (
     <>
       <Navbar
@@ -27,11 +27,10 @@ const Navigation = () => {
         transparent={false}
         className="navigation"
       >
-        <div className="navigation__top-div">
           {
             !boo
               ? (
-                <>
+              <div className="navigation__top-div">
                   <h1 className="navigation__top-div--title">
                     <span className="title is-3 navigation__top-div--title-part-1">Sustainable Workforce Development Network</span>
                     <span className="subtitle is-4 navigation__top-div--title-part-2">Resources To Build A Sustainable World</span>
@@ -42,20 +41,26 @@ const Navigation = () => {
                       <img src={logo} alt="SustainWDN logo" className="navigation__logo-div--logo" />
                     </a>
                   </Navbar.Brand>
-                </>
+              </div>
+              )
+              : (
+                null
+              )
+          }
+          {
+            !boo
+              ? (
+                <Navbar.Burger onClick={() => setShowHide(!showHide)} position="start" />
               )
               : (
                 <Navbar.Brand>
                   <a href="/" className="navigation__logo-div-logged">
                     <img src={logo} alt="SustainWDN logo" className="navigation__logo-div--logo" />
                   </a>
+                  <Navbar.Burger onClick={() => setShowHide(!showHide)} position="start" />
                 </Navbar.Brand>
-                // null
               )
           }
-        </div>
-    
-        <Navbar.Burger onClick={() => setShowHide(!showHide)} position="start" />
         {/* <span className="burger-text">Menu</span> */}
 
         <Navbar.Menu>
