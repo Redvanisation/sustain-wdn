@@ -5,14 +5,14 @@ import Homepage from '../pages/Homepage';
 import Login from '../components/Login';
 import UserSignup from '../components/UserSignup';
 import FacilitatorSingup from '../components/FacilitatorSingup';
-import Navbar from '../components/Navbar';
+import Navigation from '../components/Navigation';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Switch>
         <UsersProvider>
-          <Navbar />
+          <Navigation />
           <Route exact path='/' component={Homepage} />
           <Route exact path='/auth' component={Login} />
           <Route exact path='/register/user' component={UserSignup} />

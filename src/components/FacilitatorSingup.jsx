@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { FiUpload } from 'react-icons/fi';
 import { baseUrl, validateEmail } from '../helpers';
+import { UserContext } from '../providers/UsersProvider';
+
 
 const FacilitatorSingup = () => {
   const [password, setPassword] = useState('');
@@ -10,8 +12,16 @@ const FacilitatorSingup = () => {
   const [email, setEmail] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
+  const userCtx = useContext(UserContext);
+  const history = useHistory();
 
   const formRef = useRef(null);
+
+  useLayoutEffect(() => {
+    if (userCtx.cookies.user && !userCtx.cookies.user.admin) {
+      history.push('/');
+    }
+  })
 
   const handleImage = (e) => {
     setSelectedImage(e.target.files[0]);

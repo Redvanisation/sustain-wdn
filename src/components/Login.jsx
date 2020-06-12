@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { baseUrl, validateEmail } from '../helpers';
@@ -9,6 +9,13 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const formRef = useRef(null);
   const userCtx = useContext(UserContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (userCtx.cookies.user) {
+      history.push('/');
+    }
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,18 +26,23 @@ const Login = () => {
       alert('Please enter a valid email!')
     } else {
       const data = new FormData(formRef.current);
+
       axios({
         method: 'post',
         url: `${baseUrl}auth/login`,
-        data,
-        withCredentials: true
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        data
       })
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
-            // history.push('/auth');
+            // history.push('/');
             console.log('success');
-            // console.log(res.data)
-            userCtx.setCookie('user', res.data)
+            console.log(res.data)
+            userCtx.setCookie('token', res.data.auth_token)
+            userCtx.setCookie('user', res.data.user)
             formRef.current.reset();
           }
         })
