@@ -41,6 +41,7 @@ const Login = () => {
             // history.push('/');
             console.log('success');
             console.log(res.data)
+            localStorage.setItem('auth', res.data.auth_token);
             userCtx.setCookie('token', res.data.auth_token)
             userCtx.setCookie('user', res.data.user)
             formRef.current.reset();

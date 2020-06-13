@@ -22,7 +22,8 @@ const Navigation = () => {
 
   const handleLogout = () => {
     // if (userCtx.cookies.token && userCtx.cookies.user) {
-      userCtx.removeCookie('token');
+      localStorage.removeItem('auth');
+      // userCtx.removeCookie('token');
       userCtx.removeCookie('user');
       console.log('Logged out');
     // }
