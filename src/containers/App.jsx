@@ -11,12 +11,13 @@ import FacilitatorPage from '../pages/FacilitatorPage';
 import OrganizationPage from '../pages/OrganizationPage';
 import ErrorComponent from '../components/ErrorComponent';
 
+
 const App = () => {
   return (
     <BrowserRouter>
       <Switch>
         <UsersProvider>
-          <Navigation />
+          <Navigation location='boo' />
           <Route exact path='/' component={Homepage} />
           <Route exact path='/auth' component={Login} />
           <Route exact path='/register/user' component={UserSignup} />

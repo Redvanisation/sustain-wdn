@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { Navbar } from 'react-bulma-components';
 import { UserContext } from '../providers/UsersProvider';
 import logo from '../assets/logo-small.png';
@@ -7,7 +7,18 @@ import logo from '../assets/logo-small.png';
 const Navigation = () => {
   const userCtx = useContext(UserContext);
   const [showHide, setShowHide] = useState(false);
+  const [topText, setTopText] = useState(true);
   const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setTopText(true);
+    } else {
+      setTopText(false);
+    }
+  });
+
 
   const handleLogout = () => {
     // if (userCtx.cookies.token && userCtx.cookies.user) {
@@ -56,7 +67,6 @@ const Navigation = () => {
     }
   };
 
-  const boo = false
 
   return (
     <>
@@ -67,27 +77,25 @@ const Navigation = () => {
         className="navigation"
       >
           {
-            !boo
-              ? (
-              <div className="navigation__top-div">
-                  <h1 className="navigation__top-div--title">
-                    <span className="title is-3 navigation__top-div--title-part-1">Sustainable Workforce Development Network</span>
-                    <span className="subtitle is-4 navigation__top-div--title-part-2">Resources To Build A Sustainable World</span>
-                  </h1>
-
-                  <Navbar.Brand>
-                    <a href="/" className="navigation__logo-div">
-                      <img src={logo} alt="SustainWDN logo" className="navigation__logo-div--logo" />
-                    </a>
-                  </Navbar.Brand>
-              </div>
-              )
+            !topText
+              ? null
               : (
-                null
+                <div className="navigation__top-div">
+                    <h1 className="navigation__top-div--title">
+                      <span className="title is-3 navigation__top-div--title-part-1">Sustainable Workforce Development Network</span>
+                      <span className="subtitle is-4 navigation__top-div--title-part-2">Resources To Build A Sustainable World</span>
+                    </h1>
+
+                    <Navbar.Brand>
+                      <a href="/" className="navigation__logo-div">
+                        <img src={logo} alt="SustainWDN logo" className="navigation__logo-div--logo" />
+                      </a>
+                    </Navbar.Brand>
+                </div>
               )
           }
           {
-            !boo
+            topText
               ? (
                 <Navbar.Burger onClick={() => setShowHide(!showHide)} position="start" />
               )

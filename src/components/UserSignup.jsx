@@ -62,7 +62,7 @@ const UserSignup = () => {
   }
 
   return (
-    <div className="container">
+    <section className="form-section container">
       <h2 className="title is-2 is-centered">User Sign up</h2>
       <form className="form" ref={formRef} onSubmit={handleSubmit}>
         <div className="field">
@@ -125,7 +125,7 @@ const UserSignup = () => {
       <Link to="/auth"> Login!</Link>
     </div>
 
-  </div>
+  </section>
   )
 };
 

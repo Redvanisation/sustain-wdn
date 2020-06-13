@@ -33,6 +33,7 @@
   
   &__logo-div {
     width: 120px;
+    margin-right: -5rem;
     &--logo {
       width: 100%;
     }
@@ -51,9 +52,11 @@
   &__item,
   &__item:link,
   &__item:visited {
-    color: $color-black;
+    color: $color-dark;
     padding: .5rem;
+    padding-top: 2rem;
     transition: background-color .2s;
+    font-weight: bold;
 
     &:hover {
       background-color: rgba($color-black, .05);
@@ -132,7 +135,7 @@
 
     &__logo-div {
       width: 80px;
-
+      margin-right: 0;
     }
   }
 }

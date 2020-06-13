@@ -53,7 +53,7 @@ const Login = () => {
   }
 
   return (
-    <div className="container">
+    <section className="form-section container">
       <h2 className="title is-2 is-centered">Login</h2>
       <form className="form" ref={formRef} onSubmit={handleSubmit}>
 
@@ -79,11 +79,11 @@ const Login = () => {
     </form>
     
     <div className="is-centered">
-      You don't have an account?
-      <Link to="/register/user"> Sign up!</Link>
+      You don't have an account?<br />
+      <span className="form__footer-link"><Link to="/register/user">Sign up for a youth account!</Link></span>
     </div>
 
-  </div>
+  </section>
   )
 };
 

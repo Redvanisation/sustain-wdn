@@ -2,6 +2,14 @@
   max-width: 40%;
   padding: 2rem;
   margin: 0 auto;
+
+  &__footer-link,
+  &__footer-link:link,
+  &__footer-link:visited {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 
