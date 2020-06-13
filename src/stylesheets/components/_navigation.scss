@@ -55,11 +55,14 @@
     color: $color-dark;
     padding: .5rem;
     padding-top: 2rem;
-    transition: background-color .2s;
+    transition: all .5s;
     font-weight: bold;
+    border-bottom: 2px solid transparent;
 
     &:hover {
-      background-color: rgba($color-black, .05);
+      // background-color: rgba($color-black, .05);
+      border-bottom: 2px solid $color-dark;
+      // text-decoration: underline;
     }
   }
 }

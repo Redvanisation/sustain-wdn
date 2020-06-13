@@ -1,0 +1,169 @@
+.youth {
+  // padding: 2rem;
+
+  &__header {
+    text-align: center;
+    padding: 2rem;
+    border: 1px solid black;
+
+    &--title {
+      font-weight: bold;
+    }
+  }
+
+  &__profile-section {
+    display: flex;
+    padding: 2rem;
+
+    &--title {
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    &--image-div {
+      border: 1px solid orangered;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+    
+    &--image {
+      margin-bottom: 1rem;
+    }
+    
+    &--image-facilitator {
+      
+    }
+    
+    &--bio-div {
+      border: 1px solid green;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &--bio-container {
+      max-width: 50%;
+      align-self: center;
+      margin-bottom: 2rem;
+    }
+
+    &--bio-text {
+
+    }
+
+    &--bottom-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+
+    }
+
+    &--bottom-div {
+      max-width: 30%;
+
+      &:not(:last-child) {
+        margin-right: 5rem;
+      }
+    }
+  }
+
+  &__dream-map {
+    // border: 1px solid purple;
+    margin: 1rem auto 4rem;
+    padding: 2rem;
+    text-align: center;
+
+    &--title {
+
+    }
+
+    &__container {
+      display: flex;
+      // justify-content: center;
+      // border: 1px solid gray;
+
+      &--dreams-div {
+        border: 1px solid pink;
+        width: 60%;
+      }
+  
+      &--dreams-dream {
+  
+      }
+  
+      &--image-div {
+        border: 1px solid blue;
+        width: 40%;
+      }
+  
+      &--image {
+  
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .youth {
+    &__profile-section {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+
+      &--image-div {
+        width: 100%;
+        align-items: center;
+      }
+
+      &--bio-div {
+        padding: 2rem .5rem;
+      }
+
+      &--bio-container {
+        max-width: 100%;
+        text-align: center;
+      }
+
+      &--bottom-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      &--bottom-div {
+        max-width: 100%;
+        text-align: center;
+  
+        &:not(:last-child) {
+          margin-right: 0;
+          margin-bottom: 3rem;
+        }
+      }
+    }
+
+    &__dream-map {
+      padding: 0;
+      
+      &--title {
+  
+      }
+  
+      &__container {
+        flex-direction: column-reverse;
+
+        &--image-div {
+          width: 100%;
+        }
+
+        &--dreams-div {
+          width: 100%;
+        }
+    
+        // &--dreams-dream {
+    
+        // }
+      }
+    }
+  }
+}
