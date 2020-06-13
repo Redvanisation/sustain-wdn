@@ -11,9 +11,8 @@ const Navigation = () => {
 
   const handleLogout = () => {
     // if (userCtx.cookies.token && userCtx.cookies.user) {
-      history.push('/');
-      userCtx.removeCookie('user');
       userCtx.removeCookie('token');
+      userCtx.removeCookie('user');
       console.log('Logged out');
     // }
     
@@ -22,36 +21,36 @@ const Navigation = () => {
   const renderTabs = () => {
     if (userCtx.cookies.user && userCtx.cookies.user.role === 'user') {
       return (
-        <Navbar.Item href={`/user/${userCtx.cookies.user.user_id}`} className="navigation__item">
+        <Link to={`/user/${userCtx.cookies.user.user_id}`} className="navigation__item">
           Youth
-        </Navbar.Item>
+        </Link>
       );
     } else if (userCtx.cookies.user && userCtx.cookies.user.role === 'facilitator') {
       return (
-        <Navbar.Item href={`/facilitator/${userCtx.cookies.user.user_id}`} className="navigation__item">
+        <Link to={`/facilitator/${userCtx.cookies.user.user_id}`} className="navigation__item">
           Facilitator
-        </Navbar.Item>
+        </Link>
       );
     } else if (userCtx.cookies.user && userCtx.cookies.user.role === 'organization') {
       return (
-        <Navbar.Item href={`/organization/${userCtx.cookies.user.user_id}`} className="navigation__item">
+        <Link to={`/organization/${userCtx.cookies.user.user_id}`} className="navigation__item">
           Organization
-        </Navbar.Item>
+        </Link>
       );
     } else {
       return (
         <>
-        <Navbar.Item href="/auth" className="navigation__item">
+        <Link to="/auth" className="navigation__item">
           Youth
-        </Navbar.Item>
+        </Link>
 
-        <Navbar.Item href="/auth" className="navigation__item">
+        <Link to="/auth" className="navigation__item">
           Facilitator
-        </Navbar.Item>
+        </Link>
 
-        <Navbar.Item href="/auth" className="navigation__item">
+        <Link to="/auth" className="navigation__item">
           Organization
-        </Navbar.Item>
+        </Link>
         </>
       );
     }
@@ -106,13 +105,13 @@ const Navigation = () => {
 
         <Navbar.Menu>
           <Navbar.Container className="navigation__menu-container">
-            <Navbar.Item href="/" className="navigation__item">
+            <Link to="/" className="navigation__item">
               Home
-            </Navbar.Item>
+            </Link>
 
-            <Navbar.Item href="#" className="navigation__item">
+            <Link to="#" className="navigation__item">
               About us
-            </Navbar.Item>
+            </Link>
 
             {
               renderTabs()
@@ -121,19 +120,19 @@ const Navigation = () => {
             {
               userCtx.cookies.user
                 ? (
-                  <Navbar.Item className="navigation__item" onClick={handleLogout}>
+                  <Link to="/" className="navigation__item" onClick={handleLogout}>
                     Log out
-                  </Navbar.Item>
+                  </Link>
                 )
                 : (
                   <>
-                    <Navbar.Item href="/register/user" className="navigation__item">
+                    <Link to="/register/user" className="navigation__item">
                       Register
-                    </Navbar.Item>
+                    </Link>
 
-                    <Navbar.Item href="/auth" className="navigation__item">
+                    <Link to="/auth" className="navigation__item">
                       Log in
-                    </Navbar.Item>
+                    </Link>
                   </>
                 )
             }

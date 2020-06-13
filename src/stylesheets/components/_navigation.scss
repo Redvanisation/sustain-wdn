@@ -48,8 +48,16 @@
     margin: 0 auto;
   }
 
-  &__item {
-    
+  &__item,
+  &__item:link,
+  &__item:visited {
+    color: $color-black;
+    padding: .5rem;
+    transition: background-color .2s;
+
+    &:hover {
+      background-color: rgba($color-black, .05);
+    }
   }
 }
 
@@ -63,8 +71,14 @@
 
     &__logo-div-logged {
       width: 50px;
-      // padding: .2rem 0;
-      // margin-left: 1rem;
+
+    }
+
+    &__item,
+    &__item:link,
+    &__item:visited {
+      display: block;
+      text-align: center;
     }
   }
 }
