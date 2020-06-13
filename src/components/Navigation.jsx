@@ -7,18 +7,58 @@ import logo from '../assets/logo-small.png';
 const Navigation = () => {
   const userCtx = useContext(UserContext);
   const [showHide, setShowHide] = useState(false);
-  // const history = useHistory();
+  const history = useHistory();
 
   const handleLogout = () => {
-    if (userCtx.cookies.token && userCtx.cookies.user) {
-      userCtx.removeCookie('token');
+    // if (userCtx.cookies.token && userCtx.cookies.user) {
+      history.push('/');
       userCtx.removeCookie('user');
-      // history.push('/auth');
+      userCtx.removeCookie('token');
       console.log('Logged out');
-    }
+    // }
     
   };
+
+  const renderTabs = () => {
+    if (userCtx.cookies.user && userCtx.cookies.user.role === 'user') {
+      return (
+        <Navbar.Item href={`/user/${userCtx.cookies.user.user_id}`} className="navigation__item">
+          Youth
+        </Navbar.Item>
+      );
+    } else if (userCtx.cookies.user && userCtx.cookies.user.role === 'facilitator') {
+      return (
+        <Navbar.Item href={`/facilitator/${userCtx.cookies.user.user_id}`} className="navigation__item">
+          Facilitator
+        </Navbar.Item>
+      );
+    } else if (userCtx.cookies.user && userCtx.cookies.user.role === 'organization') {
+      return (
+        <Navbar.Item href={`/organization/${userCtx.cookies.user.user_id}`} className="navigation__item">
+          Organization
+        </Navbar.Item>
+      );
+    } else {
+      return (
+        <>
+        <Navbar.Item href="/auth" className="navigation__item">
+          Youth
+        </Navbar.Item>
+
+        <Navbar.Item href="/auth" className="navigation__item">
+          Facilitator
+        </Navbar.Item>
+
+        <Navbar.Item href="/auth" className="navigation__item">
+          Organization
+        </Navbar.Item>
+        </>
+      );
+    }
+  };
+
   const boo = false
+
   return (
     <>
       <Navbar
@@ -63,6 +103,7 @@ const Navigation = () => {
           }
         {/* <span className="burger-text">Menu</span> */}
 
+
         <Navbar.Menu>
           <Navbar.Container className="navigation__menu-container">
             <Navbar.Item href="/" className="navigation__item">
@@ -70,24 +111,17 @@ const Navigation = () => {
             </Navbar.Item>
 
             <Navbar.Item href="#" className="navigation__item">
-              Youth
-            </Navbar.Item>
-
-            <Navbar.Item href="#" className="navigation__item">
-              Facilitator
-            </Navbar.Item>
-
-            <Navbar.Item href="#" className="navigation__item">
-              Business
-            </Navbar.Item>
-
-            <Navbar.Item href="#" className="navigation__item">
               About us
             </Navbar.Item>
+
+            {
+              renderTabs()
+            }
+
             {
               userCtx.cookies.user
                 ? (
-                  <Navbar.Item href="#" className="navigation__item" onClick={() => handleLogout()}>
+                  <Navbar.Item className="navigation__item" onClick={handleLogout}>
                     Log out
                   </Navbar.Item>
                 )

@@ -1,0 +1,36 @@
+.homepage {
+  padding: 3rem;
+  
+  &__title {
+    // margin-bottom: 1rem;
+  }
+
+  &__secondary-title {
+
+  }
+
+  &__top-section{
+    text-align: center;
+    padding: 1rem 2rem;
+
+    &--text {
+      max-width: 50%;
+      margin: 0 auto;
+
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+        margin-top: 2rem;
+      }
+    }
+  }
+
+  &__bottom-section {
+
+    &--cards-div {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+
+}
