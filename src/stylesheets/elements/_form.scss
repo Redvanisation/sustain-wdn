@@ -1,0 +1,26 @@
+.form {
+  max-width: 40%;
+  padding: 2rem;
+  margin: 0 auto;
+
+  &__footer-link,
+  &__footer-link:link,
+  &__footer-link:visited {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 800px) {
+  .form {
+    max-width: 60%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .form {
+    max-width: 80%;
+  }
+}

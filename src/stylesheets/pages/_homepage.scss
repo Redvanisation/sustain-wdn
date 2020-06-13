@@ -1,0 +1,58 @@
+.homepage {
+  padding: 3rem auto;
+  
+  &__title {
+    // margin-bottom: 1rem;
+    color: $color-white;
+    font-weight: bold;
+  }
+  
+  &__secondary-title {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  &__top-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: $color-blue-light;
+    color: $color-white;
+
+    &--text {
+      max-width: 50%;
+      margin: 0 auto;
+
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+        margin-top: 2rem;
+      }
+    }
+  }
+
+  &__bottom-section {
+    padding: 2rem 2rem 4rem;
+    margin: 1rem auto 3rem;
+    max-width: 1200px;
+    
+
+    &--cards-div {
+      // display: flex;
+      // justify-content: center;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .homepage {
+    &__title {
+      font-size: 1.8rem !important;
+    }
+
+    &__top-section {
+      padding: 2rem .5rem;
+      &--text {
+        max-width: 100%;
+      }
+    }
+  }
+}
