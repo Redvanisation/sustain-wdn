@@ -14,11 +14,13 @@ const FacilitatorSingup = () => {
   const [isDisabled, setIsDisabled] = useState(false);
   const userCtx = useContext(UserContext);
   const history = useHistory();
+  const currentUser = JSON.parse(localStorage.getItem('user'));
+
 
   const formRef = useRef(null);
 
   useLayoutEffect(() => {
-    if (userCtx.cookies.user && !userCtx.cookies.user.admin) {
+    if (currentUser && !currentUser.admin) {
       history.push('/');
     }
   })

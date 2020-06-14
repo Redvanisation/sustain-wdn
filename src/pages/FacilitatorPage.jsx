@@ -6,9 +6,11 @@ const FacilitatorPage = () => {
 
   const userCtx = useContext(UserContext);
   const history = useHistory();
+  const currentUser = JSON.parse(localStorage.getItem('user')) || {};
+
 
   useLayoutEffect(() => {
-    if (!userCtx.cookies.user) {
+    if (!currentUser) {
       history.push('/auth');
     }
   });

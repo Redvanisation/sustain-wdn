@@ -12,7 +12,7 @@ const Login = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (userCtx.cookies.user) {
+    if (localStorage.getItem('user')) {
       history.push('/');
     }
   })
@@ -38,13 +38,15 @@ const Login = () => {
       })
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
-            // history.push('/');
             console.log('success');
             console.log(res.data)
             localStorage.setItem('auth', res.data.auth_token);
-            userCtx.setCookie('token', res.data.auth_token)
-            userCtx.setCookie('user', res.data.user)
+            // userCtx.setCookie('token', res.data.auth_token)
+            localStorage.setItem('user', JSON.stringify(res.data.user));
+            
+            // userCtx.setUser(JSON.parse(localStorage.getItem('user')));
             formRef.current.reset();
+            history.push('/');
           }
         })
         .catch(() => {

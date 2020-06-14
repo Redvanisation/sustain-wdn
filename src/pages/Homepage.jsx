@@ -7,14 +7,16 @@ import Footer from '../components/Footer';
 const Homepage = () => {
 
   const userCtx = useContext(UserContext);
+  const currentUser = JSON.parse(localStorage.getItem('user'));
+
   
-  // const id = userCtx.cookies.user.id;
+  // const id = userCtx.user.id;
 
   const verifyUser = (type) => {
-    if (userCtx.cookies.user && userCtx.cookies.user.role === type) {
-      const id = userCtx.cookies.user.user_id;
+    if (currentUser && currentUser.role === type) {
+      const id = currentUser.user_id;
       return `/${type}/${id}`;
-    } else if (userCtx.cookies.user && userCtx.cookies.user.role !== type) {
+    } else if (currentUser && currentUser.role !== type) {
       return '/error';
     } else {
       return '/auth';
@@ -22,7 +24,7 @@ const Homepage = () => {
   };
 
 
-  // console.log(userCtx.cookies.user)
+  // console.log(userCtx.user)
 
   return (
     <>
