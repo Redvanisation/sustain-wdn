@@ -13,11 +13,11 @@ const YouthPage = () => {
   const userCtx = useContext(UserContext);
   const history = useHistory();
 
-  // useLayoutEffect(() => {
-  //   if (!userCtx.cookies.user) {
-  //     history.push('/auth');
-  //   }
-  // });
+  useLayoutEffect(() => {
+    if (!currentUser) {
+      history.push('/auth');
+    }
+  });
 
 
   useEffect(() => {
@@ -35,10 +35,16 @@ const YouthPage = () => {
         setIsLoading(false);
       }
 
+      getUser();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (currentUser) {
       const getFacilitator = async () => {
         const response = await axios({
           method: 'get',
-          url: `${baseUrl}api/v1/facilitators/${user.facilitator_id}`,
+          url: `${baseUrl}api/v1/facilitators/${currentUser.facilitator_id}`,
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('auth')}`
           }
@@ -47,10 +53,9 @@ const YouthPage = () => {
         setFacilitator(response.data);
       }
 
-      getUser();
       getFacilitator();
     }
-  }, []);
+  }, [])
 
   return (
     <main className="youth">
@@ -59,17 +64,18 @@ const YouthPage = () => {
           ? <h2>Getting user...</h2>
           : (
             <>
-            {console.log(user)}
+            {console.log(facilitator)}
               <header className="youth__header title is-3 is-bold">
-                <h3 className="youth__header--title">Welcome back, {user.name}!</h3>
+                <h3 className="youth__header--title">Welcome back, <span className="youth__header--username">{user.name}</span>!</h3>
               </header>
               <section className="youth__profile-section">
                 
                 <div className="youth__profile-section--image-div">
                   <h3 className="youth__profile-section--title">{user.name}</h3>
-                  <img src={user.image.url} alt="profile" className="youth__profile-section--image" />
+                  <div className="youth__profile-section--image" style={{'content':`url(${user.image ? user.image.url : null})`}} />
                   <h3 className="youth__profile-section--title">Facilitator</h3>
-                  <img src="#" alt="profile" className="youth__profile-section--image-facilitator" />
+                  <span className="youth__header--username">{facilitator.name}</span>
+                  <div className="youth__profile-section--image-facilitator" style={{'content':`url(${facilitator.image ? facilitator.image.url : null})`}} />
                 </div>
 
                 <div className="youth__profile-section--bio-div">

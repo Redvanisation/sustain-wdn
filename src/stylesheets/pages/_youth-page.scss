@@ -9,7 +9,13 @@
   &__header {
     text-align: center;
     padding: 2rem;
-    border: 1px solid black;
+    background-color: $color-blue-light;
+    color: $color-white;
+    // border: 1px solid black;
+
+    &--username {
+      text-transform: capitalize;
+    }
 
     &--title {
       font-weight: bold;
@@ -27,23 +33,32 @@
     }
 
     &--image-div {
-      border: 1px solid orangered;
+      // border: 1px solid orangered;
       width: 50%;
       display: flex;
       flex-direction: column;
+      align-items: center;
       padding: 1rem;
     }
     
     &--image {
-      margin-bottom: 1rem;
+      width: 10rem;
+      height: 10rem;
+      border-radius: 200%;
+      object-fit: cover;
+      margin-bottom: 2rem;
     }
     
     &--image-facilitator {
-      
+      width: 10rem;
+      height: 10rem;
+      border-radius: 200%;
+      object-fit: cover;
+      margin-top: 1rem;
     }
     
     &--bio-div {
-      border: 1px solid green;
+      // border: 1px solid green;
       padding: 2rem;
       display: flex;
       flex-direction: column;
@@ -87,7 +102,7 @@
       // border: 1px solid gray;
 
       &--dreams-div {
-        border: 1px solid pink;
+        // border: 1px solid pink;
         width: 60%;
       }
   
@@ -96,7 +111,7 @@
       }
   
       &--image-div {
-        border: 1px solid blue;
+        // border: 1px solid blue;
         width: 40%;
       }
   
@@ -107,9 +122,14 @@
   }
 
   &__worksheets {
-    border: 1px solid red;
+    // border: 1px solid red;
     padding: 2rem;
-    margin: 2rem;
+    margin: 2rem auto;
+    background-color: $color-blue-light;
+
+    & > * {
+      color: $color-white;
+    }
 
     &--worksheet-container {
       // border: 1px solid brown;
