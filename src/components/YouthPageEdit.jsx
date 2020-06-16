@@ -16,11 +16,11 @@ const YouthPageEdit = () => {
 
   const formRef = useRef(null);
 
-  // useLayoutEffect(() => {
-  //   if (!currentUser) {
-  //     history.push('/');
-  //   }
-  // });
+  useLayoutEffect(() => {
+    if (!currentUser) {
+      history.push('/');
+    }
+  });
 
   const handleImage = (e) => {
     setSelectedImage(e.target.files[0]);
