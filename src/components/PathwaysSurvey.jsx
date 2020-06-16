@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import axios from 'axios';
-import { baseUrl } from '../helpers';
+import { useHistory } from 'react-router-dom';
 import Checkbox from './Checkbox';
+import { baseUrl } from '../helpers';
 
 const PathwaysSurvey = () => {
   const [subjects, setSubjects] = useState([]);
@@ -10,9 +11,16 @@ const PathwaysSurvey = () => {
   const [supportTypes, setSupportTypes] = useState([]);
 
   const formRef = useRef(null);
+  const history = useHistory();
   
   const currentUser = JSON.parse(localStorage.getItem('user'));
   const token = localStorage.getItem('auth');
+
+  useLayoutEffect(() => {
+    if (!currentUser) {
+      history.push('/auth');
+    }
+  });
 
 
   const handleSubmit = (e) => {

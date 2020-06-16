@@ -11,6 +11,7 @@ import FacilitatorPage from '../pages/FacilitatorPage';
 import OrganizationPage from '../pages/OrganizationPage';
 import ErrorComponent from '../components/ErrorComponent';
 import PathwaysSurvey from '../components/PathwaysSurvey';
+import DreamMapEdit from '../components/DeamMapEdit';
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
           <Route exact path='/organization/:id' component={OrganizationPage} />
           <Route exact path='/error' component={ErrorComponent} />
           <Route exact path='/youth/servey' component={PathwaysSurvey} />
+          <Route exact path='/dreammap/edit' component={DreamMapEdit} />
           {/* <Route exact path='/register/facilitator' component={FacilitatorSingup} /> */}
         </UsersProvider>
       </Switch>

@@ -106,27 +106,60 @@
     padding: 2rem;
     text-align: center;
 
+    &--button,
+    &--button:link,
+    &--button:visited {
+      background-color: $color-blue-light;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+      color: $color-white;
+      font-weight: bold;
+      transition: all .2s;
+
+      &:hover {
+        background-color: rgba($color-blue-light, .8);
+      }
+    }
+
     &__container {
       display: flex;
       // justify-content: center;
       // border: 1px solid gray;
 
-      &--dreams-div {
-        // border: 1px solid pink;
-        width: 60%;
-      }
+      // &--dreams-div {
+      //   // border: 1px solid pink;
+      //   width: 60%;
+      // }
   
-      &--dreams-dream {
+      // &--dreams-dream {
   
-      }
+      // }
+
   
       &--image-div {
-        // border: 1px solid blue;
-        width: 40%;
+        margin: 2rem auto;
+        margin-bottom: 4rem;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &--figure {
+        position: relative;
+        &:not(:last-child) {
+          margin-right: 3rem;
+        }
+        // margin-bottom: 2rem;
       }
   
       &--image {
-  
+        // max-width: 80%;
+      }
+
+      &--image-text {
+        font-weight: bold;
+        margin-top: 1rem;
+        text-transform: capitalize;
+        // font-size: 2rem;
       }
     }
   }
@@ -264,6 +297,27 @@
         height: 28rem;
       }
     }
+
+    &__dream-map {
+      &__container {
+        &--image-div {
+          flex-direction: column;
+        }
+  
+        &--figure {
+          margin-bottom: 3rem;
+          
+          &:not(:last-child) {
+            margin-right: 0;
+          }
+        }
+    
+        &--image {
+          max-width: 60%;
+        }
+      }
+    }
+
     &__sustainability {
       max-width: 100%;
 

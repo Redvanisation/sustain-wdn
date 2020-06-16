@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
 import { UserContext } from '../providers/UsersProvider';
 import { baseUrl } from '../helpers/';
+import blueStar from '../assets/star-blue.png';
+import greenStar from '../assets/star-green.png';
+import orangeStar from '../assets/star-orange.png';
 
 const YouthPage = () => {
   const [user, setUser] = useState({});
@@ -10,7 +13,7 @@ const YouthPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const currentUser = JSON.parse(localStorage.getItem('user'));
-  const userCtx = useContext(UserContext);
+  // const userCtx = useContext(UserContext);
   const history = useHistory();
 
   useLayoutEffect(() => {
@@ -64,7 +67,7 @@ const YouthPage = () => {
           ? <h2>Getting user...</h2>
           : (
             <>
-            {console.log(facilitator)}
+            {console.log(user)}
               <header className="youth__header title is-3 is-bold">
                 <h3 className="youth__header--title">Welcome back, <span className="youth__header--username">{user.name}</span>!</h3>
               </header>
@@ -111,16 +114,39 @@ const YouthPage = () => {
                 <h2 className="youth__titles title is-3">Dream Map</h2>
 
                 <div className="youth__dream-map__container">
-                  <div className="youth__dream-map__container--dreams-div">
-                    <div className="youth__dream-map__container--dreams-dream">Dream one</div>
-                    <div className="youth__dream-map__container--dreams-dream">Dream Two</div>
-                    <div className="youth__dream-map__container--dreams-dream">Dream Three</div>
-                  </div>
 
                   <div className="youth__dream-map__container--image-div">
-                    <img src="#" alt="Dream map" className="youth__dream-map__container--image" />
+                    <figure className="youth__dream-map__container--figure">
+                      <img src={blueStar} alt="Dream map" className="youth__dream-map__container--image" />
+                      <figcaption className="youth__dream-map__container--image-text text-blue">
+                        {user.life_dream ? user.life_dream : 'Set your life dream!'}
+                      </figcaption>
+                    </figure>
+
+                    <figure className="youth__dream-map__container--figure">
+                      <img src={orangeStar} alt="Dream map" className="youth__dream-map__container--image" />
+                      <figcaption className="youth__dream-map__container--image-text text-orange">
+                        {user.community_dream ? user.community_dream : 'Set your dream for the community!'}
+                      </figcaption>
+                    </figure>
+
+                    <figure className="youth__dream-map__container--figure">
+                      <img src={greenStar} alt="Dream map" className="youth__dream-map__container--image" />
+                      <figcaption className="youth__dream-map__container--image-text text-green">
+                        {user.world_dream ? user.world_dream : 'Set your dream for the world!'}
+                      </figcaption>
+                    </figure>
                   </div>
+
                 </div>
+
+                <Link to="/dreammap/edit" className="youth__dream-map--button">
+                  {
+                    (user.life_dream && user.community_dream && user.world_dream)
+                      ? 'Update my dreams'
+                      : 'Set my dreams'
+                  }
+                </Link>
               </section>
 
               <section className="youth__worksheets">
