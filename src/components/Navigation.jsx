@@ -18,7 +18,7 @@ const Navigation = () => {
     } else {
       setTopText(false);
     }
-  });
+  }, [location.pathname]);
 
 
   const handleLogout = () => {

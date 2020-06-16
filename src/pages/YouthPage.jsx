@@ -68,6 +68,7 @@ const YouthPage = () => {
               <header className="youth__header title is-3 is-bold">
                 <h3 className="youth__header--title">Welcome back, <span className="youth__header--username">{user.name}</span>!</h3>
               </header>
+              
               <section className="youth__profile-section">
                 
                 <div className="youth__profile-section--image-div">
@@ -156,7 +157,7 @@ const YouthPage = () => {
                 <p className="youth__sustainability--text">
                   When you sign up we use the information that you give us (interests, skills, etc.) to recommend potential career areas. When you select a career area to explore, we offer you a graphical pathway to achieve a job in that area, with actionable items, such as internships we can help you to apply for. You can even apply for the job if you are already qualified!
                 </p>
-                <Link to="/pathways" className="youth__sustainability--link">
+                <Link to="/youth/servey" className="youth__sustainability--link">
                   Take the Survey!
                 </Link>
               </section>

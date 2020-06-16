@@ -26,7 +26,7 @@ const App = () => {
           <Route exact path='/facilitator/:id' component={FacilitatorPage} />
           <Route exact path='/organization/:id' component={OrganizationPage} />
           <Route exact path='/error' component={ErrorComponent} />
-          <Route exact path='/pathways' component={PathwaysSurvey} />
+          <Route exact path='/youth/servey' component={PathwaysSurvey} />
           {/* <Route exact path='/register/facilitator' component={FacilitatorSingup} /> */}
         </UsersProvider>
       </Switch>
