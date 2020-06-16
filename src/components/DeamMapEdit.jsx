@@ -31,7 +31,7 @@ const DeamMapEdit = () => {
           if (res.status === 200 || res.status === 201) {
             console.log('success');
             formRef.current.reset();
-            // history.push(`/user/${currentUser.user_id}`);
+            history.push(`/user/${currentUser.user_id}`);
           }
         })
         .catch((err) => console.log(err));

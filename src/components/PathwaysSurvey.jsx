@@ -41,7 +41,12 @@ const PathwaysSurvey = () => {
         "Authorization": `Bearer ${token}`
       }
     })
-      .then(res => console.log(res.data))
+      .then((res) => {
+        if (res.status === 200 || res.status === 201) {
+          // formRef.current.reset();
+          history.push(`/user/${currentUser.user_id}`);
+        }
+      })
       .catch(err => console.log(err));
   }
 
@@ -52,33 +57,33 @@ const PathwaysSurvey = () => {
       
       <form className="form" ref={formRef} onSubmit={handleSubmit}>
         
-        <div class="control">
-          <label class="radio title is-6">
+        <div className="control">
+          <label className="radio title is-6">
             What is your highest level of education?
           </label><br />
-          <label class="radio">
+          <label className="radio">
             <input type="radio" name="education_level" value="Middle School" />
             &nbsp;Middle School
           </label><br />
-          <label class="radio">
+          <label className="radio">
             <input type="radio" name="education_level" value="High School" />
             &nbsp;High School
           </label><br />
-          <label class="radio">
+          <label className="radio">
             <input type="radio" name="education_level" value="College" />
             &nbsp;College
           </label><br />
-          <label class="radio">
+          <label className="radio">
             <input type="radio" name="education_level" value="Graduate School" />
             &nbsp;Graduate School
           </label>
         </div>
 
-        <div class="field">
-          <label class="radio title is-6">
+        <div className="field">
+          <label className="radio title is-6">
             What is your favorite subject in school?
           </label><br />
-          <div class="control checkbox-container">
+          <div className="control checkbox-container">
 
             <div className="checkbox-group" >
 
@@ -107,11 +112,11 @@ const PathwaysSurvey = () => {
           </div>
         </div>
 
-        <div class="select is-multiple">
-          <label class="radio title is-6">
+        <div className="select is-multiple">
+          <label className="radio title is-6">
             What are your favorite extracurricular activities?
           </label><br />
-          <div class="control checkbox-container">
+          <div className="control checkbox-container">
 
             <div className="checkbox-group" >
               <Checkbox value="Sports" name="fav_activities" arr={activities} setArr={setActivities} />
@@ -135,8 +140,8 @@ const PathwaysSurvey = () => {
           </div>
         </div>
 
-        <div class="select is-multiple">
-          <label class="radio title is-6">
+        <div className="select is-multiple">
+          <label className="radio title is-6">
             Which of the following terms describe yourself?
           </label><br />
           <div className="checkbox-group" >
@@ -150,8 +155,8 @@ const PathwaysSurvey = () => {
           </div>
         </div>
 
-        <div class="select is-multiple">
-          <label class="radio title is-6">
+        <div className="select is-multiple">
+          <label className="radio title is-6">
             What kind of support do you need?
           </label><br />
           <div className="checkbox-group" >
@@ -164,12 +169,12 @@ const PathwaysSurvey = () => {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">
+        <div className="field">
+          <label className="label">
             How Eager Are You To Get A Blue Job/Career To Help Rebuild The Planet? (on a scale of 1-10)
           </label>
-          <div class="control">
-            <div class="select">
+          <div className="control">
+            <div className="select">
               <select name="eager_scale">
                 <option  value="1">1</option>
                 <option value="2">2</option>

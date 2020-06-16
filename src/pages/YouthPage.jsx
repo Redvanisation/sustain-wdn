@@ -73,7 +73,8 @@ const YouthPage = () => {
               </header>
               
               <section className="youth__profile-section">
-                
+                <Link to="/edit/user" className="youth__profile-section--edit-btn">Edit</Link>
+
                 <div className="youth__profile-section--image-div">
                   <h3 className="youth__profile-section--title">{user.name}</h3>
                   <div className="youth__profile-section--image" style={{'content':`url(${user.image ? user.image.url : null})`}} />
@@ -156,23 +157,23 @@ const YouthPage = () => {
                   <h3 className="youth__worksheets--worksheet-title">
                     Youth Bio Questions
                   </h3>
-                  <Link>Link</Link>
+                  <Link to="#">Link</Link>
                 </div>
                 <div className="youth__worksheets--worksheet-container">
                   <h3 className="youth__worksheets--worksheet-title">Professtional Development</h3>
-                  <Link>Link</Link>
+                  <Link to="#">Link</Link>
                 </div>
                 <div className="youth__worksheets--worksheet-container">
                   <h3 className="youth__worksheets--worksheet-title">Sustainability in Action</h3>
-                  <Link>Link</Link>
+                  <Link to="#">Link</Link>
                 </div>
                 <div className="youth__worksheets--worksheet-container">
                   <h3 className="youth__worksheets--worksheet-title">College Prep</h3>
-                  <Link>Link</Link>
+                  <Link to="#">Link</Link>
                 </div>
                 <div className="youth__worksheets--worksheet-container">
                   <h3 className="youth__worksheets--worksheet-title">5 years plan</h3>
-                  <Link>Link</Link>
+                  <Link to="#">Link</Link>
                 </div>
               </section>
 

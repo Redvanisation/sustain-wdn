@@ -12,6 +12,7 @@ import OrganizationPage from '../pages/OrganizationPage';
 import ErrorComponent from '../components/ErrorComponent';
 import PathwaysSurvey from '../components/PathwaysSurvey';
 import DreamMapEdit from '../components/DeamMapEdit';
+import YouthPageEdit from '../components/YouthPageEdit';
 
 
 const App = () => {
@@ -19,7 +20,7 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <UsersProvider>
-          <Navigation location='boo' />
+          <Navigation />
           <Route exact path='/' component={Homepage} />
           <Route exact path='/auth' component={Login} />
           <Route exact path='/register/user' component={UserSignup} />
@@ -29,6 +30,7 @@ const App = () => {
           <Route exact path='/error' component={ErrorComponent} />
           <Route exact path='/youth/servey' component={PathwaysSurvey} />
           <Route exact path='/dreammap/edit' component={DreamMapEdit} />
+          <Route exact path='/edit/user' component={YouthPageEdit} />
           {/* <Route exact path='/register/facilitator' component={FacilitatorSingup} /> */}
         </UsersProvider>
       </Switch>

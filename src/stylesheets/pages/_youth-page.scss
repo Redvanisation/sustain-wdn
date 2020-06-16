@@ -25,7 +25,29 @@
   &__profile-section {
     display: flex;
     padding: 2rem;
+    position: relative;
     border-bottom: 1px solid $color-blue-light;
+
+    &--edit-btn,
+    &--edit-btn:link,
+    &--edit-btn:visited {
+      position: absolute;
+      right: 5rem;
+      background-color: $color-blue-light;
+      padding: .5rem 1rem;
+      border-radius: 5px;
+      color: $color-white;
+      font-weight: bold;
+      transition: all .2s;
+
+      &:hover {
+        background-color: rgba($color-blue-light, .8);
+      }
+
+      // &:hover {
+
+      // }
+    }
 
     &--title {
       font-weight: bold;
