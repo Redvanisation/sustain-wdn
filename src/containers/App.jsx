@@ -13,6 +13,7 @@ import ErrorComponent from '../components/ErrorComponent';
 import PathwaysSurvey from '../components/PathwaysSurvey';
 import DreamMapEdit from '../components/DeamMapEdit';
 import YouthPageEdit from '../components/YouthPageEdit';
+import FacilitatorPageEdit from '../components/FacilitatorPageEdit';
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
           <Route exact path='/youth/servey' component={PathwaysSurvey} />
           <Route exact path='/dreammap/edit' component={DreamMapEdit} />
           <Route exact path='/edit/user' component={YouthPageEdit} />
+          <Route exact path='/edit/facilitator' component={FacilitatorPageEdit} />
           {/* <Route exact path='/register/facilitator' component={FacilitatorSingup} /> */}
         </UsersProvider>
       </Switch>

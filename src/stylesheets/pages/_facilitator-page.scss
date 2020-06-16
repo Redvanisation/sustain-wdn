@@ -1,0 +1,100 @@
+.facilitator {
+  &__titles {
+    text-align: center;
+    margin-bottom: 2rem !important;
+  }
+
+  &__header {
+    text-align: center;
+    padding: 2rem;
+    background-color: $color-blue-light;
+    color: $color-white;
+    // border: 1px solid black;
+
+    &--username {
+      text-transform: capitalize;
+    }
+
+    &--title {
+      font-weight: bold;
+    }
+  }
+
+  &__profile-section {
+    display: flex;
+    padding: 2rem;
+    border-bottom: 1px solid $color-blue-light;
+
+    &--edit-btn,
+    &--edit-btn:link,
+    &--edit-btn:visited {
+      background-color: $color-blue-light;
+      padding: .5rem 1rem;
+      border-radius: 5px;
+      color: $color-white;
+      font-weight: bold;
+      transition: all .2s;
+
+      &:hover {
+        background-color: rgba($color-blue-light, .8);
+      }
+    }
+
+    &--edit-btn-button {
+      background-color: $color-blue-light;
+      border: none;
+      padding: .7rem 1rem;
+      font-size: 1rem;
+      margin: 1rem auto;
+      border-radius: 5px;
+      color: $color-white;
+      font-weight: bold;
+      outline: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba($color-blue-light, .8);
+      }
+    }
+
+    &--title {
+      font-weight: bold;
+      margin-bottom: 1rem;
+      text-transform: capitalize;
+    }
+
+    &--image-div {
+      position: relative;
+      width: 20%;
+      height: 30rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      border-radius: 5px;
+      @include cardShadow;
+    }
+    
+    &--image {
+      width: 8rem;
+      height: 8rem;
+      border-radius: 200%;
+      object-fit: cover;
+      margin-bottom: 2rem;
+    }
+    
+    &--users-container {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      margin: 0 2rem;
+      border-radius: 5px;
+      @include cardShadow;
+      background-color: rgba($color-blue-light, .2);
+      transition: all .3s;
+    }
+    
+  }
+}

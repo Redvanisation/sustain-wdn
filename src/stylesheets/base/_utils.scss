@@ -18,3 +18,8 @@
 .text-orange {
   color: $color-dorange !important;
 }
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}

@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
-import { UserContext } from '../providers/UsersProvider';
+// import { UserContext } from '../providers/UsersProvider';
 import { baseUrl } from '../helpers/';
 import blueStar from '../assets/star-blue.png';
 import greenStar from '../assets/star-green.png';
 import orangeStar from '../assets/star-orange.png';
 
-const YouthPage = () => {
+const YouthPage = (props) => {
   const [user, setUser] = useState({});
   const [facilitator, setFacilitator] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -17,18 +17,34 @@ const YouthPage = () => {
   const history = useHistory();
 
   useLayoutEffect(() => {
-    if (!currentUser) {
+    if (!(currentUser.role === 'user') && !(currentUser.role === 'facilitator')) {
       history.push('/auth');
     }
   });
 
+  const getId = () => {
+    if (currentUser.role === 'user') {
+      return currentUser.user_id;
+    } else {
+      return props.match.params.id;
+    }
+  }
+
+  const getFacilitatorId = () => {
+    if (currentUser.role === 'user') {
+      return currentUser.facilitator_id;
+    } else {
+      return currentUser.user_id;
+    }
+  }
+
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser) { 
       const getUser = async () => {
         const response = await axios({
           method: 'get',
-          url: `${baseUrl}api/v1/users/${currentUser.user_id}`,
+          url: `${baseUrl}api/v1/users/${getId()}`,
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('auth')}`
           }
@@ -47,7 +63,7 @@ const YouthPage = () => {
       const getFacilitator = async () => {
         const response = await axios({
           method: 'get',
-          url: `${baseUrl}api/v1/facilitators/${currentUser.facilitator_id}`,
+          url: `${baseUrl}api/v1/facilitators/${getFacilitatorId()}`,
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('auth')}`
           }

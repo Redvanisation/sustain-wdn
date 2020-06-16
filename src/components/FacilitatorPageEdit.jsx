@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { FiUpload } from 'react-icons/fi';
 import { baseUrl } from '../helpers';
 
-const YouthPageEdit = () => {
+const FacilitatorPageEdit = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
@@ -17,7 +17,7 @@ const YouthPageEdit = () => {
   const formRef = useRef(null);
 
   useLayoutEffect(() => {
-    if (!currentUser) {
+    if (!currentUser.role === 'facilitator') {
       history.push('/');
     }
   });
@@ -44,7 +44,7 @@ const YouthPageEdit = () => {
       const data = new FormData(formRef.current);
       axios({
         method: 'put',
-        url: `${baseUrl}api/v1/users/${currentUser.user_id}`,
+        url: `${baseUrl}api/v1/facilitators/${currentUser.user_id}`,
         data,
         headers: {
           "Authorization": `Bearer ${token}`
@@ -54,7 +54,7 @@ const YouthPageEdit = () => {
           if (res.status === 200 || res.status === 201) {
             console.log('success');
             formRef.current.reset();
-            history.push(`/user/${currentUser.user_id}`);
+            history.push(`/facilitator/${currentUser.user_id}`);
           }
         })
         .catch((err) => console.log(err));
@@ -87,28 +87,6 @@ const YouthPageEdit = () => {
           </div>
         </div>
 
-        <div className="field">
-          <label className="label">Biography</label>
-          <div className="control">
-            <textarea className="textarea" name="bio" type="text" placeholder={currentUser.bio || 'Bio...'} defaultValue={currentUser.bio} />
-          </div>
-        </div>
-
-        <div className="field">
-          <label className="label">Greatest Challenges</label>
-          <div className="control">
-            <textarea className="textarea" name="greatest_challenges" type="text" placeholder={currentUser.greatest_challenges || 'Greatest Challenges...'} defaultValue={currentUser.greatest_challenges} />
-          </div>
-        </div>
-
-        <div className="field">
-          <label className="label">Greatest Assets</label>
-          <div className="control">
-            <textarea className="textarea" name="greatest_assets" type="text" placeholder={currentUser.greatest_assets || 'Greatest Assets...'} defaultValue={currentUser.greatest_assets} />
-          </div>
-        </div>
-
-
         <div className="field file has-name is-boxed is-centered">
           <label className="file-label">
             <input className="file-input" type="file" name="image" onChange={handleImage} />
@@ -137,4 +115,4 @@ const YouthPageEdit = () => {
   );
 };
 
-export default YouthPageEdit;
+export default FacilitatorPageEdit;
