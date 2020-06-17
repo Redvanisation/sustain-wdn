@@ -191,10 +191,25 @@
     &--worksheet-container {
       // border: 1px solid brown;
       text-align: center;
+      padding: 2rem;
+      margin: 0 auto;
+      width: 50%;
+      border: 1px solid white;
 
       &:not(:last-child) {
-        margin-bottom: 1rem;
+        margin-bottom: 3rem;
       }
+
+      & > .title {
+        color: $color-white;
+        text-transform: capitalize;
+        font-weight: bold;
+      }
+    }
+
+    &--buttons-container {
+      display: flex;
+      justify-content: center;
     }
   }
 
@@ -270,6 +285,16 @@
       }
     }
 
+    &__worksheets {
+      // border: 1px solid red;
+      padding: 2rem;
+      margin: 2rem auto;
+  
+      &--worksheet-container {
+        width: 80%;
+      }
+    }
+
     &__dream-map {
       padding: 0;
       
@@ -309,6 +334,31 @@
       &--image-div {
         width: 60%;
         height: 28rem;
+      }
+    }
+
+    &__worksheets {
+      padding: 2rem;
+      margin: 2rem auto;
+  
+      &--worksheet-container {
+        width: 100%;
+      }
+
+      &--buttons-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      &--btn {
+        max-width: 8rem;
+        margin-top: 1rem;
+
+        &:first-child {
+          margin-bottom: 1rem;
+        }
       }
     }
 

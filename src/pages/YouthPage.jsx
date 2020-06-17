@@ -1,7 +1,10 @@
-import React, { useState, useContext, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
+import { FiEdit, FiDownload } from 'react-icons/fi';
+
 // import { UserContext } from '../providers/UsersProvider';
+import UploadWorksheet from '../components/UploadWorksheet';
 import { baseUrl } from '../helpers/';
 import blueStar from '../assets/star-blue.png';
 import greenStar from '../assets/star-green.png';
@@ -15,6 +18,7 @@ const YouthPage = (props) => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
   // const userCtx = useContext(UserContext);
   const history = useHistory();
+  const fileRef = useRef(null)
 
   useLayoutEffect(() => {
     if (!(currentUser.role === 'user') && !(currentUser.role === 'facilitator')) {
@@ -35,6 +39,36 @@ const YouthPage = (props) => {
       return currentUser.facilitator_id;
     } else {
       return currentUser.user_id;
+    }
+  }
+
+  const handleFileUpload = (e) => {
+    e.preventDefault();
+
+    const doc = e.target.files[0];
+    if (!doc) return;
+    
+    if (doc.type === 'application/pdf') {
+      const data = new FormData()
+      data.append(e.target.name, e.target.files[0])
+      
+      // console.log(e.target.name)
+      
+      axios({
+        method: 'put',
+        url: `${baseUrl}api/v1/worksheets_upload/${getId()}`,
+        data,
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('auth')}`
+        }
+      })
+        .then(res => {
+          if (res.status === 200 || res.status === 201) {
+            console.log(res.data);
+            alert('Worksheet uploaded successfully');
+          }
+        })
+        .catch(() => alert('Error uploading the worksheet'))
     }
   }
 
@@ -83,7 +117,7 @@ const YouthPage = (props) => {
           ? <h2>Getting user...</h2>
           : (
             <>
-            {/* {console.log(user)} */}
+            {console.log(user)}
               <header className="youth__header title is-3 is-bold">
                 <h3 className="youth__header--title">Welcome back, <span className="youth__header--username">{user.name}</span>!</h3>
               </header>
@@ -188,26 +222,79 @@ const YouthPage = (props) => {
                 <h2 className="youth__titles title is-3">Worksheets</h2>
 
                 <div className="youth__worksheets--worksheet-container">
-                  <h3 className="youth__worksheets--worksheet-title">
+                  <h3 className="youth__worksheets--worksheet-title title is-5">
                     Youth Bio Questions
                   </h3>
-                  <Link to="#">Link</Link>
+
+                  <div className="youth__worksheets--buttons-container">
+                    <a href="#" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button">
+                      <FiEdit />&nbsp;Worksheet
+                    </a>
+                    <UploadWorksheet name="bio_worksheet" method={handleFileUpload} user={currentUser} />
+                    <a href={user.bio_worksheet ? user.bio_worksheet.url : '#'} download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button" disabled={user.bio_worksheet ? false : true}>
+                     <FiDownload />&nbsp;Download
+                    </a>
+                  </div>                  
                 </div>
+
+
                 <div className="youth__worksheets--worksheet-container">
-                  <h3 className="youth__worksheets--worksheet-title">Professtional Development</h3>
-                  <Link to="#">Link</Link>
+                  <h3 className="youth__worksheets--worksheet-title title is-5">Professtional Development</h3>
+                  
+                  <div className="youth__worksheets--buttons-container">
+                    <a href="#" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button">
+                      <FiEdit />&nbsp;Worksheet
+                    </a>
+                    <UploadWorksheet name="development_worksheet" method={handleFileUpload} user={currentUser} />
+                    <a href={user.development_worksheet ? user.development_worksheet.url : '#'} download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button" disabled={user.development_worksheet ? false : true}>
+                      <FiDownload />&nbsp;Download
+                    </a>
+                  </div>
+
                 </div>
+
                 <div className="youth__worksheets--worksheet-container">
-                  <h3 className="youth__worksheets--worksheet-title">Sustainability in Action</h3>
-                  <Link to="#">Link</Link>
+                  <h3 className="youth__worksheets--worksheet-title title is-5">Sustainability in Action</h3>
+                  
+                  <div className="youth__worksheets--buttons-container">
+                    <a href="#" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button">
+                      <FiEdit />&nbsp;Worksheet
+                    </a>
+                    <UploadWorksheet name="sustainability_worksheet" method={handleFileUpload} user={currentUser} />
+                    <a href={user.sustainability_worksheet ? user.sustainability_worksheet.url : '#'} download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button" disabled={user.sustainability_worksheet ? false : true}>
+                      <FiDownload />&nbsp;Download
+                    </a>
+                  </div>
+
                 </div>
+
+
                 <div className="youth__worksheets--worksheet-container">
-                  <h3 className="youth__worksheets--worksheet-title">College Prep</h3>
-                  <Link to="#">Link</Link>
+                  <h3 className="youth__worksheets--worksheet-title title is-5">College Prep</h3>
+                  
+                  <div className="youth__worksheets--buttons-container">
+                    <a href="#" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button">
+                      <FiEdit />&nbsp;Worksheet
+                    </a>
+                    <UploadWorksheet name="college_prep_worksheet" method={handleFileUpload} user={currentUser} />
+                    <a href={user.college_prep_worksheet ? user.college_prep_worksheet.url : '#'} download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button" disabled={user.college_prep_worksheet ? false : true}>
+                      <FiDownload />&nbsp;Download
+                    </a>
+                  </div>
                 </div>
+
                 <div className="youth__worksheets--worksheet-container">
-                  <h3 className="youth__worksheets--worksheet-title">5 years plan</h3>
-                  <Link to="#">Link</Link>
+                  <h3 className="youth__worksheets--worksheet-title title is-5">5 years plan</h3>
+                  
+                  <div className="youth__worksheets--buttons-container">
+                    <a href="#" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button">
+                      <FiEdit />&nbsp;Worksheet
+                    </a>
+                    <UploadWorksheet name="five_years_worksheet" method={handleFileUpload} user={currentUser} />
+                    <a href={user.five_years_worksheet ? user.five_years_worksheet.url : '#'} download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button" disabled={user.five_years_worksheet ? false : true}>
+                      <FiDownload />&nbsp;Download
+                    </a>
+                  </div>
                 </div>
               </section>
 
