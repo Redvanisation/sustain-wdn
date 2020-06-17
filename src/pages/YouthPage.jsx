@@ -83,7 +83,7 @@ const YouthPage = (props) => {
           ? <h2>Getting user...</h2>
           : (
             <>
-            {console.log(user)}
+            {/* {console.log(user)} */}
               <header className="youth__header title is-3 is-bold">
                 <h3 className="youth__header--title">Welcome back, <span className="youth__header--username">{user.name}</span>!</h3>
               </header>
@@ -167,11 +167,14 @@ const YouthPage = (props) => {
                 </div>
 
                 {
-                  currentUser.role === 'user'
+                  currentUser.role === 'user' || currentUser.role === 'facilitator'
                     ? (
-                      <Link to="/dreammap/edit" className="youth__dream-map--button">
+                      <Link to={{
+                        pathname: "/dreammap/edit",
+                        user
+                      }} className="youth__dream-map--button">
                         {
-                          (user.life_dream && user.community_dream && user.world_dream)
+                          (user.life_dream || user.community_dream || user.world_dream)
                             ? 'Update my dreams'
                             : 'Set my dreams'
                         }

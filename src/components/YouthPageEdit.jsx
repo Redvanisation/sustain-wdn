@@ -35,6 +35,14 @@ const YouthPageEdit = (props) => {
     }
   };
 
+  const getId = () => {
+    if (currentUser.role === 'user') {
+      return currentUser.user_id;
+    } else {
+      return props.location.user.id;
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     
@@ -44,7 +52,7 @@ const YouthPageEdit = (props) => {
       const data = new FormData(formRef.current);
       axios({
         method: 'put',
-        url: `${baseUrl}api/v1/users/${currentUser.user_id}`,
+        url: `${baseUrl}api/v1/users/${getId()}`,
         data,
         headers: {
           "Authorization": `Bearer ${token}`
@@ -54,7 +62,7 @@ const YouthPageEdit = (props) => {
           if (res.status === 200 || res.status === 201) {
             console.log('success');
             formRef.current.reset();
-            history.push(`/user/${currentUser.user_id}`);
+            history.push(`/user/${getId()}`);
           }
         })
         .catch((err) => console.log(err));
