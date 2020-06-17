@@ -89,7 +89,16 @@ const YouthPage = (props) => {
               </header>
               
               <section className="youth__profile-section">
-                <Link to="/edit/user" className="youth__profile-section--edit-btn">Edit</Link>
+                {
+                  currentUser.role === 'user' || currentUser.role === 'facilitator'
+                    ? (
+                      <Link to={{
+                        pathname: "/edit/user",
+                        user
+                      }} className="youth__profile-section--edit-btn">Edit</Link>
+                    )
+                    : null
+                }
 
                 <div className="youth__profile-section--image-div">
                   <h3 className="youth__profile-section--title">{user.name}</h3>
@@ -103,7 +112,7 @@ const YouthPage = (props) => {
                   <div className="youth__profile-section--bio-container">
                     <h3 className="youth__profile-section--title">Bio</h3>
                     <p className="youth__profile-section--bio-text">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, ex expedita quidem fugiat explicabo animi doloremque, asperiores sit corrupti molestias dignissimos laborum repellendus. Cumque aspernatur hic amet, incidunt alias enim.
+                      {user.bio ? user.bio : 'Edit your profile to set up your bio'}
                     </p>
                   </div>
 
@@ -112,14 +121,14 @@ const YouthPage = (props) => {
                     <div className="youth__profile-section--bottom-div">
                       <h3 className="youth__profile-section--title">Greatest Assets</h3>
                       <p className="youth__profile-section--bio-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, ex expedita quidem fugiat explicabo animi doloremque, asperiores sit corrupti molestias dignissimos laborum repellendus. Cumque aspernatur hic amet, incidunt alias enim.
+                        {user.greatest_assets ? user.greatest_assets : 'Edit your profile to set up your greatest assets'}
                       </p>
                     </div>
 
                     <div className="youth__profile-section--bottom-div">
                       <h3 className="youth__profile-section--title">Greatest Challenges</h3>
                       <p className="youth__profile-section--bio-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, ex expedita quidem fugiat explicabo animi doloremque, asperiores sit corrupti molestias dignissimos laborum repellendus. Cumque aspernatur hic amet, incidunt alias enim.
+                        {user.greatest_challenges ? user.greatest_challenges : 'Edit your profile to set up your greatest challenges'}
                       </p>
                     </div>
                   </div>
@@ -157,13 +166,19 @@ const YouthPage = (props) => {
 
                 </div>
 
-                <Link to="/dreammap/edit" className="youth__dream-map--button">
-                  {
-                    (user.life_dream && user.community_dream && user.world_dream)
-                      ? 'Update my dreams'
-                      : 'Set my dreams'
-                  }
-                </Link>
+                {
+                  currentUser.role === 'user'
+                    ? (
+                      <Link to="/dreammap/edit" className="youth__dream-map--button">
+                        {
+                          (user.life_dream && user.community_dream && user.world_dream)
+                            ? 'Update my dreams'
+                            : 'Set my dreams'
+                        }
+                      </Link>
+                    )
+                    : null
+                }
               </section>
 
               <section className="youth__worksheets">
@@ -200,9 +215,14 @@ const YouthPage = (props) => {
                 <p className="youth__sustainability--text">
                   When you sign up we use the information that you give us (interests, skills, etc.) to recommend potential career areas. When you select a career area to explore, we offer you a graphical pathway to achieve a job in that area, with actionable items, such as internships we can help you to apply for. You can even apply for the job if you are already qualified!
                 </p>
-                <Link to="/youth/servey" className="youth__sustainability--link">
-                  Take the Survey!
-                </Link>
+                {
+                  currentUser.role === 'user'
+                    ? (
+                      <Link to="/youth/servey" className="youth__sustainability--link">
+                        Take the Survey!
+                      </Link>
+                    ) : null
+                }
               </section>
             </>
           )

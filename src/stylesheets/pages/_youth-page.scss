@@ -27,6 +27,7 @@
     padding: 2rem;
     position: relative;
     border-bottom: 1px solid $color-blue-light;
+    justify-content: center;
 
     &--edit-btn,
     &--edit-btn:link,
@@ -43,10 +44,6 @@
       &:hover {
         background-color: rgba($color-blue-light, .8);
       }
-
-      // &:hover {
-
-      // }
     }
 
     &--title {
@@ -56,7 +53,7 @@
     }
 
     &--image-div {
-      width: 50%;
+      width: 20rem;
       height: 30rem;
       display: flex;
       flex-direction: column;
@@ -66,7 +63,8 @@
       @include cardShadow;
     }
     
-    &--image {
+    &--image,
+    &--image-facilitator {
       width: 8rem;
       height: 8rem;
       border-radius: 200%;
@@ -74,19 +72,13 @@
       margin-bottom: 2rem;
     }
     
-    &--image-facilitator {
-      width: 10rem;
-      height: 10rem;
-      border-radius: 200%;
-      object-fit: cover;
-      margin-top: 1rem;
-    }
-    
     &--bio-div {
       // border: 1px solid green;
       padding: 2rem;
       display: flex;
       flex-direction: column;
+      // align-items: center;
+      // justify-content: center;
       // @include cardShadow;
     }
     

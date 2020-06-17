@@ -23,7 +23,7 @@
   &__profile-section {
     display: flex;
     padding: 2rem;
-    border-bottom: 1px solid $color-blue-light;
+    // border-bottom: 1px solid $color-blue-light;
 
     &--edit-btn,
     &--edit-btn:link,
@@ -98,3 +98,40 @@
     
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .facilitator {
+    &__profile-section {
+      flex-direction: column;
+      align-items: center;
+      &--image-div {
+        width: 60%;
+        margin-bottom: 2rem;
+        padding-top: 3rem;
+      }
+
+      &--users-container {
+        margin-bottom: 4rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .facilitator {
+    &__profile-section {
+      padding: 0;
+      &--image-div {
+        width: 90%;
+        margin-bottom: 2rem;
+        padding-top: 3rem;
+      }
+
+      &--users-container {
+        width: 90%;
+        padding: 2rem 0;
+      }
+    }
+  }
+}
+

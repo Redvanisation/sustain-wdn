@@ -46,7 +46,6 @@ const FacilitatorPage = () => {
         const response = await axios({
           method: 'get',
           url: `${baseUrl}api/v1/facilitator_users`,
-          // data: { id: currentUser.user_id },
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('auth')}`
           }
@@ -74,13 +73,13 @@ const FacilitatorPage = () => {
         : (
           <>
             <header className="facilitator__header title is-3 is-bold">
-              <h3 className="facilitator__header--title">Welcome back, <span className="facilitator__header--username">{facilitator.name}</span>!</h3>
+              <h3 className="facilitator__header--title">Welcome back facilitator <span className="facilitator__header--username">{facilitator.name}</span>!</h3>
             </header>
       
             <section className="facilitator__profile-section">
       
               <div className="facilitator__profile-section--image-div">
-                <h3 className="facilitator__profile-section--title">Facilitator: {facilitator.name}</h3>
+                <h3 className="facilitator__profile-section--title">{facilitator.name}</h3>
                 <div className="facilitator__profile-section--image" style={{'content':`url(${facilitator.image ? facilitator.image.url : null})`}} />
                 <Link to="/edit/facilitator" className="facilitator__profile-section--edit-btn">Edit my profile</Link>
                 <button className="facilitator__profile-section--edit-btn-button" onClick={() => setShowUsers(!showUsers)}>View my users</button>
@@ -95,6 +94,7 @@ const FacilitatorPage = () => {
                     name={user.name}
                     email={user.email}
                     activePathway={user.active_pathway}
+                    user={user}
                   />)}
               </div>
       

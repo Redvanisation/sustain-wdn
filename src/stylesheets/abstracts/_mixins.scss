@@ -2,5 +2,7 @@
 
 @mixin cardShadow {
   border-radius: 5px;
+  -webkit-appearance: none;
+  -webkit-box-shadow: 0 2px 5px 2px rgba($color-dark, .1);
   box-shadow: 0 2px 5px 2px rgba($color-dark, .1);
 };

@@ -1,18 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const UserRecord = ({ id, name, email, activePathway }) => {
+const UserRecord = ({ id, name, email, activePathway, user }) => {
   return (
     <section className="user-record">
-      <Link to={`/user/${id}`}>
-        <h3 className="user-record__name">{name}</h3>
+      <Link to={{
+        pathname: `/user/${id}`,
+        user
+      }}>
+        <h3 className="user-record__name">
+          Name: {name}
+        </h3>
         <p className="user-record__email">
-          {email}
+          Email: {email}
         </p>
         <p className="user-record__pathway">
-          {activePathway ? activePathway : 'bla bla bla'}
+          Active Pathway: {activePathway ? activePathway : 'No active pathway yet'}
         </p>
     </Link>
+    {/* {console.log('boo',user)} */}
       </section>
   );
 };

@@ -1,5 +1,4 @@
 .user-record {
-  // border: 1px solid red;
   padding: 1rem 2rem;
   margin-bottom: 2rem;
   border-radius: 3px;
@@ -21,6 +20,11 @@
     transform: translateY(-1px);
   }
 
+  a:link,
+  a:visited {
+    color: $color-dark;
+  }
+
 
 
   &__name {
@@ -38,5 +42,12 @@
     font-weight: bold;
     text-transform: capitalize;
     font-style: italic;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .user-record {
+    padding: .5rem 1rem;
+    width: 90%;
   }
 }
