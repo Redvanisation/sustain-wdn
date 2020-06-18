@@ -14,11 +14,12 @@ const YouthPage = (props) => {
   const [user, setUser] = useState({});
   const [facilitator, setFacilitator] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  let [mounted, setMounted] = useState(true);
 
   const currentUser = JSON.parse(localStorage.getItem('user'));
   // const userCtx = useContext(UserContext);
   const history = useHistory();
-  const fileRef = useRef(null)
+  // const fileRef = useRef(null)
 
   useLayoutEffect(() => {
     if (!(currentUser.role === 'user') && !(currentUser.role === 'facilitator')) {
@@ -38,10 +39,14 @@ const YouthPage = (props) => {
     if (currentUser.role === 'user') {
       return currentUser.facilitator_id;
     } else {
-      return currentUser.user_id;
+      if (!props.location.user) {
+        return false;
+      }
+      return props.location.user.facilitator_id;
     }
   }
 
+  // console.log(props)
   const handleFileUpload = (e) => {
     e.preventDefault();
 
@@ -74,40 +79,52 @@ const YouthPage = (props) => {
 
 
   useEffect(() => {
-    if (currentUser) { 
-      const getUser = async () => {
-        const response = await axios({
-          method: 'get',
-          url: `${baseUrl}api/v1/users/${getId()}`,
-          headers: {
-            "Authorization": `Bearer ${localStorage.getItem('auth')}`
-          }
-        });
-
-        setUser(response.data);
-        setIsLoading(false);
+    if (mounted) {
+      if (currentUser) { 
+        const getUser = async () => {
+          const response = await axios({
+            method: 'get',
+            url: `${baseUrl}api/v1/users/${getId()}`,
+            headers: {
+              "Authorization": `Bearer ${localStorage.getItem('auth')}`
+            }
+          });
+  
+          setUser(response.data);
+          setIsLoading(false);
+        }
+  
+        getUser();
       }
-
-      getUser();
     }
+
+    return () => setMounted(false);
   }, []);
 
   useEffect(() => {
-    if (currentUser) {
-      const getFacilitator = async () => {
-        const response = await axios({
-          method: 'get',
-          url: `${baseUrl}api/v1/facilitators/${getFacilitatorId()}`,
-          headers: {
-            "Authorization": `Bearer ${localStorage.getItem('auth')}`
-          }
-        });
+    const possible = getFacilitatorId();
 
-        setFacilitator(response.data);
+    if (mounted && possible) {
+      if (currentUser) {
+        const getFacilitator = async () => {
+          const response = await axios({
+            method: 'get',
+            url: `${baseUrl}api/v1/facilitators/${getFacilitatorId()}`,
+            headers: {
+              "Authorization": `Bearer ${localStorage.getItem('auth')}`
+            }
+          });
+  
+          setFacilitator(response.data);
+        }
+  
+        getFacilitator();
       }
-
-      getFacilitator();
+    } else {
+      history.push('/');
     }
+
+    return () => setMounted(false);
   }, []);
 
   const assignFacilitator = (e) => {
@@ -127,6 +144,7 @@ const YouthPage = (props) => {
       .then(res => {
         if (res.status === 200 || res.status === 201) {
           alert('Facilitator assigned successfully');
+          history.push(`/facilitator/${currentUser.user_id}`);
         }
       })
       .catch(() => alert('There has been an error assigning the facilitator!'));
