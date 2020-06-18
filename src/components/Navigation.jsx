@@ -44,7 +44,11 @@ const Navigation = () => {
     } else if (currentUser && currentUser.role === 'facilitator') {
       return (
         <Link to={`/facilitator/${currentUser.user_id}`} className="navigation__item">
-          Facilitator
+          {
+            currentUser.admin
+              ? 'Admin'
+              : 'Facilitator'
+          }
         </Link>
       );
     } else if (currentUser && currentUser.role === 'organization') {
@@ -60,6 +64,7 @@ const Navigation = () => {
           Youth
         </Link>
 
+        
         <Link to="/auth" className="navigation__item">
           Facilitator
         </Link>

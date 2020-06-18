@@ -3,6 +3,7 @@ import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 import { baseUrl } from '../helpers/';
 import UserRecord from '../components/UserRecord';
+import FacilitatorRecord from '../components/FacilitatorRecord';
 // import { UserContext } from '../providers/UsersProvider';
 
 const FacilitatorPage = () => {
@@ -108,16 +109,15 @@ const FacilitatorPage = () => {
         return (
           <>
             <h3 className="facilitator__profile-section--title title is-3">All Facilitators</h3>
-            {/* {allUsers.map(user => <UserRecord 
+            {allUsers.map(user => <FacilitatorRecord 
                 key={user.id}
                 id={user.id}
                 name={user.name}
                 email={user.email}
-                activePathway={user.active_pathway}
                 user={user}
-                currentUser={currentUser}
-              />)} */}
-              BUWAHAHAHAA
+                allUsers={allUsers}
+                setAllUsers={setAllUsers}
+              />)}
           </>
         );
 
@@ -134,7 +134,7 @@ const FacilitatorPage = () => {
                 user={user}
                 currentUser={currentUser}
               />)} */}
-              BOOOOOO
+              
           </>
         );
 
