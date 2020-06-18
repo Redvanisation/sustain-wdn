@@ -54,12 +54,12 @@ const UserSignup = () => {
       })
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
-            // history.push('/auth');
-            console.log('success');
             formRef.current.reset();
+            alert('Registered successfully');
+            history.push('/auth');
           }
         })
-        .catch((err) => console.log(err));
+        .catch(() => alert('Error registering!'));
     }
   }
 

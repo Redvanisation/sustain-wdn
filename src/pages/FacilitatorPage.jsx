@@ -11,6 +11,15 @@ const FacilitatorPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showUsers, setShowUsers] = useState(false);
 
+  const [allUsers, setAllUsers] = useState([]);
+  const [allFacilitators, setAllFacilitators] = useState([]);
+  const [allOrganizations, setAllOrganizations] = useState([]);
+
+
+  const [toShow, setToShow] = useState('');
+
+  const [showContainer, setShowContainer] = useState(false);
+
   // const userCtx = useContext(UserContext);
   const history = useHistory();
   const currentUser = JSON.parse(localStorage.getItem('user')) || {};
@@ -59,9 +68,80 @@ const FacilitatorPage = () => {
     }
   }, []);
 
-  // const assignUsers = () => {
+  const fetchUsers = (users) => {
+    setShowContainer(true);
+    setToShow(users);
 
-  // }
+      axios({
+        method: 'get',
+        url: `${baseUrl}api/v1/${users}`,
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('auth')}`
+        }
+      })
+        .then(res => setAllUsers(res.data))
+        .catch(() => alert('Error getting the users list'));
+  };
+
+
+  const setShowItems = (state) => {
+    switch(state) {
+      case 'users':
+        return (
+          <>
+            <h3 className="facilitator__profile-section--title title is-3">All Users</h3>
+            {allUsers.map(user => <UserRecord 
+                key={user.id}
+                id={user.id}
+                name={user.name}
+                email={user.email}
+                activePathway={user.active_pathway}
+                user={user}
+                currentUser={currentUser}
+                allUsers={allUsers}
+                setAllUsers={setAllUsers}
+              />)}
+          </>
+        );
+      
+      case 'facilitators':
+        return (
+          <>
+            <h3 className="facilitator__profile-section--title title is-3">All Facilitators</h3>
+            {/* {allUsers.map(user => <UserRecord 
+                key={user.id}
+                id={user.id}
+                name={user.name}
+                email={user.email}
+                activePathway={user.active_pathway}
+                user={user}
+                currentUser={currentUser}
+              />)} */}
+              BUWAHAHAHAA
+          </>
+        );
+
+      case 'organizations':
+        return (
+          <>
+            <h3 className="facilitator__profile-section--title title is-3">All Organizations</h3>
+            {/* {allUsers.map(user => <UserRecord 
+                key={user.id}
+                id={user.id}
+                name={user.name}
+                email={user.email}
+                activePathway={user.active_pathway}
+                user={user}
+                currentUser={currentUser}
+              />)} */}
+              BOOOOOO
+          </>
+        );
+
+      default:
+        return null;
+    }
+  }
 
 
   return (
@@ -92,9 +172,9 @@ const FacilitatorPage = () => {
                     : (
                       <>
                         {/* Admin section begins */}
-                        <button className="facilitator__profile-section--edit-btn-button" onClick={() => setShowUsers(!showUsers)}>Users</button>
-                        <button className="facilitator__profile-section--edit-btn-button" onClick={() => setShowUsers(!showUsers)}>Facilitators</button>
-                        <button className="facilitator__profile-section--edit-btn-button" onClick={() => setShowUsers(!showUsers)}>Organizations</button>
+                        <button className="facilitator__profile-section--edit-btn-button" onClick={() => fetchUsers('users')}>Users</button>
+                        <button className="facilitator__profile-section--edit-btn-button" onClick={() => fetchUsers('facilitators')}>Facilitators</button>
+                        <button className="facilitator__profile-section--edit-btn-button" onClick={() => fetchUsers('organizations')}>Organizations</button>
                         <h3 className="facilitator__profile-section--title subtitle is-5">
                           {facilitator.admin ? 'Admin' : null}
                         </h3>
@@ -105,19 +185,32 @@ const FacilitatorPage = () => {
 
               </div>
       
-            
-              <div className={showUsers ? "facilitator__profile-section--users-container" : "facilitator__profile-section--users-container hidden"}>
-                <h3 className="facilitator__profile-section--title title is-3">Users</h3>
-                {users.map(user => <UserRecord 
-                    key={user.id}
-                    id={user.id}
-                    name={user.name}
-                    email={user.email}
-                    activePathway={user.active_pathway}
-                    user={user}
-                  />)}
-              </div>
-      
+              {
+                facilitator.admin
+                  ? (
+                    <>
+                      <div className={showContainer ? "facilitator__profile-section--users-container" : "facilitator__profile-section--users-container hidden"}>
+                        {
+                          setShowItems(toShow)
+                        }
+
+                      </div>
+                    </>
+                  )
+                  : (
+                    <div className={showUsers ? "facilitator__profile-section--users-container" : "facilitator__profile-section--users-container hidden"}>
+                      <h3 className="facilitator__profile-section--title title is-3">Users</h3>
+                      {users.map(user => <UserRecord 
+                          key={user.id}
+                          id={user.id}
+                          name={user.name}
+                          email={user.email}
+                          activePathway={user.active_pathway}
+                          user={user}
+                        />)}
+                    </div>
+                  )
+              }
 
             </section>
           </>
