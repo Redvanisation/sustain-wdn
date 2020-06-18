@@ -20,7 +20,7 @@ const FacilitatorSingup = () => {
   const formRef = useRef(null);
 
   useLayoutEffect(() => {
-    if (currentUser && !currentUser.admin) {
+    if (!currentUser || !currentUser.admin) {
       history.push('/');
     }
   })
@@ -56,11 +56,11 @@ const FacilitatorSingup = () => {
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             // history.push('/auth');
-            console.log('success');
+            alert('Facilitator registered successfully');
             formRef.current.reset();
           }
         })
-        .catch((err) => console.log(err));
+        .catch(() => alert('Error registering facilitator'));
     }
   }
 

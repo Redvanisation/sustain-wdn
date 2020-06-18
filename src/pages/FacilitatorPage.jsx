@@ -59,16 +59,17 @@ const FacilitatorPage = () => {
     }
   }, []);
 
+  // const assignUsers = () => {
+
+  // }
+
 
   return (
     <main className="facilitator">
-      {/* {console.log(facilitator)} */}
-      {/* {console.log(users)} */}
-      
       {
       isLoading
         ? (
-          'boo'
+          'Loading...'
         )
         : (
           <>
@@ -79,10 +80,29 @@ const FacilitatorPage = () => {
             <section className="facilitator__profile-section">
       
               <div className="facilitator__profile-section--image-div">
-                <h3 className="facilitator__profile-section--title">{facilitator.name}</h3>
+                <h3 className="facilitator__profile-section--title subtitle is-5">{facilitator.name}</h3>
+                <h3 className="facilitator__profile-section--title subtitle is-6">Facilitator Code: {facilitator.id}</h3>
                 <div className="facilitator__profile-section--image" style={{'content':`url(${facilitator.image ? facilitator.image.url : null})`}} />
                 <Link to="/edit/facilitator" className="facilitator__profile-section--edit-btn">Edit my profile</Link>
-                <button className="facilitator__profile-section--edit-btn-button" onClick={() => setShowUsers(!showUsers)}>View my users</button>
+                {
+                  facilitator && !facilitator.admin
+                  ? (
+                      <button className="facilitator__profile-section--edit-btn-button" onClick={() => setShowUsers(!showUsers)}>View my users</button>
+                    ) 
+                    : (
+                      <>
+                        {/* Admin section begins */}
+                        <button className="facilitator__profile-section--edit-btn-button" onClick={() => setShowUsers(!showUsers)}>Users</button>
+                        <button className="facilitator__profile-section--edit-btn-button" onClick={() => setShowUsers(!showUsers)}>Facilitators</button>
+                        <button className="facilitator__profile-section--edit-btn-button" onClick={() => setShowUsers(!showUsers)}>Organizations</button>
+                        <h3 className="facilitator__profile-section--title subtitle is-5">
+                          {facilitator.admin ? 'Admin' : null}
+                        </h3>
+                        {/* Admin section ends */}
+                      </>
+                    )
+                }
+
               </div>
       
             

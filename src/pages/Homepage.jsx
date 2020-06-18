@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../providers/UsersProvider';
 import Footer from '../components/Footer';
+import { FaRegUser, FaRegThumbsUp, FaRegBuilding } from "react-icons/fa";
 
 
 const Homepage = () => {
@@ -47,17 +48,14 @@ const Homepage = () => {
           <div className="column is-one-quarter is-centered">
               <div className="card">
                 <Link to={verifyUser('user')}>
-                  {/* <div className="card-image">
-                    <figure className="image">
-                      <img src="#" alt="Card-image" />
-                    </figure>
-                  </div> */}
+                <div className="card-image">
+                    <FaRegUser className="card-icon" />
+                  </div>
                   <div className="card-content">
                     <div className="media">
 
                       <div className="media-content has-text-centered">
                         <p className="title is-5">Youth</p>
-                        {/* <p className="subtitle is-6 is-bold">{formatPrice(product.price)}</p> */}
                       </div>
                     </div>
                   </div>
@@ -68,17 +66,14 @@ const Homepage = () => {
             <div className="column is-one-quarter is-centered">
               <div className="card">
                 <Link to={verifyUser('facilitator')}>
-                  {/* <div className="card-image">
-                    <figure className="image">
-                      <img src="#" alt="Card-image" />
-                    </figure>
-                  </div> */}
+                  <div className="card-image">
+                    <FaRegThumbsUp className="card-icon" />
+                  </div>
                   <div className="card-content">
                     <div className="media">
 
                       <div className="media-content has-text-centered">
                         <p className="title is-5">Facilitator</p>
-                        {/* <p className="subtitle is-6 is-bold">{formatPrice(product.price)}</p> */}
                       </div>
                     </div>
                   </div>
@@ -89,17 +84,14 @@ const Homepage = () => {
             <div className="column is-one-quarter is-centered">
               <div className="card">
                 <Link to={verifyUser('organization')}>
-                  {/* <div className="card-image">
-                    <figure className="image">
-                      <img src="#" alt="Card-image" />
-                    </figure>
-                  </div> */}
+                  <div className="card-image">
+                    <FaRegBuilding className="card-icon" />
+                  </div>
                   <div className="card-content">
                     <div className="media">
 
                       <div className="media-content has-text-centered">
                         <p className="title is-5">Organization</p>
-                        {/* <p className="subtitle is-6 is-bold">{formatPrice(product.price)}</p> */}
                       </div>
                     </div>
                   </div>

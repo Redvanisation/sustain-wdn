@@ -17,9 +17,9 @@ const UserRecord = ({ id, name, email, activePathway, user }) => {
         <p className="user-record__pathway">
           Active Pathway: {activePathway ? activePathway : 'No active pathway yet'}
         </p>
-    </Link>
-    {/* {console.log('boo',user)} */}
-      </section>
+      </Link>
+
+    </section>
   );
 };
 
