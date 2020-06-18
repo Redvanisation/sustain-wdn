@@ -37,7 +37,13 @@ const FacilitatorRecord = ({ id, name, email, user, setAllUsers, allUsers }) => 
         alert('Facilitator deleted successfully');
         setAllUsers(allUsers.filter(usr => usr.id !== user.id));
       })
-      .catch(() => alert('Error deleting the facilitator'));
+      .catch(() => {
+        if (users.length > 0) {
+          alert('Please assign the users to another facilitator before doing that!')
+        } else {
+          alert('Error deleting the facilitator');
+        }
+      });
   }
 
   return (
@@ -46,6 +52,9 @@ const FacilitatorRecord = ({ id, name, email, user, setAllUsers, allUsers }) => 
         <h3 className="user-record__name">
           Name: {name}
         </h3>
+        <p className="user-record__email">
+          Facilitator Code: {id}
+        </p>
         <p className="user-record__email">
           Email: {email}
         </p>

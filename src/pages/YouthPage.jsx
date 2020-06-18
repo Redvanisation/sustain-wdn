@@ -167,12 +167,12 @@ const YouthPage = (props) => {
                     currentUser && currentUser.admin
                       ? (
                         <form onSubmit={assignFacilitator}>
-                          <div class="field has-addons">
-                            <div class="control">
-                              <input class="input" type="text" name="facilitator_id" placeholder="Code..." />
+                          <div className="field has-addons">
+                            <div className="control">
+                              <input className="input" type="text" name="facilitator_id" placeholder="Code..." />
                             </div>
-                            <div class="control">
-                              <input type="submit" class="button is-info" value="Assign Facilitator" />
+                            <div className="control">
+                              <input type="submit" className="button is-info" value="Assign Facilitator" />
                             </div>
                           </div>
                         </form>
