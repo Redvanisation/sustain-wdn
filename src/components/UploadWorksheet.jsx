@@ -10,7 +10,7 @@ const UploadWorksheet = ({ name, method, user }) => {
             <form onChange={method} className="youth__worksheets--buttons-container--form">
               <div className="file">
                 <label className="file-label">
-                  <input className="file-input" type="file" name={name} accept=".pdf"/>
+                  <input className="file-input" type="file" name={name} accept=".pdf, .doc, .docx"/>
                   <span className="file-cta">
                     <FiUpload />
                     <span className="file-label">

@@ -283,7 +283,7 @@ const YouthPage = (props) => {
                   </h3>
 
                   <div className="youth__worksheets--buttons-container">
-                    <a href="#" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
+                    <a href="/worksheets/1-Youth-Bio-Delegate-Questions.pdf" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
                       <FiEdit />&nbsp;Worksheet
                     </a>
                     <UploadWorksheet name="bio_worksheet" method={handleFileUpload} user={currentUser} />
@@ -298,7 +298,7 @@ const YouthPage = (props) => {
                   <h3 className="youth__worksheets--worksheet-title title is-5">Professtional Development</h3>
                   
                   <div className="youth__worksheets--buttons-container">
-                    <a href="#" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
+                    <a href="/worksheets/2-Professional-Worksheet.docx" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
                       <FiEdit />&nbsp;Worksheet
                     </a>
                     <UploadWorksheet name="development_worksheet" method={handleFileUpload} user={currentUser} />
@@ -313,7 +313,7 @@ const YouthPage = (props) => {
                   <h3 className="youth__worksheets--worksheet-title title is-5">Sustainability in Action</h3>
                   
                   <div className="youth__worksheets--buttons-container">
-                    <a href="#" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
+                    <a href="/worksheets/3-YLS-Sustainability-In-Action-Worksheet-2020.pdf" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
                       <FiEdit />&nbsp;Worksheet
                     </a>
                     <UploadWorksheet name="sustainability_worksheet" method={handleFileUpload} user={currentUser} />
@@ -329,7 +329,7 @@ const YouthPage = (props) => {
                   <h3 className="youth__worksheets--worksheet-title title is-5">College Prep</h3>
                   
                   <div className="youth__worksheets--buttons-container">
-                    <a href="#" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
+                    <a href="/worksheets/4-college-prep-worksheet-2020.pdf" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
                       <FiEdit />&nbsp;Worksheet
                     </a>
                     <UploadWorksheet name="college_prep_worksheet" method={handleFileUpload} user={currentUser} />
@@ -343,7 +343,21 @@ const YouthPage = (props) => {
                   <h3 className="youth__worksheets--worksheet-title title is-5">5 years plan</h3>
                   
                   <div className="youth__worksheets--buttons-container">
-                    <a href="#" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
+                    <a href="/worksheets/5-Five-Year-Action-Plan.docx" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
+                      <FiEdit />&nbsp;Worksheet
+                    </a>
+                    <UploadWorksheet name="five_years_worksheet" method={handleFileUpload} user={currentUser} />
+                    <a href={user.five_years_worksheet ? user.five_years_worksheet.url : '#'} download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn" disabled={user.five_years_worksheet ? false : true}>
+                      <FiDownload />&nbsp;Download
+                    </a>
+                  </div>
+                </div>
+
+                <div className="youth__worksheets--worksheet-container">
+                  <h3 className="youth__worksheets--worksheet-title title is-5">Performance Metrics</h3>
+                  
+                  <div className="youth__worksheets--buttons-container">
+                    <a href="/worksheets/6-Performance-Metrics-2020-Fillable.pdf" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
                       <FiEdit />&nbsp;Worksheet
                     </a>
                     <UploadWorksheet name="five_years_worksheet" method={handleFileUpload} user={currentUser} />
