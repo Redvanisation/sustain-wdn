@@ -113,7 +113,7 @@ const UserSignup = () => {
           </label>
         </div>
 
-        <input type="hidden" name="facilitator_id" value="1" />
+        <input type="hidden" name="facilitator_id" value="3" />
 
         <div className="field is-grouped">
           <div className="control is-centered">

@@ -44,7 +44,8 @@ const PathwaysSurvey = () => {
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           // formRef.current.reset();
-          history.push(`/user/${currentUser.user_id}`);
+          localStorage.setItem('user-answered', JSON.stringify(res.data));
+          history.push(`/pathways`);
         }
       })
       .catch(err => console.log(err));
@@ -62,7 +63,7 @@ const PathwaysSurvey = () => {
             What is your highest level of education?
           </label><br />
           <label className="radio">
-            <input type="radio" name="education_level" value="Middle School" />
+            <input type="radio" name="education_level" value="Middle School" required />
             &nbsp;Middle School
           </label><br />
           <label className="radio">

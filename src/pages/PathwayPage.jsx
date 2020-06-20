@@ -19,47 +19,77 @@ const PathwayPage = (props) => {
       }
     };
   });
+
+  // const handleAddFavorite = () => {
+  //   /api/v1/user_pathways/:id
+
+
+  // }
   
   
   // const pathway = props.location.pathway;
 
 
-  console.log(pathway)
+  // console.log(pathway)
   return (
     <main className="pathway">
       <header className="pathway__header">
         <h2 className="pathway__header--title title is-2">
           {pathway.title}
         </h2>
-        <p className="pathway__header--description subtitle is-5">
-          {pathway.subtitle}
-          {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae harum beatae, fugiat explicabo fugit at totam neque omnis odio perspiciatis vitae qui eius asperiores, minus repudiandae error, natus sunt eveniet? */}
-        </p>
       </header>
 
       <section className="pathway__content">
-        <h3 className="pathway__content--title title is-4">
+        <h3 className="pathway__content--title title is-3">
           About {pathway.title} Pathway
         </h3>
         <p className="pathway__content--description">
           {pathway.description}
-          {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus omnis at iste sint eveniet quod cumque accusamus voluptate ut, dignissimos repellendus pariatur quis voluptatum aspernatur in architecto illum dolor excepturi!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur nesciunt atque dolorem officia perspiciatis qui quae voluptate adipisci molestiae magni? Tempore beatae aut doloremque? Laborum totam eveniet dolorum vitae eius.
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus cupiditate fugit dolorem, maiores iure nam amet tenetur libero accusantium molestiae aliquid enim totam non commodi itaque soluta mollitia labore reprehenderit.
-          Delectus quas at qui velit dolorem rerum doloremque consectetur fugit recusandae voluptatibus blanditiis esse ratione excepturi illum beatae impedit optio dignissimos, nulla modi minima magnam eum porro amet dicta. Necessitatibus?
-          Voluptas tempore iste ea possimus ex debitis, impedit laudantium vel assumenda libero provident ipsum totam numquam, blanditiis deleniti nisi? Repudiandae quaerat sapiente in temporibus necessitatibus, eveniet accusamus dolorem amet ratione?
-          Fuga sit fugiat sequi, ut impedit optio ipsam debitis mollitia tempora, velit asperiores vero alias libero ipsa tempore error ad eius reiciendis dolorem repellendus provident dignissimos quam possimus. Ab, fuga.
-          Voluptatem voluptate autem rem. Laboriosam nam atque quaerat ex. Reprehenderit dolorum quae hic esse dolores optio ratione, perspiciatis laudantium ducimus, quibusdam deserunt unde mollitia maiores modi recusandae, repudiandae magnam dicta.
-          Quos, numquam ex est dignissimos neque animi consectetur qui dolorum sed aut molestias dolores eaque facilis vitae magnam cum ducimus facere ut dolorem corrupti assumenda dolor possimus in officia. Eaque?
-          Assumenda quod officia eum tenetur perspiciatis ipsum sed recusandae quia reiciendis optio vel vero suscipit autem illum rerum aperiam deleniti fugit ab neque, nam minus sint temporibus voluptate. Ut, voluptates.
-          Accusamus magnam blanditiis tempora, sed quod est et assumenda vel tempore provident officiis libero eius illo quasi omnis recusandae, esse alias nostrum consequatur, odit amet nam ratione laboriosam. Optio, sequi?
-          Odit explicabo quia delectus corporis totam dolorem perferendis vel quo a illum, eveniet ipsum modi iusto voluptatem pariatur nam similique dolorum asperiores, quidem alias. Quae eos labore dicta voluptatum ab.
-          Beatae quia ea nemo perferendis nisi porro expedita! Consectetur temporibus ratione adipisci commodi iure maiores aliquid incidunt fugiat alias quibusdam, dolores praesentium nobis porro doloremque ab minus! Corrupti, eum asperiores. */}
         </p>
+
+        <h3 className="pathway__content--title title is-3">
+          Responsibilities
+        </h3>
+        <div className="pathway__content--description content">
+          {
+            pathway.responsibilities.split(',').map((entry, i) => <ul key={i}><li>{entry}</li></ul>)
+          }
+        </div>
+
+        <h3 className="pathway__content--title title is-3">
+          Qualifications
+        </h3>
+        <div className="pathway__content--description content">
+          {
+            pathway.qualifications.split(',').map((entry, i)=> <ul key={i}><li>{entry}</li></ul>)
+          }
+        </div>
+
+        <h3 className="pathway__content--title title is-3">
+          Salary
+        </h3>
+        <p className="pathway__content--description pathway__content--description--salary is-bold">
+          {pathway.salary}
+        </p>
+
+        {
+          pathway.links
+            ? (
+              <>
+                <h3 className="pathway__content--title title is-3">
+                  Resources
+                </h3>
+                <p className="pathway__content--description">
+                    {pathway.links.split(',').map((link, i) => <><a key={i} href={link} target="_blank" rel="noopener noreferrer">{link}</a><br/></>)}
+                </p>
+              </>
+            )
+            : null
+        }
 
         <div className="pathway__content--btns-container">
           <button className="pathway__content--btn button is-info">Set as active pathway</button>
-          <button className="pathway__content--btn button is-dark">Add to favorite pathways</button>
+          <button className="pathway__content--btn button is-dark" >Add to favorite pathways</button>
         </div>
 
       </section>

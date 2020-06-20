@@ -37,13 +37,13 @@ const PathwayRecord = ({ pathway }) => {
         Pathway number: {pathway.id}
       </p>
 
-      <h3 className="pathway-record__title title is-5 mt-1">
+      <h3 className="pathway-record__title title is-4 mt-1">
         {pathway.title}
       </h3>
 
-      <p className="pathway-record__subtitle subtitle is-6">
-        {pathway.subtitle}
-      </p>
+      {/* <p className="pathway-record__subtitle subtitle is-6">
+        {pathway.description}
+      </p> */}
     </Link>
   );
 };

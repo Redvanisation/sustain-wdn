@@ -13,15 +13,16 @@
     &--title {
       text-transform: capitalize;
       line-height: 1.6;
+      // color: $color-blue-light;
     }
 
-    &--description {
-      max-width: 50%;
-      text-align: center;
-      &::first-letter {
-        text-transform: capitalize;
-      }
-    }
+    // &--description {
+    //   max-width: 50%;
+    //   text-align: center;
+    //   &::first-letter {
+    //     text-transform: capitalize;
+    //   }
+    // }
   }
 
   &__content {
@@ -39,12 +40,18 @@
     }
 
     &--description {
+      max-width: 50%;
+      line-height: 2;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+
       &::first-letter {
         text-transform: capitalize;
       }
-      max-width: 50%;
-      line-height: 1.8;
-      margin-bottom: 2rem;
+
+      &--salary {
+        font-size: 1.5rem;
+      }
     }
 
     &--btns-container {

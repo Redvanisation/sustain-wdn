@@ -31,16 +31,16 @@ const App = () => {
           <Route exact path='/user/:id' component={YouthPage} />
           <Route exact path='/facilitator/:id' component={FacilitatorPage} />
           <Route exact path='/organization/:id' component={OrganizationPage} />
-          <Route exact path='/pathway/:id' component={PathwayPage} />
           <Route exact path='/error' component={ErrorComponent} />
-          <Route exact path='/youth/servey' component={PathwaysSurvey} />
+          <Route exact path='/youth/survey' component={PathwaysSurvey} />
           <Route exact path='/dreammap/edit' component={DreamMapEdit} />
           <Route exact path='/edit/user' component={YouthPageEdit} />
           <Route exact path='/edit/facilitator' component={FacilitatorPageEdit} />
           <Route exact path='/register/organization' component={OrganizationSingup} />
           <Route exact path='/register/facilitator' component={FacilitatorSingup} />
           
-          <Route exact path='/user-pathways' component={UserPathwaysPage} />
+          <Route exact path='/pathways' component={UserPathwaysPage} />
+          <Route exact path='/pathway/:id' component={PathwayPage} />
         </UsersProvider>
       </Switch>
     </BrowserRouter>

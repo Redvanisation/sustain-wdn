@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { baseUrl } from '../helpers/';
 
 const FacilitatorRecord = ({ id, name, email, user, setAllUsers, allUsers }) => {
   const [users, setUsers] = useState([]);
+  const currentUser = JSON.parse(localStorage.getItem('user')) || {};
 
   useEffect(() => {
       const getUsers = async () => {
@@ -47,27 +48,34 @@ const FacilitatorRecord = ({ id, name, email, user, setAllUsers, allUsers }) => 
   }
 
   return (
-    <section className="user-record">
-      <div>
-        <h3 className="user-record__name">
-          Name: {name}
-        </h3>
-        <p className="user-record__email">
-          Facilitator Code: {id}
-        </p>
-        <p className="user-record__email">
-          Email: {email}
-        </p>
-        <p className="user-record__email">
-          Assigned Users: {users.length}
-        </p>
+    <>
+    {
+      currentUser.name === name
+      ? null
+      : (
+          <section className="user-record">
+            <div>
+              <h3 className="user-record__name">
+                Name: {name}
+              </h3>
+              <p className="user-record__email">
+                Facilitator Code: {id}
+              </p>
+              <p className="user-record__email">
+                Email: {email}
+              </p>
+              <p className="user-record__email">
+                Assigned Users: {users.length}
+              </p>
 
-      </div>
-      <button className="button is-danger btn mt-3" onClick={() => handleDeleteUser()}>
-        Delete
-      </button>
-
-    </section>
+            </div>
+            <button className="button is-danger btn mt-3" onClick={() => handleDeleteUser()}>
+              Delete
+            </button>
+          </section>
+        )
+      }
+    </>
   );
 };
 

@@ -378,7 +378,7 @@ const YouthPage = (props) => {
                 {
                   currentUser.role === 'user'
                     ? (
-                      <Link to="/youth/servey" className="youth__sustainability--link">
+                      <Link to="/youth/survey" className="youth__sustainability--link">
                         Take the Survey!
                       </Link>
                     ) : null
