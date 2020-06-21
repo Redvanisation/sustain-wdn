@@ -12,10 +12,26 @@
   }
 }
 
+.checkbox-container {
+  display: flex;
+}
+
+.checkbox-group > label {
+  display: block;
+}
+
+.checkbox-group {
+  &:not(:last-child) {
+
+    margin-right: 1rem;
+  }
+}
+
 
 @media only screen and (max-width: 800px) {
   .form {
     max-width: 60%;
+    padding: 0;
   }
 }
 

@@ -2,19 +2,22 @@ import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../providers/UsersProvider';
 import Footer from '../components/Footer';
+import { FaRegUser, FaRegThumbsUp, FaRegBuilding } from "react-icons/fa";
 
 
 const Homepage = () => {
 
   const userCtx = useContext(UserContext);
+  const currentUser = JSON.parse(localStorage.getItem('user'));
+
   
-  // const id = userCtx.cookies.user.id;
+  // const id = userCtx.user.id;
 
   const verifyUser = (type) => {
-    if (userCtx.cookies.user && userCtx.cookies.user.role === type) {
-      const id = userCtx.cookies.user.user_id;
+    if (currentUser && currentUser.role === type) {
+      const id = currentUser.user_id;
       return `/${type}/${id}`;
-    } else if (userCtx.cookies.user && userCtx.cookies.user.role !== type) {
+    } else if (currentUser && currentUser.role !== type) {
       return '/error';
     } else {
       return '/auth';
@@ -22,7 +25,7 @@ const Homepage = () => {
   };
 
 
-  // console.log(userCtx.cookies.user)
+  // console.log(userCtx.user)
 
   return (
     <>
@@ -45,17 +48,14 @@ const Homepage = () => {
           <div className="column is-one-quarter is-centered">
               <div className="card">
                 <Link to={verifyUser('user')}>
-                  {/* <div className="card-image">
-                    <figure className="image">
-                      <img src="#" alt="Card-image" />
-                    </figure>
-                  </div> */}
+                <div className="card-image">
+                    <FaRegUser className="card-icon" />
+                  </div>
                   <div className="card-content">
                     <div className="media">
 
                       <div className="media-content has-text-centered">
                         <p className="title is-5">Youth</p>
-                        {/* <p className="subtitle is-6 is-bold">{formatPrice(product.price)}</p> */}
                       </div>
                     </div>
                   </div>
@@ -66,17 +66,14 @@ const Homepage = () => {
             <div className="column is-one-quarter is-centered">
               <div className="card">
                 <Link to={verifyUser('facilitator')}>
-                  {/* <div className="card-image">
-                    <figure className="image">
-                      <img src="#" alt="Card-image" />
-                    </figure>
-                  </div> */}
+                  <div className="card-image">
+                    <FaRegThumbsUp className="card-icon" />
+                  </div>
                   <div className="card-content">
                     <div className="media">
 
                       <div className="media-content has-text-centered">
                         <p className="title is-5">Facilitator</p>
-                        {/* <p className="subtitle is-6 is-bold">{formatPrice(product.price)}</p> */}
                       </div>
                     </div>
                   </div>
@@ -87,17 +84,14 @@ const Homepage = () => {
             <div className="column is-one-quarter is-centered">
               <div className="card">
                 <Link to={verifyUser('organization')}>
-                  {/* <div className="card-image">
-                    <figure className="image">
-                      <img src="#" alt="Card-image" />
-                    </figure>
-                  </div> */}
+                  <div className="card-image">
+                    <FaRegBuilding className="card-icon" />
+                  </div>
                   <div className="card-content">
                     <div className="media">
 
                       <div className="media-content has-text-centered">
                         <p className="title is-5">Organization</p>
-                        {/* <p className="subtitle is-6 is-bold">{formatPrice(product.price)}</p> */}
                       </div>
                     </div>
                   </div>

@@ -1,0 +1,49 @@
+.pathway-record {
+  padding: 1rem 2rem;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  border-radius: 3px;
+  background-color: white;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all .2s;
+  box-shadow: 0 2px 4px 1px rgba($color-dark, .2);
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  a:link,
+  a:visited {
+    color: $color-dark;
+  }
+
+
+  &__id {
+    color: $color-dark;
+  }
+
+  &__title {
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: .2rem;
+    color: $color-blue-light;
+  }
+
+}
+
+@media only screen and (max-width: 600px) {
+  .pathway-record {
+    padding: .5rem 1rem;
+    width: 90%;
+  }
+}

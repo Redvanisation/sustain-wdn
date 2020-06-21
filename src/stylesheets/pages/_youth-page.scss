@@ -1,10 +1,21 @@
 .youth {
   // padding: 2rem;
 
+  &__titles {
+    text-align: center;
+    margin-bottom: 2rem !important;
+  }
+
   &__header {
     text-align: center;
     padding: 2rem;
-    border: 1px solid black;
+    background-color: $color-blue-light;
+    color: $color-white;
+    // border: 1px solid black;
+
+    &--username {
+      text-transform: capitalize;
+    }
 
     &--title {
       font-weight: bold;
@@ -14,39 +25,71 @@
   &__profile-section {
     display: flex;
     padding: 2rem;
+    position: relative;
+    border-bottom: 10px solid $color-blue-light;
+    // justify-content: center;
+
+    &--edit-btn,
+    &--edit-btn:link,
+    &--edit-btn:visited {
+      position: absolute;
+      right: 5rem;
+      background-color: $color-blue-light;
+      padding: .5rem 1rem;
+      border-radius: 5px;
+      color: $color-white;
+      font-weight: bold;
+      transition: all .2s;
+
+      &:hover {
+        background-color: rgba($color-blue-light, .8);
+      }
+    }
 
     &--title {
       font-weight: bold;
       margin-bottom: 1rem;
+      text-transform: capitalize;
     }
 
     &--image-div {
-      border: 1px solid orangered;
-      width: 50%;
+      width: 20rem;
+      // height: 30rem;
       display: flex;
       flex-direction: column;
+      align-items: center;
       padding: 1rem;
+      border-radius: 5px;
+      @include cardShadow;
     }
     
-    &--image {
-      margin-bottom: 1rem;
-    }
-    
+    &--image,
     &--image-facilitator {
-      
+      width: 8rem;
+      height: 8rem;
+      border-radius: 200%;
+      object-fit: cover;
+      margin-bottom: 2rem;
     }
     
     &--bio-div {
-      border: 1px solid green;
+      // border: 1px solid green;
       padding: 2rem;
       display: flex;
       flex-direction: column;
+      margin: 0 auto;
+      width: 100%;
+      // align-items: center;
+      // justify-content: center;
+      // @include cardShadow;
     }
-
+    
     &--bio-container {
       max-width: 50%;
       align-self: center;
       margin-bottom: 2rem;
+      // @include cardShadow;
+
     }
 
     &--bio-text {
@@ -55,13 +98,19 @@
 
     &--bottom-container {
       display: flex;
-      justify-content: center;
+      justify-content: space-evenly;
+      margin: 0 auto;
       margin-top: 2rem;
+      padding: 2rem;
+      // max-width: 100%;
+      width: 80%;
+      @include cardShadow;
 
     }
 
     &--bottom-div {
-      max-width: 30%;
+      // max-width: 30%;
+      // margin: 0 auto;
 
       &:not(:last-child) {
         margin-right: 5rem;
@@ -75,31 +124,163 @@
     padding: 2rem;
     text-align: center;
 
-    &--title {
+    &--button,
+    &--button:link,
+    &--button:visited {
+      background-color: $color-blue-light;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+      color: $color-white;
+      font-weight: bold;
+      transition: all .2s;
 
+      &:hover {
+        background-color: rgba($color-blue-light, .8);
+      }
     }
 
     &__container {
       display: flex;
-      // justify-content: center;
-      // border: 1px solid gray;
 
-      &--dreams-div {
-        border: 1px solid pink;
-        width: 60%;
-      }
-  
-      &--dreams-dream {
-  
-      }
   
       &--image-div {
-        border: 1px solid blue;
-        width: 40%;
+        margin: 2rem auto;
+        margin-bottom: 4rem;
+        display: flex;
+        // max-width: 50%;
+        // border: 1px solid red;
+        justify-content: space-between;
+      }
+
+      &--figure {
+        position: relative;
+        // border: 1px solid green;
+        // width: 30rem;
+        max-width: 30rem;
+        text-align: center;
+        &:not(:last-child) {
+          margin-right: 3rem;
+        }
       }
   
       &--image {
-  
+        display: inline-block;
+        max-width: 80%;
+        width: 25rem;
+        margin-top: 4rem;
+        margin-bottom: 3rem;
+        object-fit: cover;
+        outline-offset: 10px;
+
+
+
+        &--blue {
+          outline: 10px solid $color-dblue;
+        }
+        &--orange {
+          outline: 10px solid $color-dorange;
+        }
+        &--green {
+          outline: 10px solid $color-dgreen;
+        }
+
+      }
+
+      &--image-rotate-right {
+        -webkit-transform:rotate(10deg);
+        -moz-transform:rotate(10deg);
+        -o-transform:rotate(10deg); 
+        transform:rotate(10deg);
+      }
+
+      &--image-rotate-left {
+        -webkit-transform:rotate(-10deg);
+        -moz-transform:rotate(10deg);
+        -o-transform:rotate(-10deg); 
+        transform:rotate(-10deg);
+      }
+
+      &--image-text {
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        text-transform: capitalize;
+        text-align: center !important;
+
+        // font-size: 2rem;
+      }
+    }
+  }
+
+  &__worksheets {
+    // border: 1px solid red;
+    padding: 2rem;
+    margin: 2rem auto;
+    background-color: $color-blue-light;
+
+    & > * {
+      color: $color-white;
+    }
+
+    &--worksheet-container {
+      // border: 1px solid brown;
+      text-align: center;
+      padding: 2rem;
+      margin: 0 auto;
+      width: 50%;
+      border: 1px solid white;
+
+      &:not(:last-child) {
+        margin-bottom: 3rem;
+      }
+
+      & > .title {
+        color: $color-white;
+        text-transform: capitalize;
+        font-weight: bold;
+      }
+    }
+
+    &--buttons-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__fav-pathways {
+    padding-bottom: 2rem;
+  }
+
+  &__sustainability {
+    max-width: 70%;
+    margin: 2rem auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &--title {
+
+    }
+
+    &--text {
+      max-width: 70%;
+      margin-bottom: 2rem;
+    }
+
+    &--link,
+    &--link:link,
+    &--link:visited {
+      background-color: $color-blue-light;
+      color: $color-white;
+      padding: .5rem 1rem;
+      font-weight: bold;
+      border-radius: 3px;
+      transition: all .2s;
+
+      &:hover {
+        background-color: rgba($color-blue-light, .8);
       }
     }
   }
@@ -113,7 +294,8 @@
       padding: 0;
 
       &--image-div {
-        width: 100%;
+        width: 40%;
+        margin: 0 auto;
         align-items: center;
       }
 
@@ -142,6 +324,16 @@
       }
     }
 
+    &__worksheets {
+      // border: 1px solid red;
+      padding: 2rem;
+      margin: 2rem auto;
+  
+      &--worksheet-container {
+        width: 80%;
+      }
+    }
+
     &__dream-map {
       padding: 0;
       
@@ -163,6 +355,88 @@
         // &--dreams-dream {
     
         // }
+      }
+    }
+
+    &__sustainability {
+      max-width: 70%;
+      padding: 0;
+
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .youth {
+    &__profile-section {
+
+      &--image-div {
+        width: 60%;
+        height: 28rem;
+      }
+    }
+
+    &__worksheets {
+      padding: 2rem;
+      margin: 2rem auto;
+  
+      &--worksheet-container {
+        width: 100%;
+      }
+
+      &--buttons-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      &--btn {
+        max-width: 8rem;
+        margin-top: 1rem;
+
+        &:first-child {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+
+    &__dream-map {
+      &__container {
+        &--image-div {
+          flex-direction: column;
+        }
+  
+        &--figure {
+          margin-bottom: 3rem;
+          
+          &:not(:last-child) {
+            margin-right: 0;
+          }
+        }
+    
+        &--image {
+          max-width: 40%;
+          margin-bottom: 0;
+        }
+        
+        &--image-rotate-left {
+          max-width: 90%;
+          margin: 0 auto;
+        }
+
+        &--image-rotate-right {
+          max-width: 90%;
+          margin: 0 auto;
+        }
+      }
+    }
+
+    &__sustainability {
+      max-width: 100%;
+
+      &--text {
+        max-width: 90%;
       }
     }
   }

@@ -10,6 +10,7 @@ const Navigation = () => {
   const [topText, setTopText] = useState(true);
   const history = useHistory();
   const location = useLocation();
+  const currentUser = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     if (location.pathname === '/') {
@@ -17,35 +18,42 @@ const Navigation = () => {
     } else {
       setTopText(false);
     }
-  });
+  }, [location.pathname]);
 
 
   const handleLogout = () => {
     // if (userCtx.cookies.token && userCtx.cookies.user) {
       localStorage.removeItem('auth');
+      localStorage.removeItem('user');
+      // userCtx.setUser({});
       // userCtx.removeCookie('token');
-      userCtx.removeCookie('user');
+      // userCtx.removeCookie('user');
       console.log('Logged out');
     // }
     
   };
 
+
   const renderTabs = () => {
-    if (userCtx.cookies.user && userCtx.cookies.user.role === 'user') {
+    if (currentUser && currentUser.role === 'user') {
       return (
-        <Link to={`/user/${userCtx.cookies.user.user_id}`} className="navigation__item">
+        <Link to={`/user/${currentUser.user_id}`} className="navigation__item">
           Youth
         </Link>
       );
-    } else if (userCtx.cookies.user && userCtx.cookies.user.role === 'facilitator') {
+    } else if (currentUser && currentUser.role === 'facilitator') {
       return (
-        <Link to={`/facilitator/${userCtx.cookies.user.user_id}`} className="navigation__item">
-          Facilitator
+        <Link to={`/facilitator/${currentUser.user_id}`} className="navigation__item">
+          {
+            currentUser.admin
+              ? 'Admin'
+              : 'Facilitator'
+          }
         </Link>
       );
-    } else if (userCtx.cookies.user && userCtx.cookies.user.role === 'organization') {
+    } else if (currentUser && currentUser.role === 'organization') {
       return (
-        <Link to={`/organization/${userCtx.cookies.user.user_id}`} className="navigation__item">
+        <Link to={`/organization/${currentUser.user_id}`} className="navigation__item">
           Organization
         </Link>
       );
@@ -56,6 +64,7 @@ const Navigation = () => {
           Youth
         </Link>
 
+        
         <Link to="/auth" className="navigation__item">
           Facilitator
         </Link>
@@ -68,6 +77,12 @@ const Navigation = () => {
     }
   };
 
+  const checkToken = () => {
+    if (localStorage.getItem('auth')) {
+      return true;
+    }
+    return false;
+  };
 
   return (
     <>
@@ -118,7 +133,7 @@ const Navigation = () => {
               Home
             </Link>
 
-            <Link to="#" className="navigation__item">
+            <Link to="/about" className="navigation__item">
               About us
             </Link>
 
@@ -127,7 +142,7 @@ const Navigation = () => {
             }
 
             {
-              userCtx.cookies.user
+              checkToken()
                 ? (
                   <Link to="/" className="navigation__item" onClick={handleLogout}>
                     Log out

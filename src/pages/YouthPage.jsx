@@ -1,41 +1,195 @@
-import React, { useState, useContext, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import { UserContext } from '../providers/UsersProvider';
-import { baseUrl } from '../helpers/';
+import { useHistory, Link } from 'react-router-dom';
+import { FiEdit, FiDownload, FiUpload } from 'react-icons/fi';
 
-const YouthPage = () => {
+// import { UserContext } from '../providers/UsersProvider';
+import UploadWorksheet from '../components/UploadWorksheet';
+import { baseUrl } from '../helpers/';
+import blueStar from '../assets/star-blue.png';
+import greenStar from '../assets/star-green.png';
+import orangeStar from '../assets/star-orange.png';
+
+const YouthPage = (props) => {
   const [user, setUser] = useState({});
   const [facilitator, setFacilitator] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  let [mounted, setMounted] = useState(true);
+  // const [dreamImage, setDreamImage] = useState('');
 
-  const userCtx = useContext(UserContext);
+  const currentUser = JSON.parse(localStorage.getItem('user'));
+  const userPathways = JSON.parse(localStorage.getItem('user-fav-pathways'));
+  // const userCtx = useContext(UserContext);
   const history = useHistory();
+  const blueRef = useRef(null)
+  const orangeRef = useRef(null)
+  const greenRef = useRef(null)
 
-  // useLayoutEffect(() => {
-  //   if (!userCtx.cookies.user) {
-  //     history.push('/auth');
-  //   }
-  // });
+  useLayoutEffect(() => {
+    if (!(currentUser.role === 'user') && !(currentUser.role === 'facilitator')) {
+      history.push('/auth');
+    }
+  });
+
+  const getId = () => {
+    if (currentUser.role === 'user') {
+      return currentUser.user_id;
+    } else {
+      return props.match.params.id;
+    }
+  }
+
+  const getFacilitatorId = () => {
+    if (currentUser.role === 'user') {
+      return currentUser.facilitator_id;
+    } else {
+      if (!props.location.user) {
+        return false;
+      }
+      return props.location.user.facilitator_id;
+    }
+  }
+
+  // console.log(props)
+  const handleFileUpload = (e) => {
+    e.preventDefault();
+
+    const doc = e.target.files[0];
+    if (!doc) return;
+    
+    if (doc.type === 'application/pdf') {
+      const data = new FormData()
+      data.append(e.target.name, e.target.files[0])
+      
+      // console.log(e.target.name)
+      
+      axios({
+        method: 'put',
+        url: `${baseUrl}api/v1/worksheets_upload/${getId()}`,
+        data,
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('auth')}`
+        }
+      })
+        .then(res => {
+          if (res.status === 200 || res.status === 201) {
+            // console.log(res.data);
+            alert('Worksheet uploaded successfully');
+          }
+        })
+        .catch(() => alert('Error uploading the worksheet'))
+    }
+  };
+
 
   useEffect(() => {
-    if (userCtx.cookies.user) {
-      const getUser = async () => {
-        const response = await axios({
-          method: 'get',
-          url: `${baseUrl}api/v1/users/${userCtx.cookies.user.user_id}`,
-          headers: {
-            "Authorization": `Bearer ${userCtx.cookies.token}`
-          }
-        });
-
-        setUser(response.data);
-        setIsLoading(false);
+    if (mounted) {
+      if (currentUser) { 
+        const getUser = async () => {
+          const response = await axios({
+            method: 'get',
+            url: `${baseUrl}api/v1/users/${getId()}`,
+            headers: {
+              "Authorization": `Bearer ${localStorage.getItem('auth')}`
+            }
+          });
+  
+          setUser(response.data);
+          setIsLoading(false);
+        }
+  
+        getUser();
       }
-
-      getUser();
     }
-  }, [userCtx.cookies.user, userCtx.cookies.token]);
+
+    return () => setMounted(false);
+  }, []);
+
+  useEffect(() => {
+    const possible = getFacilitatorId();
+
+    if (mounted && possible) {
+      if (currentUser) {
+        const getFacilitator = async () => {
+          const response = await axios({
+            method: 'get',
+            url: `${baseUrl}api/v1/facilitators/${getFacilitatorId()}`,
+            headers: {
+              "Authorization": `Bearer ${localStorage.getItem('auth')}`
+            }
+          });
+  
+          setFacilitator(response.data);
+        }
+  
+        getFacilitator();
+      }
+    } else {
+      history.push('/');
+    }
+
+    return () => setMounted(false);
+  }, []);
+
+  const assignFacilitator = (e) => {
+    e.preventDefault();
+
+    const data = new FormData(e.target);
+    e.target.reset();
+
+    axios({
+      method: 'put',
+      url: `${baseUrl}api/v1/users/${getId()}`,
+      data,
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('auth')}`
+      }
+    })
+      .then(res => {
+        if (res.status === 200 || res.status === 201) {
+          alert('Facilitator assigned successfully');
+          history.push(`/facilitator/${currentUser.user_id}`);
+        }
+      })
+      .catch(() => alert('There has been an error assigning the facilitator!'));
+  }
+
+  const setActivePathway = () => {
+    if (user.active_pathway) {
+      const act = userPathways.find(elem => elem.title === user.active_pathway);
+      return [act.id, act.title];
+    }
+  }
+
+  const updateDreamImage =(e, user_ref) => {
+    e.preventDefault();
+
+    const img = e.target.files[0].type;
+
+    if (img.type === 'image/png' || img.type === 'image/jpg' || img.type === 'image/jpeg') return;
+
+    const data = new FormData(user_ref.current);
+    blueRef.current.reset();
+
+    axios({
+      method: 'put',
+      url: `${baseUrl}dream-images/users/${getId()}`,
+      data,
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('auth')}`
+      }
+    })
+      .then(res => {
+        if (res.status === 200 || res.status === 201) {
+          alert('Dream image updated successfully!');
+          setUser(res.data);
+          console.log(res.data);
+        }
+      })
+      .catch(() => {
+        alert('Error updating the dream image!');
+      });
+  }
 
   return (
     <main className="youth">
@@ -44,23 +198,61 @@ const YouthPage = () => {
           ? <h2>Getting user...</h2>
           : (
             <>
-              <header className="youth__header title is-3 is-bold">
-                <h3 className="youth__header--title">Welcome back, {user.name}!</h3>
-              </header>
+            {/* {console.log(user)} */}
+            
+            <header className="youth__header title is-3 is-bold">
+            {
+              currentUser.role === 'user'
+                ? (
+                    <h3 className="youth__header--title">Welcome back, <span className="youth__header--username">{user.name}</span>!</h3>
+                    ) 
+                    : (
+                      <h3 className="youth__header--title">Welcome back, <span className="youth__header--username">{currentUser.name}</span>!</h3>
+                    )
+                  }
+            </header>
+              
               <section className="youth__profile-section">
-                
+                {
+                  currentUser.role === 'user' || currentUser.role === 'facilitator'
+                    ? (
+                      <Link to={{
+                        pathname: "/edit/user",
+                        user
+                      }} className="youth__profile-section--edit-btn">Edit</Link>
+                    )
+                    : null
+                }
+
                 <div className="youth__profile-section--image-div">
                   <h3 className="youth__profile-section--title">{user.name}</h3>
-                  <img src="#" alt="profile" className="youth__profile-section--image" />
+                  <div className="youth__profile-section--image" style={{'content':`url(${user.image ? user.image.url : null})`}} />
                   <h3 className="youth__profile-section--title">Facilitator</h3>
-                  <img src="#" alt="profile" className="youth__profile-section--image-facilitator" />
+                  <span className="youth__header--username">{facilitator.name}</span>
+                  <div className="youth__profile-section--image-facilitator" style={{'content':`url(${facilitator.image ? facilitator.image.url : null})`}} />
+
+                  {
+                    currentUser && currentUser.admin
+                      ? (
+                        <form onSubmit={assignFacilitator}>
+                          <div className="field has-addons">
+                            <div className="control">
+                              <input className="input" type="text" name="facilitator_id" placeholder="Code..." />
+                            </div>
+                            <div className="control">
+                              <input type="submit" className="button is-info" value="Assign Facilitator" />
+                            </div>
+                          </div>
+                        </form>
+                      ) : null
+                  }
                 </div>
 
                 <div className="youth__profile-section--bio-div">
                   <div className="youth__profile-section--bio-container">
                     <h3 className="youth__profile-section--title">Bio</h3>
                     <p className="youth__profile-section--bio-text">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, ex expedita quidem fugiat explicabo animi doloremque, asperiores sit corrupti molestias dignissimos laborum repellendus. Cumque aspernatur hic amet, incidunt alias enim.
+                      {user.bio ? user.bio : 'Edit your profile to set up your bio'}
                     </p>
                   </div>
 
@@ -69,14 +261,14 @@ const YouthPage = () => {
                     <div className="youth__profile-section--bottom-div">
                       <h3 className="youth__profile-section--title">Greatest Assets</h3>
                       <p className="youth__profile-section--bio-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, ex expedita quidem fugiat explicabo animi doloremque, asperiores sit corrupti molestias dignissimos laborum repellendus. Cumque aspernatur hic amet, incidunt alias enim.
+                        {user.greatest_assets ? user.greatest_assets : 'Edit your profile to set up your greatest assets'}
                       </p>
                     </div>
 
                     <div className="youth__profile-section--bottom-div">
                       <h3 className="youth__profile-section--title">Greatest Challenges</h3>
                       <p className="youth__profile-section--bio-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, ex expedita quidem fugiat explicabo animi doloremque, asperiores sit corrupti molestias dignissimos laborum repellendus. Cumque aspernatur hic amet, incidunt alias enim.
+                        {user.greatest_challenges ? user.greatest_challenges : 'Edit your profile to set up your greatest challenges'}
                       </p>
                     </div>
                   </div>
@@ -85,20 +277,240 @@ const YouthPage = () => {
               </section>
               
               <section className="youth__dream-map">
-                <h2 className="youth__dream-map--title title is-3">Dream Map</h2>
+                <h2 className="youth__titles title is-3">Dream Map</h2>
 
                 <div className="youth__dream-map__container">
-                  <div className="youth__dream-map__container--dreams-div">
-                    <div className="youth__dream-map__container--dreams-dream">Dream one</div>
-                    <div className="youth__dream-map__container--dreams-dream">Dream Two</div>
-                    <div className="youth__dream-map__container--dreams-dream">Dream Three</div>
-                  </div>
 
                   <div className="youth__dream-map__container--image-div">
-                    <img src="#" alt="Dream map" className="youth__dream-map__container--image" />
+                    <figure className="youth__dream-map__container--figure">
+
+                      <figcaption className="youth__dream-map__container--image-text text-blue">
+                        {user.life_dream ? user.life_dream : 'Set your life dream!'}
+                      </figcaption>
+
+                      <form className="file has-bg-blue is-centered" ref={blueRef} onChange={(e) => updateDreamImage(e, blueRef)}>
+                        <label className="file-label">
+                          <input className="file-input" type="file" name="blue_image" accept=".jpg, .jpeg, .png" />
+                          <span className="file-cta">
+                            <FiUpload />&nbsp;
+                            <span className="file-label is-bold">
+                              Upload Image
+                            </span>
+                          </span>
+                        </label>
+                      </form>
+
+
+                    <div className={user.blue_image ? "youth__dream-map__container--image-rotate-right" : ""}>
+                      <img src={user.blue_image ? user.blue_image.url : blueStar} alt="Dream map" className={user.blue_image ? "youth__dream-map__container--image youth__dream-map__container--image--blue" :"youth__dream-map__container--image"} />
+                    </div>
+
+                    </figure>
+
+                    <figure className="youth__dream-map__container--figure">
+
+                      <figcaption className="youth__dream-map__container--image-text text-orange">
+                        {user.community_dream ? user.community_dream : 'Set your dream for the community!'}
+                      </figcaption>
+
+                      <form className="file has-bg-orange is-centered" ref={orangeRef} onChange={(e) => updateDreamImage(e, orangeRef)}>
+                        <label className="file-label">
+                          <input className="file-input" type="file" name="orange_image" accept=".jpg, .jpeg, .png" />
+                          <span className="file-cta">
+                            <FiUpload />&nbsp;
+                            <span className="file-label is-bold">
+                              Upload Image
+                            </span>
+                          </span>
+                        </label>
+                      </form>
+
+
+                    <div className={user.orange_image ? "youth__dream-map__container--image-rotate-left" : ""}>
+                      <img src={user.orange_image ? user.orange_image.url : orangeStar} alt="Dream map" className={user.orange_image ? "youth__dream-map__container--image youth__dream-map__container--image--orange" :"youth__dream-map__container--image"} />
+                    </div>
+
+                    </figure>
+
+                    <figure className="youth__dream-map__container--figure">
+
+                      <figcaption className="youth__dream-map__container--image-text text-green">
+                        {user.world_dream ? user.world_dream : 'Set your dream for the world!'}
+                      </figcaption>
+
+                      <form className="file has-bg-green is-centered" ref={greenRef} onChange={(e) => updateDreamImage(e, greenRef)}>
+                        <label className="file-label">
+                          <input className="file-input" type="file" name="green_image" accept=".jpg, .jpeg, .png" />
+                          <span className="file-cta">
+                            <FiUpload />&nbsp;
+                            <span className="file-label is-bold">
+                              Upload Image
+                            </span>
+                          </span>
+                        </label>
+                      </form>
+
+
+                    <div className={user.green_image ? "youth__dream-map__container--image-rotate-right" : ""}>
+                      <img src={user.green_image ? user.green_image.url : greenStar} alt="Dream map" className={user.green_image ? "youth__dream-map__container--image youth__dream-map__container--image--green" :"youth__dream-map__container--image"} />
+                    </div>
+
+                    </figure>
+                  </div>
+
+                </div>
+
+                {
+                  currentUser.role === 'user' || currentUser.role === 'facilitator'
+                    ? (
+                      <Link to={{
+                        pathname: "/dreammap/edit",
+                        user
+                      }} className="youth__dream-map--button">
+                        {
+                          (user.life_dream || user.community_dream || user.world_dream)
+                            ? 'Update my dreams'
+                            : 'Set my dreams'
+                        }
+                      </Link>
+                    )
+                    : null
+                }
+              </section>
+
+              <section className="youth__worksheets">
+                <h2 className="youth__titles title is-3">Worksheets</h2>
+
+                <div className="youth__worksheets--worksheet-container">
+                  <h3 className="youth__worksheets--worksheet-title title is-5">
+                    Youth Bio Questions
+                  </h3>
+
+                  <div className="youth__worksheets--buttons-container">
+                    <a href="/worksheets/1-Youth-Bio-Delegate-Questions.pdf" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
+                      <FiEdit />&nbsp;Worksheet
+                    </a>
+                    <UploadWorksheet name="bio_worksheet" method={handleFileUpload} user={currentUser} />
+                    <a href={user.bio_worksheet ? user.bio_worksheet.url : '#'} download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn" disabled={user.bio_worksheet ? false : true}>
+                     <FiDownload />&nbsp;Download
+                    </a>
+                  </div>                  
+                </div>
+
+
+                <div className="youth__worksheets--worksheet-container">
+                  <h3 className="youth__worksheets--worksheet-title title is-5">Professtional Development</h3>
+                  
+                  <div className="youth__worksheets--buttons-container">
+                    <a href="/worksheets/2-Professional-Worksheet.docx" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
+                      <FiEdit />&nbsp;Worksheet
+                    </a>
+                    <UploadWorksheet name="development_worksheet" method={handleFileUpload} user={currentUser} />
+                    <a href={user.development_worksheet ? user.development_worksheet.url : '#'} download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn" disabled={user.development_worksheet ? false : true}>
+                      <FiDownload />&nbsp;Download
+                    </a>
+                  </div>
+
+                </div>
+
+                <div className="youth__worksheets--worksheet-container">
+                  <h3 className="youth__worksheets--worksheet-title title is-5">Sustainability in Action</h3>
+                  
+                  <div className="youth__worksheets--buttons-container">
+                    <a href="/worksheets/3-YLS-Sustainability-In-Action-Worksheet-2020.pdf" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
+                      <FiEdit />&nbsp;Worksheet
+                    </a>
+                    <UploadWorksheet name="sustainability_worksheet" method={handleFileUpload} user={currentUser} />
+                    <a href={user.sustainability_worksheet ? user.sustainability_worksheet.url : '#'} download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn" disabled={user.sustainability_worksheet ? false : true}>
+                      <FiDownload />&nbsp;Download
+                    </a>
+                  </div>
+
+                </div>
+
+
+                <div className="youth__worksheets--worksheet-container">
+                  <h3 className="youth__worksheets--worksheet-title title is-5">College Prep</h3>
+                  
+                  <div className="youth__worksheets--buttons-container">
+                    <a href="/worksheets/4-college-prep-worksheet-2020.pdf" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
+                      <FiEdit />&nbsp;Worksheet
+                    </a>
+                    <UploadWorksheet name="college_prep_worksheet" method={handleFileUpload} user={currentUser} />
+                    <a href={user.college_prep_worksheet ? user.college_prep_worksheet.url : '#'} download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn" disabled={user.college_prep_worksheet ? false : true}>
+                      <FiDownload />&nbsp;Download
+                    </a>
+                  </div>
+                </div>
+
+                <div className="youth__worksheets--worksheet-container">
+                  <h3 className="youth__worksheets--worksheet-title title is-5">5 years plan</h3>
+                  
+                  <div className="youth__worksheets--buttons-container">
+                    <a href="/worksheets/5-Five-Year-Action-Plan.docx" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
+                      <FiEdit />&nbsp;Worksheet
+                    </a>
+                    <UploadWorksheet name="five_years_worksheet" method={handleFileUpload} user={currentUser} />
+                    <a href={user.five_years_worksheet ? user.five_years_worksheet.url : '#'} download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn" disabled={user.five_years_worksheet ? false : true}>
+                      <FiDownload />&nbsp;Download
+                    </a>
+                  </div>
+                </div>
+
+                <div className="youth__worksheets--worksheet-container">
+                  <h3 className="youth__worksheets--worksheet-title title is-5">Performance Metrics</h3>
+                  
+                  <div className="youth__worksheets--buttons-container">
+                    <a href="/worksheets/6-Performance-Metrics-2020-Fillable.pdf" download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn">
+                      <FiEdit />&nbsp;Worksheet
+                    </a>
+                    <UploadWorksheet name="five_years_worksheet" method={handleFileUpload} user={currentUser} />
+                    <a href={user.five_years_worksheet ? user.five_years_worksheet.url : '#'} download target="_blank" rel="noopener noreferrer" className="youth__worksheets--btn button btn" disabled={user.five_years_worksheet ? false : true}>
+                      <FiDownload />&nbsp;Download
+                    </a>
                   </div>
                 </div>
               </section>
+
+              {
+                userPathways && user.active_pathway
+                  ? (
+                    <section className="youth__fav-pathways">
+                      <div className="youth__fav-pathways--active-pathway">
+                        <h2 className="title is-3 is-centered">Active Pathway</h2>
+                        <Link to={`/pathway/${setActivePathway()[0]}`} 
+                          className="pathway-record" 
+                        >
+
+                          <p className="pathway-record__id mb-1">
+                            Pathway number: {setActivePathway()[0]}
+                          </p>
+
+                          <h3 className="pathway-record__title title is-4 mt-1">
+                            {setActivePathway()[1]}
+                          </h3>
+                        </Link>
+
+                      </div>
+                    </section>
+                  ) : <h3 className="subtitle is-3 is-bold is-centered text-light-blue mb-4 pb-4">No Active Pathway yet</h3>
+              }
+              {
+                currentUser.role === 'user'
+                  ? (
+                      <section className="youth__sustainability">
+                        <h2 className="youth__titles title is-3">Sustainability</h2>
+
+                        <h3 className="youth__sustainability--title title is-4">SustainWDN Pathways Survey</h3>
+                        <p className="youth__sustainability--text">
+                          When you sign up we use the information that you give us (interests, skills, etc.) to recommend potential career areas. When you select a career area to explore, we offer you a graphical pathway to achieve a job in that area, with actionable items, such as internships we can help you to apply for. You can even apply for the job if you are already qualified!
+                        </p>
+                        <Link to="/youth/survey" className="youth__sustainability--link">
+                          Take the Survey!
+                        </Link>
+                      </section>
+                    ) : null
+                }
             </>
           )
       }
