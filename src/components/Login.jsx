@@ -39,7 +39,7 @@ const Login = () => {
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             console.log('success');
-            console.log(res.data)
+            // console.log(res.data)
             localStorage.setItem('auth', res.data.auth_token);
             // userCtx.setCookie('token', res.data.auth_token)
             localStorage.setItem('user', JSON.stringify(res.data.user));

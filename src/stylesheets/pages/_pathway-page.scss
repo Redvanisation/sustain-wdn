@@ -3,17 +3,22 @@
 
   &__header {
     padding: 2rem;
-    min-height: 15rem;
+    min-height: 25rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-bottom: 5px dashed $color-blue-light;
-
+    background-size: cover;
+    background-position: 10%;
+    background-repeat: no-repeat;
+    text-align: center;
+    
+    
     &--title {
       text-transform: capitalize;
       line-height: 1.6;
-      // color: $color-blue-light;
+      color: $color-white;
+      font-weight: bold;
     }
 
     // &--description {
@@ -35,6 +40,11 @@
     align-items: center;
 
     &--title {
+      // display: inline-block;
+      border-top: 5px dashed $color-blue-light;
+      margin-top: 2rem;
+      padding-bottom: 1rem;
+      padding-top: 2rem;
       line-height: 1.6;
       text-align: center;
     }
@@ -47,6 +57,13 @@
 
       &::first-letter {
         text-transform: capitalize;
+      }
+
+      &--link,
+      &--link:link,
+      &--link:visited {
+        line-break: anywhere;
+        font-weight: bold;
       }
 
       &--salary {

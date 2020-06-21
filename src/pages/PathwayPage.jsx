@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { baseUrl } from '../helpers/';
+import { baseUrl, setBackgroundImg } from '../helpers/';
 
 const PathwayPage = () => {
   const history = useHistory();
@@ -106,7 +106,7 @@ const PathwayPage = () => {
 
   return (
     <main className="pathway">
-      <header className="pathway__header">
+      <header className="pathway__header" style={{backgroundImage: `radial-gradient(rgba(32, 154, 206,.9) 50%, rgba(32, 154, 206, .5)), url(${setBackgroundImg(pathway.title)})`}}>
         <h2 className="pathway__header--title title is-2">
           {pathway.title}
         </h2>
@@ -153,7 +153,7 @@ const PathwayPage = () => {
                   Resources
                 </h3>
                 <p className="pathway__content--description">
-                    {pathway.links.split(',').map((link, i) => <React.Fragment key={i}><a href={link} target="_blank" rel="noopener noreferrer">{link}</a><br/></React.Fragment>)}
+                    {pathway.links.split(',').map((link, i) => <React.Fragment key={i}><a href={link} target="_blank" rel="noopener noreferrer" className="pathway__content--description--link">{link}</a><br/></React.Fragment>)}
                 </p>
               </>
             )
