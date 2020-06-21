@@ -198,10 +198,19 @@ const YouthPage = (props) => {
           ? <h2>Getting user...</h2>
           : (
             <>
-            {console.log(user)}
-              <header className="youth__header title is-3 is-bold">
-                <h3 className="youth__header--title">Welcome back, <span className="youth__header--username">{user.name}</span>!</h3>
-              </header>
+            {/* {console.log(user)} */}
+            
+            <header className="youth__header title is-3 is-bold">
+            {
+              currentUser.role === 'user'
+                ? (
+                    <h3 className="youth__header--title">Welcome back, <span className="youth__header--username">{user.name}</span>!</h3>
+                    ) 
+                    : (
+                      <h3 className="youth__header--title">Welcome back, <span className="youth__header--username">{currentUser.name}</span>!</h3>
+                    )
+                  }
+            </header>
               
               <section className="youth__profile-section">
                 {
@@ -484,25 +493,24 @@ const YouthPage = (props) => {
 
                       </div>
                     </section>
-                  ) : <h3 className="subtitle is-3 is-bold is-centered text-light-blue">No Active Pathway yet</h3>
+                  ) : <h3 className="subtitle is-3 is-bold is-centered text-light-blue mb-4 pb-4">No Active Pathway yet</h3>
               }
+              {
+                currentUser.role === 'user'
+                  ? (
+                      <section className="youth__sustainability">
+                        <h2 className="youth__titles title is-3">Sustainability</h2>
 
-              <section className="youth__sustainability">
-                <h2 className="youth__titles title is-3">Sustainability</h2>
-
-                <h3 className="youth__sustainability--title title is-4">SustainWDN Pathways Survey</h3>
-                <p className="youth__sustainability--text">
-                  When you sign up we use the information that you give us (interests, skills, etc.) to recommend potential career areas. When you select a career area to explore, we offer you a graphical pathway to achieve a job in that area, with actionable items, such as internships we can help you to apply for. You can even apply for the job if you are already qualified!
-                </p>
-                {
-                  currentUser.role === 'user'
-                    ? (
-                      <Link to="/youth/survey" className="youth__sustainability--link">
-                        Take the Survey!
-                      </Link>
+                        <h3 className="youth__sustainability--title title is-4">SustainWDN Pathways Survey</h3>
+                        <p className="youth__sustainability--text">
+                          When you sign up we use the information that you give us (interests, skills, etc.) to recommend potential career areas. When you select a career area to explore, we offer you a graphical pathway to achieve a job in that area, with actionable items, such as internships we can help you to apply for. You can even apply for the job if you are already qualified!
+                        </p>
+                        <Link to="/youth/survey" className="youth__sustainability--link">
+                          Take the Survey!
+                        </Link>
+                      </section>
                     ) : null
                 }
-              </section>
             </>
           )
       }
