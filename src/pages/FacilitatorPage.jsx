@@ -175,7 +175,7 @@ const FacilitatorPage = () => {
                         <button className="facilitator__profile-section--edit-btn-button" onClick={() => fetchUsers('users')}>Users</button>
                         <button className="facilitator__profile-section--edit-btn-button" onClick={() => fetchUsers('facilitators')}>Facilitators</button>
                         <button className="facilitator__profile-section--edit-btn-button" onClick={() => fetchUsers('organizations')}>Organizations</button>
-                        <Link to="/register/facilitator">Add Facilitator</Link>
+                        <Link to="/register/facilitator" className="facilitator__profile-section--edit-btn">Add Facilitator</Link>
                         <h3 className="facilitator__profile-section--title subtitle is-5">
                           {facilitator.admin ? 'Admin' : null}
                         </h3>

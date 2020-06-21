@@ -36,7 +36,7 @@ const UserRecord = ({ id, name, email, activePathway, user, currentUser, setAllU
           Email: {email}
         </p>
         <p className="user-record__pathway">
-          Active Pathway: {activePathway ? activePathway : 'No active pathway yet'}
+          Active Pathway: <span className="text-important">{activePathway ? activePathway : 'No active pathway yet'}</span>
         </p>
       </Link>
       {

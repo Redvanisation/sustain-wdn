@@ -1,5 +1,5 @@
 .user-record {
-  padding: 1rem 2rem;
+  padding: 2rem 2rem;
   margin-bottom: 2rem;
   border-radius: 3px;
   background-color: white;
@@ -11,6 +11,10 @@
   cursor: pointer;
   transition: all .2s;
   box-shadow: 0 2px 4px 1px rgba($color-dark, .2);
+  text-align: center;
+
+
+
 
   &:hover {
     transform: translateY(-2px);
@@ -31,23 +35,24 @@
     text-transform: capitalize;
     font-weight: bold;
     font-size: 1.2rem;
-    margin-bottom: .2rem;
+    margin-bottom: .5rem;
   }
 
   &__email {
-
+    margin-bottom: .5rem;
   }
-
+  
   &__pathway {
     font-weight: bold;
     text-transform: capitalize;
-    font-style: italic;
+    margin-bottom: .5rem;
+    // color: $color-blue-light;
   }
 }
 
 @media only screen and (max-width: 600px) {
   .user-record {
-    padding: .5rem 1rem;
+    padding: 1rem;
     width: 90%;
   }
 }

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
-import { FiEdit, FiDownload } from 'react-icons/fi';
+import { FiEdit, FiDownload, FiUpload } from 'react-icons/fi';
 
 // import { UserContext } from '../providers/UsersProvider';
 import UploadWorksheet from '../components/UploadWorksheet';
@@ -15,12 +15,15 @@ const YouthPage = (props) => {
   const [facilitator, setFacilitator] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   let [mounted, setMounted] = useState(true);
+  // const [dreamImage, setDreamImage] = useState('');
 
   const currentUser = JSON.parse(localStorage.getItem('user'));
   const userPathways = JSON.parse(localStorage.getItem('user-fav-pathways'));
   // const userCtx = useContext(UserContext);
   const history = useHistory();
-  // const fileRef = useRef(null)
+  const blueRef = useRef(null)
+  const orangeRef = useRef(null)
+  const greenRef = useRef(null)
 
   useLayoutEffect(() => {
     if (!(currentUser.role === 'user') && !(currentUser.role === 'facilitator')) {
@@ -158,6 +161,36 @@ const YouthPage = (props) => {
     }
   }
 
+  const updateDreamImage =(e, user_ref) => {
+    e.preventDefault();
+
+    const img = e.target.files[0].type;
+
+    if (img.type === 'image/png' || img.type === 'image/jpg' || img.type === 'image/jpeg') return;
+
+    const data = new FormData(user_ref.current);
+    blueRef.current.reset();
+
+    axios({
+      method: 'put',
+      url: `${baseUrl}dream-images/users/${getId()}`,
+      data,
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('auth')}`
+      }
+    })
+      .then(res => {
+        if (res.status === 200 || res.status === 201) {
+          alert('Dream image updated successfully!');
+          setUser(res.data);
+          console.log(res.data);
+        }
+      })
+      .catch(() => {
+        alert('Error updating the dream image!');
+      });
+  }
+
   return (
     <main className="youth">
       {
@@ -165,7 +198,7 @@ const YouthPage = (props) => {
           ? <h2>Getting user...</h2>
           : (
             <>
-            {/* {console.log(user)} */}
+            {console.log(user)}
               <header className="youth__header title is-3 is-bold">
                 <h3 className="youth__header--title">Welcome back, <span className="youth__header--username">{user.name}</span>!</h3>
               </header>
@@ -241,24 +274,78 @@ const YouthPage = (props) => {
 
                   <div className="youth__dream-map__container--image-div">
                     <figure className="youth__dream-map__container--figure">
-                      <img src={blueStar} alt="Dream map" className="youth__dream-map__container--image" />
+
                       <figcaption className="youth__dream-map__container--image-text text-blue">
                         {user.life_dream ? user.life_dream : 'Set your life dream!'}
                       </figcaption>
+
+                      <form className="file has-bg-blue is-centered" ref={blueRef} onChange={(e) => updateDreamImage(e, blueRef)}>
+                        <label className="file-label">
+                          <input className="file-input" type="file" name="blue_image" accept=".jpg, .jpeg, .png" />
+                          <span className="file-cta">
+                            <FiUpload />&nbsp;
+                            <span className="file-label is-bold">
+                              Upload Image
+                            </span>
+                          </span>
+                        </label>
+                      </form>
+
+
+                    <div className={user.blue_image ? "youth__dream-map__container--image-rotate-right" : ""}>
+                      <img src={user.blue_image ? user.blue_image.url : blueStar} alt="Dream map" className={user.blue_image ? "youth__dream-map__container--image youth__dream-map__container--image--blue" :"youth__dream-map__container--image"} />
+                    </div>
+
                     </figure>
 
                     <figure className="youth__dream-map__container--figure">
-                      <img src={orangeStar} alt="Dream map" className="youth__dream-map__container--image" />
+
                       <figcaption className="youth__dream-map__container--image-text text-orange">
                         {user.community_dream ? user.community_dream : 'Set your dream for the community!'}
                       </figcaption>
+
+                      <form className="file has-bg-orange is-centered" ref={orangeRef} onChange={(e) => updateDreamImage(e, orangeRef)}>
+                        <label className="file-label">
+                          <input className="file-input" type="file" name="orange_image" accept=".jpg, .jpeg, .png" />
+                          <span className="file-cta">
+                            <FiUpload />&nbsp;
+                            <span className="file-label is-bold">
+                              Upload Image
+                            </span>
+                          </span>
+                        </label>
+                      </form>
+
+
+                    <div className={user.orange_image ? "youth__dream-map__container--image-rotate-left" : ""}>
+                      <img src={user.orange_image ? user.orange_image.url : orangeStar} alt="Dream map" className={user.orange_image ? "youth__dream-map__container--image youth__dream-map__container--image--orange" :"youth__dream-map__container--image"} />
+                    </div>
+
                     </figure>
 
                     <figure className="youth__dream-map__container--figure">
-                      <img src={greenStar} alt="Dream map" className="youth__dream-map__container--image" />
+
                       <figcaption className="youth__dream-map__container--image-text text-green">
                         {user.world_dream ? user.world_dream : 'Set your dream for the world!'}
                       </figcaption>
+
+                      <form className="file has-bg-green is-centered" ref={greenRef} onChange={(e) => updateDreamImage(e, greenRef)}>
+                        <label className="file-label">
+                          <input className="file-input" type="file" name="green_image" accept=".jpg, .jpeg, .png" />
+                          <span className="file-cta">
+                            <FiUpload />&nbsp;
+                            <span className="file-label is-bold">
+                              Upload Image
+                            </span>
+                          </span>
+                        </label>
+                      </form>
+
+
+                    <div className={user.green_image ? "youth__dream-map__container--image-rotate-right" : ""}>
+                      <img src={user.green_image ? user.green_image.url : greenStar} alt="Dream map" className={user.green_image ? "youth__dream-map__container--image youth__dream-map__container--image--green" :"youth__dream-map__container--image"} />
+                    </div>
+
                     </figure>
                   </div>
 
