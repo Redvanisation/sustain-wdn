@@ -17,6 +17,7 @@ const YouthPage = (props) => {
   let [mounted, setMounted] = useState(true);
 
   const currentUser = JSON.parse(localStorage.getItem('user'));
+  const userPathways = JSON.parse(localStorage.getItem('user-fav-pathways'));
   // const userCtx = useContext(UserContext);
   const history = useHistory();
   // const fileRef = useRef(null)
@@ -69,7 +70,7 @@ const YouthPage = (props) => {
       })
         .then(res => {
           if (res.status === 200 || res.status === 201) {
-            console.log(res.data);
+            // console.log(res.data);
             alert('Worksheet uploaded successfully');
           }
         })
@@ -150,6 +151,13 @@ const YouthPage = (props) => {
       .catch(() => alert('There has been an error assigning the facilitator!'));
   }
 
+  const setActivePathway = () => {
+    if (user.active_pathway) {
+      const act = userPathways.find(elem => elem.title === user.active_pathway);
+      return [act.id, act.title];
+    }
+  }
+
   return (
     <main className="youth">
       {
@@ -157,7 +165,7 @@ const YouthPage = (props) => {
           ? <h2>Getting user...</h2>
           : (
             <>
-            {console.log(user)}
+            {/* {console.log(user)} */}
               <header className="youth__header title is-3 is-bold">
                 <h3 className="youth__header--title">Welcome back, <span className="youth__header--username">{user.name}</span>!</h3>
               </header>
@@ -367,6 +375,30 @@ const YouthPage = (props) => {
                   </div>
                 </div>
               </section>
+
+              {
+                userPathways && user.active_pathway
+                  ? (
+                    <section className="youth__fav-pathways">
+                      <div className="youth__fav-pathways--active-pathway">
+                        <h2 className="title is-3 is-centered">Active Pathway</h2>
+                        <Link to={`/pathway/${setActivePathway()[0]}`} 
+                          className="pathway-record" 
+                        >
+
+                          <p className="pathway-record__id mb-1">
+                            Pathway number: {setActivePathway()[0]}
+                          </p>
+
+                          <h3 className="pathway-record__title title is-4 mt-1">
+                            {setActivePathway()[1]}
+                          </h3>
+                        </Link>
+
+                      </div>
+                    </section>
+                  ) : <h3 className="subtitle is-3 is-bold is-centered text-light-blue">No Active Pathway yet</h3>
+              }
 
               <section className="youth__sustainability">
                 <h2 className="youth__titles title is-3">Sustainability</h2>

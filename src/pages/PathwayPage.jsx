@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { baseUrl } from '../helpers/';
 
-const PathwayPage = (props) => {
+const PathwayPage = () => {
   const history = useHistory();
   const currentUser = JSON.parse(localStorage.getItem('user')) || {};
   const pathway = JSON.parse(localStorage.getItem('pathway')) || {};
@@ -20,17 +20,90 @@ const PathwayPage = (props) => {
     };
   });
 
-  // const handleAddFavorite = () => {
-  //   /api/v1/user_pathways/:id
+  useEffect(() => {
+    if (currentUser && currentUser.role === 'user') {
+      const getUserPathways = async () => {
+        const response = await axios({
+          method: 'get',
+          url: `${baseUrl}api/v1/user_pathways`,
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem('auth')}`
+          }
+        });
+
+        localStorage.setItem('user-fav-pathways', JSON.stringify(response.data));
+      }
+
+      getUserPathways();
+    }
+  }, []);
 
 
-  // }
+  const favoritePathway = (id, user_id) => {
+    if (currentUser.role === 'user') {
+      const data = new FormData();
+      data.append('id', id);
+      data.append('user_id', user_id);
   
-  
-  // const pathway = props.location.pathway;
+      axios({
+        method: 'post',
+        url: `${baseUrl}/api/v1/user_pathways`,
+        data,
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('auth')}`
+        }
+      })
+        .then(res => {
+          if (res.status === 200 || res.status === 201) {
+            alert(`${res.data.active_pathway} set as active pathway`);
+            // console.log(res.data)
+          }
+        })
+        .catch(() => alert('Error setting the active pathway!'));
+
+        axios({
+          method: 'put',
+          url: `${baseUrl}/api/v1/user_pathways/${id}`,
+          data,
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem('auth')}`
+          }
+        })
+          .then((res) => {
+            localStorage.setItem('user-fav-pathways', JSON.stringify(res.data));
+            console.log('Added successfully');
+          })
+          .catch(err => console.log(err));
+    } else {
+      alert('Only a user can set their own active pathway');
+    }
+  }
+
+  const handleAddFavorite = (id, user_id) => {
+    if (currentUser.role === 'user') {
+      const data = new FormData();
+      data.append('id', id);
+      data.append('user_id', user_id);
+
+      axios({
+        method: 'put',
+        url: `${baseUrl}/api/v1/user_pathways/${id}`,
+        data,
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('auth')}`
+        }
+      })
+        .then((res) => {
+          alert('Pathway added to favorites successfully!');
+          console.log(res.data)
+        })
+        .catch(() => alert('Pathway already in favorites'));
+    } else {
+      alert('Only a user can set their favorite pathways!');
+    }
+  }
 
 
-  // console.log(pathway)
   return (
     <main className="pathway">
       <header className="pathway__header">
@@ -80,17 +153,22 @@ const PathwayPage = (props) => {
                   Resources
                 </h3>
                 <p className="pathway__content--description">
-                    {pathway.links.split(',').map((link, i) => <><a key={i} href={link} target="_blank" rel="noopener noreferrer">{link}</a><br/></>)}
+                    {pathway.links.split(',').map((link, i) => <React.Fragment key={i}><a href={link} target="_blank" rel="noopener noreferrer">{link}</a><br/></React.Fragment>)}
                 </p>
               </>
             )
             : null
         }
 
-        <div className="pathway__content--btns-container">
-          <button className="pathway__content--btn button is-info">Set as active pathway</button>
-          <button className="pathway__content--btn button is-dark" >Add to favorite pathways</button>
-        </div>
+        {
+          currentUser.role === 'user'
+            ? (
+              <div className="pathway__content--btns-container">
+                <button className="pathway__content--btn button is-info" onClick={() => favoritePathway(pathway.id, currentUser.user_id)}>Set as active pathway</button>
+                <button className="pathway__content--btn button is-dark" onClick={() => handleAddFavorite(pathway.id, currentUser.user_id)}>Add to favorite pathways</button>
+              </div>
+            ) : null
+        }
 
       </section>
     </main>
