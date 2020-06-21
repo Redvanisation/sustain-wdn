@@ -17,7 +17,7 @@ const FacilitatorPageEdit = () => {
   const formRef = useRef(null);
 
   useLayoutEffect(() => {
-    if (!currentUser.role === 'facilitator') {
+    if (currentUser.role !== 'facilitator') {
       history.push('/');
     }
   });

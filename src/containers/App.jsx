@@ -4,6 +4,7 @@ import UsersProvider from '../providers/UsersProvider';
 import Homepage from '../pages/Homepage';
 import Login from '../components/Login';
 import UserSignup from '../components/UserSignup';
+import OrganizationSignup from '../components/OrganizationSignup';
 import FacilitatorSingup from '../components/FacilitatorSingup';
 import Navigation from '../components/Navigation';
 import YouthPage from '../pages/YouthPage';
@@ -14,9 +15,10 @@ import PathwaysSurvey from '../components/PathwaysSurvey';
 import DreamMapEdit from '../components/DeamMapEdit';
 import YouthPageEdit from '../components/YouthPageEdit';
 import FacilitatorPageEdit from '../components/FacilitatorPageEdit';
-import OrganizationSingup from '../components/OrganizationSingup';
+import OrganizationPageEdit from '../components/OrganizationPageEdit';
 import UserPathwaysPage from '../pages/UserPathwaysPage';
 import PathwayPage from '../pages/PathwayPage';
+import AddOpportunity from '../components/AddOpportunity';
 
 
 const App = () => {
@@ -36,8 +38,10 @@ const App = () => {
           <Route exact path='/dreammap/edit' component={DreamMapEdit} />
           <Route exact path='/edit/user' component={YouthPageEdit} />
           <Route exact path='/edit/facilitator' component={FacilitatorPageEdit} />
-          <Route exact path='/register/organization' component={OrganizationSingup} />
+          <Route exact path='/edit/organization' component={OrganizationPageEdit} />
+          <Route exact path='/register/organization' component={OrganizationSignup} />
           <Route exact path='/register/facilitator' component={FacilitatorSingup} />
+          <Route exact path='/add/opportunity' component={AddOpportunity} />
           
           <Route exact path='/pathways' component={UserPathwaysPage} />
           <Route exact path='/pathway/:id' component={PathwayPage} />

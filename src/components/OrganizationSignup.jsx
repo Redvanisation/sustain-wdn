@@ -1,17 +1,17 @@
-import React, { useState, useRef, useLayoutEffect, useContext } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { FiUpload } from 'react-icons/fi';
 import { baseUrl, validateEmail } from '../helpers';
-// import { UserContext } from '../providers/UsersProvider';
 
-const UserSignup = () => {
+
+const OrganizationSignup = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
-  // const userCtx = useContext(UserContext);
+
   const history = useHistory();
   const currentUser = JSON.parse(localStorage.getItem('user'));
 
@@ -49,7 +49,7 @@ const UserSignup = () => {
       const data = new FormData(formRef.current);
       axios({
         method: 'post',
-        url: `${baseUrl}auth/users/register`,
+        url: `${baseUrl}/api/v1/organizations`,
         data,
       })
         .then((res) => {
@@ -65,7 +65,7 @@ const UserSignup = () => {
 
   return (
     <section className="form-section container">
-      <h2 className="title is-2 is-centered">User Sign up</h2>
+      <h2 className="title is-2 is-centered">Organization Sign up</h2>
       <form className="form" ref={formRef} onSubmit={handleSubmit}>
         <div className="field">
           <label className="label">Name</label>
@@ -126,13 +126,9 @@ const UserSignup = () => {
       You have an account?
       <Link to="/auth"> Login!</Link>
     </div>
-    <div className="is-centered">
-      Are you an Organization?
-      <Link to="/register/organization"> Sign up here!</Link>
-    </div>
 
   </section>
   )
 };
 
-export default UserSignup;
+export default OrganizationSignup;
