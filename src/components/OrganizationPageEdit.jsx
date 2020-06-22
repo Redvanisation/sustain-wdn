@@ -87,6 +87,83 @@ const OrganizationPageEdit = () => {
           </div>
         </div>
 
+        <div className="field">
+        <label className="label">Description</label>
+          <div className="control">
+            <textarea className="textarea" name="description" placeholder="Description..." defaultValue={currentUser.description}></textarea>
+          </div>
+        </div>
+
+        <div className="field">
+          <label className="label">Industry</label>
+          <div className="control">
+            <input className="input" type="text" name="industry" placeholder="Industry" defaultValue={currentUser.industry} />
+          </div>
+        </div>
+
+        <div className="control">
+          <label className="radio title is-6">
+            Do you have active internships?
+          </label><br />
+          <label className="radio">
+            <input type="radio" name="interships" value={true} required />
+            &nbsp;Yes
+          </label>
+          <label className="radio">
+            <input type="radio" name="interships" value={false} />
+            &nbsp;No
+          </label>
+        </div><br />
+
+        <div className="control">
+          <label className="radio title is-6">
+            Do you have any active job opportunities?
+          </label><br />
+          <label className="radio">
+            <input type="radio" name="jobs" value={true} required />
+            &nbsp;Yes
+          </label>
+          <label className="radio">
+            <input type="radio" name="jobs" value={false} />
+            &nbsp;No
+          </label>
+        </div><br />
+
+        <div className="control">
+          <label className="radio title is-6">
+            Do you have any other active opportunities?
+          </label><br />
+          <label className="radio">
+            <input type="radio" name="other_opportunities" value={true} required />
+            &nbsp;Yes
+          </label>
+          <label className="radio">
+            <input type="radio" name="other_opportunities" value={false} />
+            &nbsp;No
+          </label>
+        </div><br />
+
+        <div className="field">
+        <label className="label">Related subjects</label>
+          <div className="control">
+            <textarea className="textarea" name="related_subjects" placeholder="Related subjects..." defaultValue={currentUser.related_subjects} required></textarea>
+          </div>
+        </div>
+
+        <div className="field">
+        <label className="label">Related Activities</label>
+          <div className="control">
+            <textarea className="textarea" name="related_activities" placeholder="Related Activities..." defaultValue={currentUser.related_activities} required></textarea>
+          </div>
+        </div>
+
+        <div className="field">
+        <label className="label">Related Soft Skills</label>
+          <div className="control">
+            <textarea className="textarea" name="related_soft_skills" placeholder="Related Soft Skills..." defaultValue={currentUser.related_soft_skills} required></textarea>
+          </div>
+        </div>
+
         <div className="field file has-name is-boxed is-centered">
           <label className="file-label">
             <input className="file-input" type="file" name="image" onChange={handleImage} />

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { baseUrl } from '../helpers/';
 import UserRecord from '../components/UserRecord';
 import FacilitatorRecord from '../components/FacilitatorRecord';
+import OrganizationRecord from '../components/OrganizationRecord';
 // import { UserContext } from '../providers/UsersProvider';
 
 const FacilitatorPage = () => {
@@ -125,15 +126,17 @@ const FacilitatorPage = () => {
         return (
           <>
             <h3 className="facilitator__profile-section--title title is-3">All Organizations</h3>
-            {/* {allUsers.map(user => <UserRecord 
-                key={user.id}
-                id={user.id}
-                name={user.name}
-                email={user.email}
-                activePathway={user.active_pathway}
-                user={user}
+            {allUsers.map(opp => <OrganizationRecord 
+                key={opp.id}
+                id={opp.id}
+                name={opp.name}
+                email={opp.email}
+                description={opp.description}
+                type={opp.type}
+                related_field={opp.related_field}
+                opportunity={opp}
                 currentUser={currentUser}
-              />)} */}
+              />)}
               
           </>
         );

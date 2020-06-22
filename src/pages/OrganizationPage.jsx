@@ -92,6 +92,43 @@ const OrganizationPage = () => {
               </div>
 
             </section>
+
+            <section className="youth__profile-section">
+
+            <div className="youth__profile-section--bio-div">
+                  <div className="youth__profile-section--bio-container">
+                    <h3 className="youth__profile-section--title">Description</h3>
+                    <p className="youth__profile-section--bio-text">
+                      {organization.description ? organization.description : 'Edit your profile to set up your description'}
+                    </p>
+                  </div>
+
+                  <div className="youth__profile-section--bottom-container">
+
+                    <div className="youth__profile-section--bottom-div">
+                      <h3 className="youth__profile-section--title">Internships</h3>
+                      <p className="youth__profile-section--bio-text">
+                        {organization.interships ? 'Yes' : 'Edit your profile to set up wheither or not you have active internships'}
+                      </p>
+                    </div>
+
+                    <div className="youth__profile-section--bottom-div">
+                      <h3 className="youth__profile-section--title">Jobs</h3>
+                      <p className="youth__profile-section--bio-text">
+                        {organization.jobs ? 'Yes' : 'Edit your profile to set up wheither or not you have active jobs'}
+                      </p>
+                    </div>
+
+                    <div className="youth__profile-section--bottom-div">
+                      <h3 className="youth__profile-section--title">Other Opportunities</h3>
+                      <p className="youth__profile-section--bio-text">
+                        {organization.other_opportunities ? 'Yes' : 'Edit your profile to set up wheither or not you have any active opportunities'}
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </section>
           </>
         )
       }
