@@ -1,21 +1,40 @@
-import React, { useState, createContext } from 'react';
-import { useCookies } from 'react-cookie';
+import React, { useState, useEffect, createContext } from 'react';
+import axios from 'axios';
+import { baseUrl } from '../helpers/';
 
 
 export const UserContext = createContext(null);
 
 const UsersProvider = ({ children }) => {
-  // const [cookies, setCookie, removeCookie] = useCookies(['user']);
-  const [user, setUser] = useState({});
+  const [pathways, setPathways] = useState([]);
+  const currentUser = JSON.parse(localStorage.getItem('user')) || {};
+
+
+  useEffect(() => {
+    if (currentUser) {
+      const getPathways = async () => {
+        const response = await axios({
+          method: 'get',
+          url: `${baseUrl}/api/v1/pathways`,
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem('auth')}`
+          }
+        });
+        
+        localStorage.setItem('the-pathways', JSON.stringify(response.data));
+        setPathways(response.data);
+      }
+  
+      getPathways();
+    }
+  }, []);
+
 
   return (
     <UserContext.Provider
       value={{
-        // cookies,
-        // setCookie,
-        // removeCookie
-        user,
-        setUser
+        pathways,
+        setPathways
       }}
     >
       {children}

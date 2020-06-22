@@ -15,7 +15,8 @@ const Login = () => {
     if (localStorage.getItem('user')) {
       history.push('/');
     }
-  })
+  });
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,15 +40,22 @@ const Login = () => {
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             console.log('success');
-            // console.log(res.data)
             localStorage.setItem('auth', res.data.auth_token);
-            // userCtx.setCookie('token', res.data.auth_token)
             localStorage.setItem('user', JSON.stringify(res.data.user));
-            
-            // userCtx.setUser(JSON.parse(localStorage.getItem('user')));
             formRef.current.reset();
-            history.push('/');
+            // history.push('/');
           }
+        })
+        .then(() => {
+          axios({
+            method: 'get',
+            url: `${baseUrl}/api/v1/pathways`,
+            headers: {
+              "Authorization": `Bearer ${localStorage.getItem('auth')}`
+            }
+          })
+            .then(res => localStorage.setItem('the-pathways', JSON.stringify(res.data)));
+            history.push('/');
         })
         .catch(() => {
           alert('Invalid email/password combination');

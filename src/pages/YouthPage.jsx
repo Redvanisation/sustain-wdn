@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect, useContext } from 'react';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
 import { FiEdit, FiDownload, FiUpload } from 'react-icons/fi';
 
-// import { UserContext } from '../providers/UsersProvider';
+import { UserContext } from '../providers/UsersProvider';
 import UploadWorksheet from '../components/UploadWorksheet';
 import { baseUrl } from '../helpers/';
 import blueStar from '../assets/star-blue.png';
@@ -18,8 +18,8 @@ const YouthPage = (props) => {
   // const [dreamImage, setDreamImage] = useState('');
 
   const currentUser = JSON.parse(localStorage.getItem('user'));
-  const userPathways = JSON.parse(localStorage.getItem('user-fav-pathways'));
-  // const userCtx = useContext(UserContext);
+  // const userPathways = JSON.parse(localStorage.getItem('user-fav-pathways')) || [];
+  const userCtx = useContext(UserContext);
   const history = useHistory();
   const blueRef = useRef(null)
   const orangeRef = useRef(null)
@@ -156,7 +156,7 @@ const YouthPage = (props) => {
 
   const setActivePathway = () => {
     if (user.active_pathway) {
-      const act = userPathways.find(elem => elem.title === user.active_pathway);
+      const act = userCtx.pathways.find(elem => elem.title === user.active_pathway);
       return [act.id, act.title];
     }
   }
@@ -193,6 +193,7 @@ const YouthPage = (props) => {
 
   return (
     <main className="youth">
+      
       {
         isLoading 
           ? <h2>Getting user...</h2>
@@ -473,7 +474,7 @@ const YouthPage = (props) => {
               </section>
 
               {
-                userPathways && user.active_pathway
+                userCtx.pathways && user.active_pathway
                   ? (
                     <section className="youth__fav-pathways">
                       <div className="youth__fav-pathways--active-pathway">

@@ -25,6 +25,7 @@ const Navigation = () => {
     // if (userCtx.cookies.token && userCtx.cookies.user) {
       localStorage.removeItem('auth');
       localStorage.removeItem('user');
+      localStorage.clear();
       // userCtx.setUser({});
       // userCtx.removeCookie('token');
       // userCtx.removeCookie('user');
