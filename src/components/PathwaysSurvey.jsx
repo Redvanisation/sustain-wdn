@@ -77,7 +77,7 @@ const PathwaysSurvey = () => {
             <input type="radio" name="education_level" value="Graduate School" />
             &nbsp;Graduate School
           </label>
-        </div>
+        </div><br />
 
         <div className="field">
           <label className="radio title is-6">
@@ -86,23 +86,15 @@ const PathwaysSurvey = () => {
           <div className="control checkbox-container">
 
             <div className="checkbox-group" >
-
-              <Checkbox value="English (Literature/Analysis)" name="fav_subjects" arr={subjects} setArr={setSubjects} />
-              <Checkbox value="English (Writing)" name="fav_subjects" arr={subjects} setArr={setSubjects} />
-              <Checkbox value="French" name="fav_subjects" arr={subjects} setArr={setSubjects} />
-              <Checkbox value="Spanish" name="fav_subjects" arr={subjects} setArr={setSubjects} />
-              <Checkbox value="Mandarian" name="fav_subjects" arr={subjects} setArr={setSubjects} />
-              <Checkbox value="German" name="fav_subjects" arr={subjects} setArr={setSubjects} />
-              <Checkbox value="Italian" name="fav_subjects" arr={subjects} setArr={setSubjects} />
-              <Checkbox value="Japanese" name="fav_subjects" arr={subjects} setArr={setSubjects} />
-              <Checkbox value="Mathematics (Algebra/Calculus)" name="fav_subjects" arr={subjects} setArr={setSubjects} />
-            </div>
-            
-            <div className="checkbox-group" >
-              <Checkbox value="Mathematics (Statistics)" name="fav_subjects" arr={subjects} setArr={setSubjects} />
+              <Checkbox value="English" name="fav_subjects" arr={subjects} setArr={setSubjects} />
+              <Checkbox value="Foreign Languages" name="fav_subjects" arr={subjects} setArr={setSubjects} />
+              <Checkbox value="Mathematics" name="fav_subjects" arr={subjects} setArr={setSubjects} />
               <Checkbox value="Robotics" name="fav_subjects" arr={subjects} setArr={setSubjects} />
               <Checkbox value="Biology" name="fav_subjects" arr={subjects} setArr={setSubjects} />
               <Checkbox value="Psychology" name="fav_subjects" arr={subjects} setArr={setSubjects} />
+            </div>
+
+            <div className="checkbox-group" >
               <Checkbox value="Physics" name="fav_subjects" arr={subjects} setArr={setSubjects} />
               <Checkbox value="Environmental" name="fav_subjects" arr={subjects} setArr={setSubjects} />
               <Checkbox value="Computer Science" name="fav_subjects" arr={subjects} setArr={setSubjects} />
@@ -110,7 +102,7 @@ const PathwaysSurvey = () => {
               <Checkbox value="Music" name="fav_subjects" arr={subjects} setArr={setSubjects} />
             </div>
           </div>
-        </div>
+        </div><br />
 
         <div className="select is-multiple">
           <label className="radio title is-6">
@@ -123,13 +115,11 @@ const PathwaysSurvey = () => {
               <Checkbox value="Volunteer Work and Community Service" name="fav_activities" arr={activities} setArr={setActivities} />
               <Checkbox value="Student Newspaper" name="fav_activities" arr={activities} setArr={setActivities} />
               <Checkbox value="Student Government" name="fav_activities" arr={activities} setArr={setActivities} />
-              <Checkbox value="Club (Academic)" name="fav_activities" arr={activities} setArr={setActivities} />
-              <Checkbox value="Club (Non-Academic)" name="fav_activities" arr={activities} setArr={setActivities} />
-              <Checkbox value="Activism (Environmental)" name="fav_activities" arr={activities} setArr={setActivities} />
+              <Checkbox value="Clubs" name="fav_activities" arr={activities} setArr={setActivities} />
+              <Checkbox value="Activism" name="fav_activities" arr={activities} setArr={setActivities} />
             </div>
             
             <div className="checkbox-group" >
-              <Checkbox value="Activism (Social/Economic/Racial Justice)" name="fav_activities" arr={activities} setArr={setActivities} />
               <Checkbox value="Photography/Film" name="fav_activities" arr={activities} setArr={setActivities} />
               <Checkbox value="Computer Activities (Video Games/Self-Taught Coding)" name="fav_activities" arr={activities} setArr={setActivities} />
               <Checkbox value="Woodworking/Building" name="fav_activities" arr={activities} setArr={setActivities} />
@@ -138,7 +128,9 @@ const PathwaysSurvey = () => {
             </div>
 
           </div>
-        </div>
+        </div><br />
+        
+        <br />
 
         <div className="select is-multiple">
           <label className="radio title is-6">
@@ -153,7 +145,9 @@ const PathwaysSurvey = () => {
             <Checkbox value="Resourceful (Good At Troubleshooting Challenges)" name="soft_skills" arr={softSkills} setArr={setSoftSkills} />
             <Checkbox value="Technically Skilled" name="soft_skills" arr={softSkills} setArr={setSoftSkills} />
           </div>
-        </div>
+        </div><br />
+
+        <br />
 
         <div className="select is-multiple">
           <label className="radio title is-6">
@@ -167,12 +161,14 @@ const PathwaysSurvey = () => {
             <Checkbox value="Transportation" name="support_types" arr={supportTypes} setArr={setSupportTypes} />
             <Checkbox value="Other Financial Support" name="support_types" arr={supportTypes} setArr={setSupportTypes} />
           </div>
-        </div>
+        </div><br />
+
+        <br />
 
         <div className="field">
           <label className="label">
             How Eager Are You To Get A Blue Job/Career To Help Rebuild The Planet? (on a scale of 1-10)
-          </label>
+          </label><br />
           <div className="control">
             <div className="select">
               <select name="eager_scale">
@@ -189,7 +185,7 @@ const PathwaysSurvey = () => {
               </select>
             </div>
           </div>
-        </div>
+        </div><br />
 
       <div className="field is-grouped">
         <div className="control is-centered">

@@ -7,8 +7,8 @@ import managerImg from '../assets/project-manager.jpg';
 import coordImg from '../assets/project-coordinator.jpg';
 
 
-// export const baseUrl = 'https://sustain-wdn-api.herokuapp.com/';
-export const baseUrl = 'http://localhost:3000/';
+export const baseUrl = 'https://sustain-wdn-api.herokuapp.com/';
+// export const baseUrl = 'http://localhost:3000/';
 
 
 export const validateEmail = (email) => {

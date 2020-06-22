@@ -84,9 +84,9 @@ const PathwayPage = (props) => {
         })
           .then((res) => {
             localStorage.setItem('user-fav-pathways', JSON.stringify(res.data));
-            notify('Added successfully');
+            // notify('Added successfully');
           })
-          .catch(() => notify('There has been an error'));
+          // .catch(() => notify('There has been an error'));
     } else {
       notify('Only a user can set their own active pathway');
     }
