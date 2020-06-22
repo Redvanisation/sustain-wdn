@@ -23,8 +23,8 @@ const OpportunityRecord = ({ id, name, description, type, related_field, opportu
 
   return (
     <section className="user-record">
-      {/* <Link to={`/opportunity/${id}`}> */}
-      <Link to="#">
+      <Link to={`/opportunity/${id}`}>
+      {/* <Link to="#"> */}
         <h3 className="user-record__name">
           {name}
         </h3>

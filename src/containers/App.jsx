@@ -19,6 +19,7 @@ import OrganizationPageEdit from '../components/OrganizationPageEdit';
 import UserPathwaysPage from '../pages/UserPathwaysPage';
 import PathwayPage from '../pages/PathwayPage';
 import AddOpportunity from '../components/AddOpportunity';
+import OpportunityPage from '../pages/OpportunityPage';
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
           <Route exact path='/user/:id' component={YouthPage} />
           <Route exact path='/facilitator/:id' component={FacilitatorPage} />
           <Route exact path='/organization/:id' component={OrganizationPage} />
+          <Route exact path='/opportunity/:id' component={OpportunityPage} />
           <Route exact path='/error' component={ErrorComponent} />
           <Route exact path='/youth/survey' component={PathwaysSurvey} />
           <Route exact path='/dreammap/edit' component={DreamMapEdit} />
