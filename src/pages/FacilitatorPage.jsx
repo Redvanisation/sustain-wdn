@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
@@ -5,7 +6,6 @@ import { baseUrl } from '../helpers/';
 import UserRecord from '../components/UserRecord';
 import FacilitatorRecord from '../components/FacilitatorRecord';
 import OrganizationRecord from '../components/OrganizationRecord';
-// import { UserContext } from '../providers/UsersProvider';
 
 const FacilitatorPage = () => {
   const [facilitator, setFacilitator] = useState({});
@@ -14,15 +14,13 @@ const FacilitatorPage = () => {
   const [showUsers, setShowUsers] = useState(false);
 
   const [allUsers, setAllUsers] = useState([]);
-  const [allFacilitators, setAllFacilitators] = useState([]);
-  const [allOrganizations, setAllOrganizations] = useState([]);
 
 
   const [toShow, setToShow] = useState('');
 
   const [showContainer, setShowContainer] = useState(false);
 
-  // const userCtx = useContext(UserContext);
+
   const history = useHistory();
   const currentUser = JSON.parse(localStorage.getItem('user')) || {};
 

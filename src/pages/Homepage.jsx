@@ -1,17 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../providers/UsersProvider';
 import Footer from '../components/Footer';
 import { FaRegUser, FaRegThumbsUp, FaRegBuilding } from "react-icons/fa";
 
 
 const Homepage = () => {
 
-  const userCtx = useContext(UserContext);
   const currentUser = JSON.parse(localStorage.getItem('user'));
 
   
-  // const id = userCtx.user.id;
 
   const verifyUser = (type) => {
     if (currentUser && currentUser.role === type) {
@@ -25,7 +22,6 @@ const Homepage = () => {
   };
 
 
-  // console.log(userCtx.user)
 
   return (
     <>

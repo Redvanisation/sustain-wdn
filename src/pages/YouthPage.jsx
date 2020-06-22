@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef, useEffect, useLayoutEffect, useContext } from 'react';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
@@ -15,10 +16,9 @@ const YouthPage = (props) => {
   const [facilitator, setFacilitator] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   let [mounted, setMounted] = useState(true);
-  // const [dreamImage, setDreamImage] = useState('');
 
   const currentUser = JSON.parse(localStorage.getItem('user'));
-  // const userPathways = JSON.parse(localStorage.getItem('user-fav-pathways')) || [];
+  const pathways = JSON.parse(localStorage.getItem('the-pathways'));
   const userCtx = useContext(UserContext);
   const history = useHistory();
   const blueRef = useRef(null)
@@ -156,7 +156,7 @@ const YouthPage = (props) => {
 
   const setActivePathway = () => {
     if (user.active_pathway) {
-      const act = userCtx.pathways.find(elem => elem.title === user.active_pathway);
+      const act = pathways.find(elem => elem.title === user.active_pathway);
       return [act.id, act.title];
     }
   }

@@ -1,14 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Navbar } from 'react-bulma-components';
-import { UserContext } from '../providers/UsersProvider';
 import logo from '../assets/logo-small.png';
 
 const Navigation = () => {
-  const userCtx = useContext(UserContext);
   const [showHide, setShowHide] = useState(false);
   const [topText, setTopText] = useState(true);
-  const history = useHistory();
   const location = useLocation();
   const currentUser = JSON.parse(localStorage.getItem('user'));
 
@@ -22,15 +19,11 @@ const Navigation = () => {
 
 
   const handleLogout = () => {
-    // if (userCtx.cookies.token && userCtx.cookies.user) {
-      localStorage.removeItem('auth');
-      localStorage.removeItem('user');
-      localStorage.clear();
-      // userCtx.setUser({});
-      // userCtx.removeCookie('token');
-      // userCtx.removeCookie('user');
-      console.log('Logged out');
-    // }
+    localStorage.removeItem('auth');
+    localStorage.removeItem('user');
+    localStorage.clear();
+
+    console.log('Logged out');
     
   };
 

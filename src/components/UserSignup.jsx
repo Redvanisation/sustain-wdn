@@ -1,9 +1,9 @@
-import React, { useState, useRef, useLayoutEffect, useContext } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { FiUpload } from 'react-icons/fi';
 import { baseUrl, validateEmail } from '../helpers';
-// import { UserContext } from '../providers/UsersProvider';
+
 
 const UserSignup = () => {
   const [password, setPassword] = useState('');
@@ -11,7 +11,7 @@ const UserSignup = () => {
   const [email, setEmail] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
-  // const userCtx = useContext(UserContext);
+
   const history = useHistory();
   const currentUser = JSON.parse(localStorage.getItem('user'));
 

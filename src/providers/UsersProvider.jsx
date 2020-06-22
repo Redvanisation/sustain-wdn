@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../helpers/';

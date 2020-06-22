@@ -1,13 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect, useLayoutEffect, useContext } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { baseUrl, setBackgroundImg } from '../helpers/';
-import { UserContext } from '../providers/UsersProvider';
 
 const PathwayPage = (props) => {
   const history = useHistory();
-  // const userCtx = useContext(UserContext);
+
   const pathways = JSON.parse(localStorage.getItem('the-pathways'));
   const currentUser = JSON.parse(localStorage.getItem('user')) || {};
   const [pathway, setPathway] = useState({});
