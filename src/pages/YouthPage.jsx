@@ -6,7 +6,7 @@ import { FiEdit, FiDownload, FiUpload } from 'react-icons/fi';
 
 import { UserContext } from '../providers/UsersProvider';
 import UploadWorksheet from '../components/UploadWorksheet';
-import { baseUrl } from '../helpers/';
+import { baseUrl, notify } from '../helpers/';
 import blueStar from '../assets/star-blue.png';
 import greenStar from '../assets/star-green.png';
 import orangeStar from '../assets/star-orange.png';
@@ -50,7 +50,6 @@ const YouthPage = (props) => {
     }
   }
 
-  // console.log(props)
   const handleFileUpload = (e) => {
     e.preventDefault();
 
@@ -61,7 +60,6 @@ const YouthPage = (props) => {
       const data = new FormData()
       data.append(e.target.name, e.target.files[0])
       
-      // console.log(e.target.name)
       
       axios({
         method: 'put',
@@ -73,11 +71,10 @@ const YouthPage = (props) => {
       })
         .then(res => {
           if (res.status === 200 || res.status === 201) {
-            // console.log(res.data);
-            alert('Worksheet uploaded successfully');
+            notify('Worksheet uploaded successfully');
           }
         })
-        .catch(() => alert('Error uploading the worksheet'))
+        .catch(() => notify('Error uploading the worksheet'))
     }
   };
 
@@ -147,11 +144,11 @@ const YouthPage = (props) => {
     })
       .then(res => {
         if (res.status === 200 || res.status === 201) {
-          alert('Facilitator assigned successfully');
+          notify('Facilitator assigned successfully');
           history.push(`/facilitator/${currentUser.user_id}`);
         }
       })
-      .catch(() => alert('There has been an error assigning the facilitator!'));
+      .catch(() => notify('There has been an error assigning the facilitator!'));
   }
 
   const setActivePathway = () => {
@@ -181,13 +178,12 @@ const YouthPage = (props) => {
     })
       .then(res => {
         if (res.status === 200 || res.status === 201) {
-          alert('Dream image updated successfully!');
+          notify('Dream image updated successfully!');
           setUser(res.data);
-          console.log(res.data);
         }
       })
       .catch(() => {
-        alert('Error updating the dream image!');
+        notify('Error updating the dream image!');
       });
   }
 
@@ -199,7 +195,6 @@ const YouthPage = (props) => {
           ? <h2>Getting user...</h2>
           : (
             <>
-            {/* {console.log(user)} */}
             
             <header className="youth__header title is-3 is-bold">
             {

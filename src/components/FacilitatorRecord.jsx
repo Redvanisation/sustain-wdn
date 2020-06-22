@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { baseUrl } from '../helpers/';
+import { baseUrl, notify } from '../helpers/';
 
 const FacilitatorRecord = ({ id, name, email, user, setAllUsers, allUsers }) => {
   const [users, setUsers] = useState([]);
@@ -35,14 +35,14 @@ const FacilitatorRecord = ({ id, name, email, user, setAllUsers, allUsers }) => 
       }
     })
       .then(() => {
-        alert('Facilitator deleted successfully');
+        notify('Facilitator deleted successfully');
         setAllUsers(allUsers.filter(usr => usr.id !== user.id));
       })
       .catch(() => {
         if (users.length > 0) {
-          alert('Please assign the users to another facilitator before doing that!')
+          notify('Please assign the users to another facilitator before doing that!')
         } else {
-          alert('Error deleting the facilitator');
+          notify('Error deleting the facilitator');
         }
       });
   }

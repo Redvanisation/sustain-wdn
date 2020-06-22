@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
-import { baseUrl } from '../helpers/';
+import { baseUrl, notify } from '../helpers/';
 import UserRecord from '../components/UserRecord';
 import FacilitatorRecord from '../components/FacilitatorRecord';
 import OrganizationRecord from '../components/OrganizationRecord';
@@ -80,7 +80,7 @@ const FacilitatorPage = () => {
         }
       })
         .then(res => setAllUsers(res.data))
-        .catch(() => alert('Error getting the users list'));
+        .catch(() => notify('Error getting the users list'));
   };
 
 

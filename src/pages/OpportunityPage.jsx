@@ -18,7 +18,6 @@ const OpportunityPage = (props) => {
     }
   });
 
-  // console.log(props.match.params.id)
 
   useEffect(() => {
     if (currentUser) {

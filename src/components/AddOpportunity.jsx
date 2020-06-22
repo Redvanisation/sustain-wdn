@@ -1,7 +1,7 @@
 import React, { useRef, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { baseUrl } from '../helpers';
+import { baseUrl, notify } from '../helpers';
 
 const AddOpportunity = () => {
   const history = useHistory();
@@ -32,11 +32,11 @@ const AddOpportunity = () => {
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           formRef.current.reset();
-          alert('Opportunity added successfully');
+          notify('Opportunity added successfully');
           history.push(`/organization/${currentUser.user_id}`);
         }
       })
-      .catch(() => alert('Error adding the opportunity!'));
+      .catch(() => notify('Error adding the opportunity!'));
   }
 
 

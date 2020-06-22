@@ -2,7 +2,7 @@ import React, { useState, useRef, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { FiUpload } from 'react-icons/fi';
-import { baseUrl } from '../helpers';
+import { baseUrl, notify } from '../helpers';
 
 const YouthPageEdit = (props) => {
   const [password, setPassword] = useState('');
@@ -31,7 +31,7 @@ const YouthPageEdit = (props) => {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
-      alert('Please upload an image of type PNG or JPG');
+      notify('Please upload an image of type PNG or JPG');
     }
   };
 
@@ -47,7 +47,7 @@ const YouthPageEdit = (props) => {
     e.preventDefault();
     
     if (password !== confirmPassword) {
-      alert('Password and Password Confirmation do not match!');
+      notify('Password and Password Confirmation do not match!');
     } else {
       const data = new FormData(formRef.current);
       axios({
@@ -60,12 +60,12 @@ const YouthPageEdit = (props) => {
       })
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
-            console.log('success');
+            notify('Profile edited successfully');
             formRef.current.reset();
             history.push(`/user/${getId()}`);
           }
         })
-        .catch((err) => console.log(err));
+        .catch(() => notify('Error editing the profile'));
     }
   };
 

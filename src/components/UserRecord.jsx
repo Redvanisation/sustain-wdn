@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { baseUrl } from '../helpers/';
+import { baseUrl, notify } from '../helpers/';
 
 const UserRecord = ({ id, name, email, activePathway, user, currentUser, setAllUsers, allUsers }) => {
 
@@ -17,10 +17,10 @@ const UserRecord = ({ id, name, email, activePathway, user, currentUser, setAllU
       }
     })
       .then(() => {
-        alert('User deleted successfully');
+        notify('User deleted successfully');
         setAllUsers(allUsers.filter(usr => usr.id !== user.id));
       })
-      .catch(() => alert('Error deleting the user'));
+      .catch(() => notify('Error deleting the user'));
   }
 
   return (

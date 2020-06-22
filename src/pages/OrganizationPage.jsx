@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
-import { baseUrl } from '../helpers/';
+import { baseUrl, notify } from '../helpers/';
 import OpportunityRecord from '../components/OpportunityRecord';
 
 const OrganizationPage = () => {
@@ -51,7 +51,7 @@ const OrganizationPage = () => {
         }
       })
         .then(res => setOpportunities(res.data))
-        .catch(() => alert('Error getting the users list'));
+        .catch(() => notify('Error getting the users list'));
   };
 
   return (

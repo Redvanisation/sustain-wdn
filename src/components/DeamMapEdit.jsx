@@ -1,7 +1,7 @@
 import React, { useRef, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { baseUrl } from '../helpers/';
+import { baseUrl, notify } from '../helpers/';
 
 const DeamMapEdit = (props) => {
   const formRef = useRef(null);
@@ -38,12 +38,12 @@ const DeamMapEdit = (props) => {
       })
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
-            console.log('success');
+            notify('Dream map edited successfully');
             formRef.current.reset();
             history.push(`/user/${getId()}`);
           }
         })
-        .catch((err) => console.log(err));
+        .catch(() => notify('Erorr editing the dream map!'));
   }
   
   return (

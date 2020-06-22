@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
-import { baseUrl, validateEmail } from '../helpers';
+import { baseUrl, validateEmail, notify } from '../helpers';
 
 
 const Login = () => {
@@ -22,7 +22,7 @@ const Login = () => {
     const emailValid = validateEmail(email);
 
     if (!emailValid) {
-      alert('Please enter a valid email!')
+      notify('Please enter a valid email!')
     } else {
       const data = new FormData(formRef.current);
 
@@ -37,7 +37,7 @@ const Login = () => {
       })
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
-            console.log('success');
+            notify('Logged in successfully!');
             localStorage.setItem('auth', res.data.auth_token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
             formRef.current.reset();
@@ -56,7 +56,7 @@ const Login = () => {
             history.push('/');
         })
         .catch(() => {
-          alert('Invalid email/password combination');
+          notify('Invalid email/password combination');
         });
     }
   }

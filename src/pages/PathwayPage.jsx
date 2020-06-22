@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { baseUrl, setBackgroundImg } from '../helpers/';
+import { baseUrl, setBackgroundImg, notify } from '../helpers/';
 
 const PathwayPage = (props) => {
   const history = useHistory();
@@ -69,11 +69,10 @@ const PathwayPage = (props) => {
       })
         .then(res => {
           if (res.status === 200 || res.status === 201) {
-            alert(`${res.data.active_pathway} set as active pathway`);
-            // console.log(res.data)
+            notify(`${res.data.active_pathway} set as active pathway`);
           }
         })
-        .catch(() => alert('Error setting the active pathway!'));
+        .catch(() => notify('Error setting the active pathway!'));
 
         axios({
           method: 'put',
@@ -85,11 +84,11 @@ const PathwayPage = (props) => {
         })
           .then((res) => {
             localStorage.setItem('user-fav-pathways', JSON.stringify(res.data));
-            console.log('Added successfully');
+            notify('Added successfully');
           })
-          .catch(err => console.log(err));
+          .catch(() => notify('There has been an error'));
     } else {
-      alert('Only a user can set their own active pathway');
+      notify('Only a user can set their own active pathway');
     }
   }
 
@@ -108,12 +107,11 @@ const PathwayPage = (props) => {
         }
       })
         .then((res) => {
-          alert('Pathway added to favorites successfully!');
-          console.log(res.data)
+          notify('Pathway added to favorites successfully!');
         })
-        .catch(() => alert('Pathway already in favorites'));
+        .catch(() => notify('Pathway already in favorites'));
     } else {
-      alert('Only a user can set their favorite pathways!');
+      notify('Only a user can set their favorite pathways!');
     }
   }
 

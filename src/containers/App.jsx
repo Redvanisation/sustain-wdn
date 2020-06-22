@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import UsersProvider from '../providers/UsersProvider';
 import Homepage from '../pages/Homepage';
 import Login from '../components/Login';
@@ -20,11 +21,13 @@ import UserPathwaysPage from '../pages/UserPathwaysPage';
 import PathwayPage from '../pages/PathwayPage';
 import AddOpportunity from '../components/AddOpportunity';
 import OpportunityPage from '../pages/OpportunityPage';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const App = () => {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Switch>
         <UsersProvider>
           <Navigation />

@@ -16,10 +16,10 @@ const PathwayRecord = ({ pathway }) => {
   //     }
   //   })
   //     .then(() => {
-  //       alert('User deleted successfully');
+  //       notify('User deleted successfully');
   //       setAllUsers(allUsers.filter(usr => usr.id !== user.id));
   //     })
-  //     .catch(() => alert('Error deleting the user'));
+  //     .catch(() => notify('Error deleting the user'));
   // }
 
   const setPathway = () => {

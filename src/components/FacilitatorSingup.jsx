@@ -2,7 +2,7 @@ import React, { useState, useRef, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { FiUpload } from 'react-icons/fi';
-import { baseUrl, validateEmail } from '../helpers';
+import { baseUrl, validateEmail, notify } from '../helpers';
 
 
 const FacilitatorSingup = () => {
@@ -31,7 +31,7 @@ const FacilitatorSingup = () => {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
-      alert('Please upload an image of type PNG or JPG');
+      notify('Please upload an image of type PNG or JPG');
     }
   };
 
@@ -41,9 +41,9 @@ const FacilitatorSingup = () => {
     const emailValid = validateEmail(email);
 
     if (password !== confirmPassword) {
-      alert('Password and Password Confirmation do not match!');
+      notify('Password and Password Confirmation do not match!');
     } else if (!emailValid) {
-      alert('Please enter a valid email!')
+      notify('Please enter a valid email!')
     } else {
       const data = new FormData(formRef.current);
       axios({
@@ -54,11 +54,11 @@ const FacilitatorSingup = () => {
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             // history.push('/auth');
-            alert('Facilitator registered successfully');
+            notify('Facilitator registered successfully');
             formRef.current.reset();
           }
         })
-        .catch(() => alert('Error registering facilitator'));
+        .catch(() => notify('Error registering facilitator'));
     }
   }
 

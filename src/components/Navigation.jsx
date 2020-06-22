@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Navbar } from 'react-bulma-components';
 import logo from '../assets/logo-small.png';
+import { notify } from '../helpers/';
 
 const Navigation = () => {
   const [showHide, setShowHide] = useState(false);
@@ -23,7 +24,7 @@ const Navigation = () => {
     localStorage.removeItem('user');
     localStorage.clear();
 
-    console.log('Logged out');
+    notify('Logged out!');
     
   };
 

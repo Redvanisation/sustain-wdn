@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { baseUrl } from '../helpers/';
+import { baseUrl, notify } from '../helpers/';
 
 const OrganizationRecord = ({ id, name, email, description, currentUser, setAllOrganizations, allOrganizations }) => {
 
@@ -13,10 +13,10 @@ const OrganizationRecord = ({ id, name, email, description, currentUser, setAllO
       }
     })
       .then(() => {
-        alert('Organization deleted successfully');
+        notify('Organization deleted successfully');
         setAllOrganizations(allOrganizations.filter(org => org.id !== id));
       })
-      .catch(() => alert('Can\'t delete organizations with active opportunities!'));
+      .catch(() => notify('Can\'t delete organizations with active opportunities!'));
   }
 
   return (

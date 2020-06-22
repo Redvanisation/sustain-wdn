@@ -2,7 +2,7 @@ import React, { useState, useRef, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Checkbox from './Checkbox';
-import { baseUrl } from '../helpers';
+import { baseUrl, notify } from '../helpers';
 
 const PathwaysSurvey = () => {
   const [subjects, setSubjects] = useState([]);
@@ -32,7 +32,6 @@ const PathwaysSurvey = () => {
     if(softSkills.length > 0) data.append('soft_skills',softSkills);
     if(supportTypes.length > 0) data.append('support_types',supportTypes);
 
-    // console.log(supportTypes)
     axios({
       method: 'put',
       url: `${baseUrl}/api/v1/users/${currentUser.user_id}`,
@@ -48,7 +47,7 @@ const PathwaysSurvey = () => {
           history.push(`/pathways`);
         }
       })
-      .catch(err => console.log(err));
+      .catch(() => notify('There has been an error!'));
   }
 
   return (

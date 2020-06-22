@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import codingImg from '../assets/coding.jpg';
 import nursingImg from '../assets/nursing.jpg';
 import vetImg from '../assets/veterinarian.jpg';
@@ -34,3 +35,10 @@ export const setBackgroundImg = (title) => {
       return null;
   };
 };
+
+toast.configure();
+export const notify = (message) => toast.info(message, {
+  position: toast.POSITION.TOP_CENTER,
+  autoClose: 3000
+});
+

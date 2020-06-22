@@ -2,7 +2,7 @@ import React, { useState, useRef, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { FiUpload } from 'react-icons/fi';
-import { baseUrl } from '../helpers';
+import { baseUrl, notify } from '../helpers';
 
 const OrganizationPageEdit = () => {
   const [password, setPassword] = useState('');
@@ -30,7 +30,7 @@ const OrganizationPageEdit = () => {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
-      alert('Please upload an image of type PNG or JPG');
+      notify('Please upload an image of type PNG or JPG');
     }
   };
 
@@ -39,7 +39,7 @@ const OrganizationPageEdit = () => {
     
 
     if (password !== confirmPassword) {
-      alert('Password and Password Confirmation do not match!');
+      notify('Password and Password Confirmation do not match!');
     } else {
       const data = new FormData(formRef.current);
       axios({

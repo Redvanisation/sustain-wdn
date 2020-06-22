@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { baseUrl } from '../helpers/';
+import { baseUrl, notify } from '../helpers/';
 
 const OpportunityRecord = ({ id, name, description, type, related_field, opportunities, setOpportunities }) => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
@@ -15,10 +15,10 @@ const OpportunityRecord = ({ id, name, description, type, related_field, opportu
       }
     })
       .then(() => {
-        alert('Opportunity deleted successfully');
+        notify('Opportunity deleted successfully');
         setOpportunities(opportunities.filter(opp => opp.id !== id));
       })
-      .catch(() => alert('Error deleting the user'));
+      .catch(() => notify('Error deleting the user'));
   }
 
   return (
