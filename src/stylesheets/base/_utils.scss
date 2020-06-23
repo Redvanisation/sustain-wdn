@@ -1,0 +1,107 @@
+.is-centered {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.is-bold {
+  font-weight: bold !important;
+}
+
+.has-bg-blue .file-cta {
+  background-color: $color-dblue;
+  color: $color-white;
+  border: none;
+  transition: all .2s;
+  &:hover {
+    background-color: rgba($color-dblue, .8);
+    color: $color-white;
+  }
+}
+
+.is-info {
+  background-color: $color-blue-light !important;
+}
+
+.has-bg-orange .file-cta {
+  background-color: $color-dorange;
+  color: $color-white;
+  border: none;
+  transition: all .2s;
+  &:hover {
+    background-color: rgba($color-dorange, .8);
+    color: $color-white;
+  }
+}
+
+.has-bg-green .file-cta {
+  background-color: $color-dgreen;
+  color: $color-white;
+  border: none;
+  transition: all .2s;
+  &:hover {
+    background-color: rgba($color-dgreen, .8);
+    color: $color-white;
+  }
+}
+
+.text-light-blue {
+  color: $color-blue-light !important;
+}
+
+.text-blue {
+  color: $color-dblue !important;
+}
+
+.text-important {
+  color: #F14767 !important;
+}
+
+.text-green {
+  color: $color-dgreen !important;
+}
+
+.text-orange {
+  color: $color-dorange !important;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.btn {
+  margin: 0 1rem;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+.mt-2 {
+  margin-top: 2rem;
+}
+.mt-3 {
+  margin-top: 3rem;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
+}
+
+.mb-2 {
+  margin-bottom: 2rem;
+}
+
+.mb-4 {
+  margin-bottom: 2rem;
+}
+
+.pb-4 {
+  padding-bottom: 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .btn {
+    margin: 0;
+    width: 100% !important;
+  }
+}
