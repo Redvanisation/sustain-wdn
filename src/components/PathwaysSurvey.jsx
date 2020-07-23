@@ -11,6 +11,7 @@ const PathwaysSurvey = () => {
   const [supportTypes, setSupportTypes] = useState([]);
   const [workBest, setWorkBest] = useState([]);
   const [peopleSee, setPeopleSee] = useState([]);
+  const eagerScale = [0, 1 , 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const formRef = useRef(null);
   const history = useHistory();
@@ -72,15 +73,15 @@ const PathwaysSurvey = () => {
             &nbsp;High School
           </label><br />
           <label className="radio">
-            <input type="radio" name="education_level" value="College" />
+            <input type="radio" name="education_level" value="Bachelor’s Degree" />
             &nbsp;Bachelor’s Degree
           </label><br />
           <label className="radio">
-            <input type="radio" name="education_level" value="College" />
+            <input type="radio" name="education_level" value="Master’s Degree" />
             &nbsp;Master’s Degree
           </label><br />
           <label className="radio">
-            <input type="radio" name="education_level" value="Graduate School" />
+            <input type="radio" name="education_level" value="Doctorate Degrees" />
             &nbsp;Doctorate Degrees
           </label>
         </div><br />
@@ -222,16 +223,9 @@ const PathwaysSurvey = () => {
           <div className="control">
             <div className="select">
               <select name="eager_scale">
-                <option  value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
+                {
+                  eagerScale.map(num => <option key={num} value={num}>{num}</option>)
+                }
               </select>
             </div>
           </div>
